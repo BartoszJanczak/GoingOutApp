@@ -23,6 +23,7 @@ namespace GoingOutApp
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("Hello World!");
         }
     }
 }
