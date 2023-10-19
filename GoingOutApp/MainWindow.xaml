@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="720" Width="1280"
+        WindowStartupLocation="CenterScreen">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="GoingOut" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,10,0,0" Grid.Column="1" Height="42" Width="136"/>
+
+        <!-- Lista ofert po lewej stronie -->
+        <ListBox Grid.Column="0" Margin="10,76,10,10">
+            <ListBoxItem Content="Mecz piłki nożnej:                                                                                         15 listopad 20:45" Width="489"/>
+            <ListBoxItem Content="Koncert zespołu rockowego                                                                         25 listopad 20:00"/>
+            <ListBoxItem Content="Impreza okolocznościowa                                                                            23 listopad 16:30"/>
+            <!-- Dodaj więcej ofert, jeśli jest taka potrzeba -->
+        </ListBox>
+
+        <!-- Mapa świata po prawej stronie -->
+        <Image Grid.Column="1" Source="C:\Users\marek\source\repos\GoingOutApp\GoingOutApp\data\images\mapa.png" Stretch="UniformToFill" Margin="16,72,10,10"/>
+        <Button Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="590,16,0,0" VerticalAlignment="Top" Height="30" Width="69" Background="White"/>
+        <Button Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="673,16,0,0" VerticalAlignment="Top" Height="30" Width="69" Background="White"/>
 
     </Grid>
 </Window>
