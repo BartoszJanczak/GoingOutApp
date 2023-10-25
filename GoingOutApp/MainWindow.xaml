@@ -6,27 +6,56 @@
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
 
-        <TextBlock Text="GoingOut" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,10,0,0" Grid.Column="1" Height="42" Width="136"/>
+    <Border CornerRadius="50">
+        <Border CornerRadius="50"
+                BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E0E0E0" Offset="0"/>
+                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
+                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
+                    <GradientStop Color="#808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
-        <!-- Lista ofert po lewej stronie -->
-        <ListBox Grid.Column="0" Margin="10,76,10,10">
-            <ListBoxItem Content="Mecz piłki nożnej:                                                                                         15 listopad 20:45" Width="489"/>
-            <ListBoxItem Content="Koncert zespołu rockowego                                                                         25 listopad 20:00"/>
-            <ListBoxItem Content="Impreza okolocznościowa                                                                            23 listopad 16:30"/>
-            <!-- Dodaj więcej ofert, jeśli jest taka potrzeba -->
-        </ListBox>
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#E0E0E0" Offset="0"/>
+                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
+                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
+                    <GradientStop Color="#808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
 
-        <!-- Mapa świata po prawej stronie -->
-        <Image Grid.Column="1" Source="C:\Users\marek\source\repos\GoingOutApp\GoingOutApp\data\images\mapa.png" Stretch="UniformToFill" Margin="16,72,10,10"/>
-        <Button Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="590,16,0,0" VerticalAlignment="Top" Height="30" Width="69" Background="White"/>
-        <Button Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="673,16,0,0" VerticalAlignment="Top" Height="30" Width="69" Background="White"/>
+                <TextBlock Text="GoingOut" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,10,0,0" Grid.Column="1" Height="42" Width="136" Foreground="White"/>
 
-    </Grid>
+                <!-- Lista ofert po lewej stronie -->
+                <ListBox Grid.Column="0" Margin="32,76,10,36">
+                    <ListBoxItem Content="Mecz piłki nożnej:                                                                                         15 listopad 20:45" Width="489"/>
+                    <ListBoxItem Content="Koncert zespołu rockowego                                                                         25 listopad 20:00"/>
+                    <ListBoxItem Content="Impreza okolocznościowa                                                                            23 listopad 16:30"/>
+                    <!-- Dodaj więcej ofert, jeśli jest taka potrzeba -->
+                </ListBox>
+
+                <!-- Mapa świata po prawej stronie -->
+                <Image x:Name="MapBox" Grid.Column="1" Stretch="UniformToFill" Margin="16,72,26,38"/>
+                <Button x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="556,11,0,0" VerticalAlignment="Top" Height="30" Width="70" Background="White" Click="ProfileButton_Click"/>
+                <Button Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="468,11,0,0" VerticalAlignment="Top" Height="30" Width="68" Background="White"/>
+                <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="694,8,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
+                <Button Style="{StaticResource Windowbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="652,8,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
+
+            </Grid>
+        </Border>
+    </Border>
 </Window>
