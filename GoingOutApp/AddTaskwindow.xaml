@@ -1,0 +1,51 @@
+﻿<Window x:Class="GoingOutApp.AddTaskwindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoingOutApp"
+        mc:Ignorable="d"
+        Title="ProfileWindow" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
+
+    <Border CornerRadius="50">
+        <Border CornerRadius="50"
+                BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E0E0E0" Offset="0"/>
+                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
+                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
+                    <GradientStop Color="#808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#B0B0B0" Offset="0"/>
+                    <GradientStop Color="#909090" Offset="0.25"/>
+                    <GradientStop Color="#707070" Offset="0.75"/>
+                    <GradientStop Color="#505050" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Adding new event" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,67,0,0" Height="42" Width="258" Foreground="White" Grid.ColumnSpan="2"/>
+
+                <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="403,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Margin="0,136,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Margin="0,188,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top" Width="106"/>
+                <TextBox HorizontalAlignment="Left" Margin="266,238,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="258" Height="85" Grid.ColumnSpan="2"/>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
