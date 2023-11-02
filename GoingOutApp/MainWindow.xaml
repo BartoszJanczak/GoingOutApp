@@ -6,27 +6,65 @@
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
-        WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        MouseDown="Window_mousedown">
 
-        <TextBlock Text="GoingOut" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="60,10,0,0" Grid.Column="1" Height="42" Width="136"/>
+    <Border CornerRadius="50">
+        <Border CornerRadius="50"
+                BorderThickness="5">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E0E0E0" Offset="0"/>
+                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
+                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
+                    <GradientStop Color="#808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
-        <!-- Lista ofert po lewej stronie -->
-        <ListBox Grid.Column="0" Margin="10,76,10,10">
-            <ListBoxItem Content="Mecz piłki nożnej:                                                                                         15 listopad 20:45" Width="489"/>
-            <ListBoxItem Content="Koncert zespołu rockowego                                                                         25 listopad 20:00"/>
-            <ListBoxItem Content="Impreza okolocznościowa                                                                            23 listopad 16:30"/>
-            <!-- Dodaj więcej ofert, jeśli jest taka potrzeba -->
-        </ListBox>
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#B0B0B0" Offset="0"/>
+                    <GradientStop Color="#909090" Offset="0.25"/>
+                    <GradientStop Color="#707070" Offset="0.75"/>
+                    <GradientStop Color="#505050" Offset="1"/>
 
-        <!-- Mapa świata po prawej stronie -->
-        <Image Grid.Column="1" Source="C:\Users\marek\source\repos\GoingOutApp\GoingOutApp\data\images\mapa.png" Stretch="UniformToFill" Margin="16,72,10,10"/>
-        <Button Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="590,16,0,0" VerticalAlignment="Top" Height="30" Width="69" Background="White"/>
-        <Button Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="673,16,0,0" VerticalAlignment="Top" Height="30" Width="69" Background="White"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
 
-    </Grid>
+                <TextBlock Text="GoingOut" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,18,0,0" Grid.Column="1" Height="42" Width="136" Foreground="White"/>
+
+                <ListBox Grid.Column="0" FontSize="20" Margin="32,81,10,36" Background="#E0E0E0">
+                    <ListBoxItem>Koncert zespołu rockowego</ListBoxItem>
+                    <ListBoxItem>Kino samochodowe</ListBoxItem>
+                    <ListBoxItem>Warsztaty kulinarne</ListBoxItem>
+                    <ListBoxItem>Piknik w parku</ListBoxItem>
+                    <ListBoxItem>Wystawa sztuki</ListBoxItem>
+                    <ListBoxItem>Impreza kulturalna</ListBoxItem>
+                    <ListBoxItem>Zajęcia jogi na plaży</ListBoxItem>
+                    <ListBoxItem>Festiwal filmowy</ListBoxItem>
+                    <ListBoxItem>Konferencja naukowa</ListBoxItem>
+                    <ListBoxItem>Zlot motocyklistów</ListBoxItem>
+                </ListBox>
+
+                <Image x:Name="MapBox" Grid.Column="1" Stretch="UniformToFill" Margin="16,82,26,38"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Height="50" Width="88" Click="ProfileButton_Click"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Height="49" Width="114"/>
+                <Button Style="{StaticResource Windowbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="694,18,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
+                <Button Style="{StaticResource Windowbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="646,18,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" Height="50" Width="88" Click="AddButton_Click"/>
+
+                <!--NIE WIEM CZEMU TO NIE DZIAŁA-->
+                <!--<Label Content="&#xf133;" Foreground="White" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Height="34" Width="28" FontFamily="/data/fonts/#Font Awesome 6 Free Solid" FontSize="20" Grid.Column="1"/>-->
+            </Grid>
+        </Border>
+    </Border>
 </Window>
