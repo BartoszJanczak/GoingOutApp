@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:GoingOutApp"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="/templates/Windowbutton.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/templates/Navbutton.xaml"/>
+                <ResourceDictionary Source="/templates/Windowbutton.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

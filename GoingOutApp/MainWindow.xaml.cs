@@ -20,8 +20,11 @@ namespace GoingOutApp
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {       string mapPath = AppDomain.CurrentDomain.BaseDirectory + @"..\..\..\data\images\mapa.png";
-            private static ProfileWindow ?_profileWindowInstance;
+    {  
+        string mapPath = AppDomain.CurrentDomain.BaseDirectory + @"..\..\..\data\images\mapa.png";
+
+        private static ProfileWindow ?_profileWindowInstance;
+        private static AddTaskwindow? _addWindowInstance;
 
         public MainWindow()
         {
@@ -47,6 +50,12 @@ namespace GoingOutApp
             }
         }
 
+        private void Window_mousedown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -67,9 +76,22 @@ namespace GoingOutApp
             }
             else
             {
-                _profileWindowInstance.Focus(); // Skoncentruj się na istniejącym oknie profilu.
+                _profileWindowInstance.Focus();
             }
         }
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_addWindowInstance == null)
+            {
+                _addWindowInstance = new AddTaskwindow();
+                _addWindowInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                _addWindowInstance.Show();
+            }
+            else
+            {
+                _addWindowInstance.Focus();
+            }
+        }
     }
 }

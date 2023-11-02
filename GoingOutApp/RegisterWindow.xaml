@@ -26,10 +26,10 @@
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#E0E0E0" Offset="0"/>
-                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
-                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
-                    <GradientStop Color="#808080" Offset="1"/>
+                    <GradientStop Color="#B0B0B0" Offset="0"/>
+                    <GradientStop Color="#909090" Offset="0.25"/>
+                    <GradientStop Color="#707070" Offset="0.75"/>
+                    <GradientStop Color="#505050" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
@@ -38,16 +38,12 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Rejestracja" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="314,69,0,0" Height="42" Width="161" Foreground="White" Grid.ColumnSpan="2"/>
+                <TextBlock Text="Signing up" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="315,69,0,0" Height="42" Width="160" Foreground="White" Grid.ColumnSpan="2"/>
 
-                <!-- Lista ofert po lewej stronie -->
-
-                <!-- Mapa świata po prawej stronie -->
                 <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="403,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
-                <Button Style="{StaticResource Windowbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="355,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
                 <TextBox HorizontalAlignment="Left" Margin="2,148,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
                 <TextBox HorizontalAlignment="Left" Margin="2,188,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-                <Button Grid.Column="1" Content="Zarejestruj sie" HorizontalAlignment="Left" Margin="38,318,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+                <Button Style="{StaticResource Navbutton}" Content="Sign Up" HorizontalAlignment="Left" Margin="28,335,0,0" VerticalAlignment="Top" Click="Button_Click" Grid.Column="1"/>
                 <TextBox HorizontalAlignment="Left" Margin="2,228,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
                 <TextBox HorizontalAlignment="Left" Margin="2,272,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
             </Grid>

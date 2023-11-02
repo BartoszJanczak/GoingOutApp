@@ -35,7 +35,7 @@ namespace GoingOutApp
             this.WindowState = WindowState.Minimized;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             if (_registerWindowInstance == null)
             {
