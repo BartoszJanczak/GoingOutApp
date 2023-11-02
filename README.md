@@ -10,6 +10,7 @@ Contains initial design with basic functionalities.<br>
   4. Working Calendar page. Showing details for chosen day from calendar.
   
 ### Example screenshot:
-![image](https://github.com/BartoszJanczak/GoingOutApp/assets/88060437/5af0668f-d96e-4b4f-9e66-0316b9dbf7ef)
+![image](https://github.com/BartoszJanczak/GoingOutApp/assets/88060437/827ccaf8-17a2-4d63-9640-92a2b9a87d52)
+
 
 
