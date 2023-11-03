@@ -8,13 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="data\images\" />
+    <None Remove="data\images\lock.png" />
+    <None Remove="data\images\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="data\fonts\" />
     <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.12" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="data\images\lock.png" />
+    <Resource Include="data\images\user.png" />
   </ItemGroup>
 
 </Project>
