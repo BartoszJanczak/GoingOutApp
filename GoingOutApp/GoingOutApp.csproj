@@ -8,7 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="data\images\age.png" />
     <None Remove="data\images\lock.png" />
+    <None Remove="data\images\name.png" />
+    <None Remove="data\images\surname.png" />
     <None Remove="data\images\user.png" />
   </ItemGroup>
 
@@ -22,7 +25,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="data\images\age.png" />
     <Resource Include="data\images\lock.png" />
+    <Resource Include="data\images\name.png" />
+    <Resource Include="data\images\surname.png" />
     <Resource Include="data\images\user.png" />
   </ItemGroup>
 
