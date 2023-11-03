@@ -33,30 +33,70 @@
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Text="Signing up" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="218,60,0,0" Height="42" Width="160" Foreground="White" Grid.ColumnSpan="2"/>
-
-                <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="283,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
-                <Label Content="Username:" HorizontalAlignment="Left" Margin="177,130,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.132,0.611" Width="72" Height="28" Foreground="WHITE" FontSize="13" Grid.ColumnSpan="2"/>
-                <Label Content="Password:" HorizontalAlignment="Left" Margin="180,173,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.132,0.611" Width="66" Height="26" Foreground="WHITE" FontSize="13" Grid.ColumnSpan="2"/>
-                <Label Content="Name:" HorizontalAlignment="Left" Margin="199,213,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.132,0.611" Width="60" Height="26" Foreground="WHITE" FontSize="13" Grid.ColumnSpan="2"/>
-                <Label Content="Surname:" HorizontalAlignment="Left" Margin="180,254,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.132,0.611" Width="74" Height="26" Grid.ColumnSpan="2" Foreground="WHITE" FontSize="13"/>
-                <Label Content="Age:" HorizontalAlignment="Left" Margin="209,295,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.132,0.611" Width="50" Height="30" Foreground="WHITE" FontSize="13" Grid.ColumnSpan="2"/>
-                <Label Content="Gender:" HorizontalAlignment="Left" Margin="189,334,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.132,0.611" Width="56" Height="26" Foreground="WHITE" FontSize="13" Grid.ColumnSpan="2"/>
-                <TextBox HorizontalAlignment="Left" Margin="16,134,0,0" Text="" VerticalAlignment="Top" Width="142" Grid.Column="1" Height="24" FontSize="13" Name="UsernameTextBox"/>
-                <PasswordBox HorizontalAlignment="Left" Margin="16,177,0,0" VerticalAlignment="Top" Width="142" Grid.Column="1" Height="22" Name="PasswordBox"/>
-                <TextBox HorizontalAlignment="Left" Margin="16,217,0,0" Text="" VerticalAlignment="Top" Width="142" Grid.Column="1" Height="22" Name="NameTextBox"/>
-                <TextBox HorizontalAlignment="Left" Margin="16,258,0,0" Text="" VerticalAlignment="Top" Width="142" Grid.Column="1" Height="22" Name="SurnameTextBox"/>
-                <TextBox HorizontalAlignment="Left" Margin="16,299,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="30" Grid.Column="1" Height="22" PreviewTextInput="AgeTextBox_PreviewTextInput" Name="AgeTextBox" MaxLength="3"/>
-                <StackPanel Orientation="Horizontal" Margin="16,339,204,172" Grid.Column="1">
-                    <RadioButton Content="Male" Name="MaleRadioButton" Width="68"  Foreground="WHITE" FontSize="13"/>
-                    <RadioButton Content="Female" Name="FemaleRadioButton" Width="73"  Foreground="WHITE" FontSize="13"/>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="500 5 0 0"/>
+                    <TextBlock Text="Signing up" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Top"  Height="42" Width="160" Foreground="White" Grid.ColumnSpan="2"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/user.png" Height="20"/>
+                            <TextBlock x:Name="textUser" MouseDown="textUser_MouseDown" Text="Username" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <TextBox x:Name="txtUser" TextChanged="txtUser_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="5">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/lock.png" Height="20"/>
+                            <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " />
+                            <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/name.png" Height="20"/>
+                            <TextBlock x:Name="textName" MouseDown="textName_MouseDown" Text="Name" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <TextBox x:Name="txtName" TextChanged="txtName_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="5">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/surname.png" Height="20"/>
+                            <TextBlock x:Name="textSurname" MouseDown="textSurname_MouseDown" Text="Surname" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <TextBox x:Name="txtSurname" TextChanged="txtSurname_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="85" Background="White" Margin="173 12 0 0" HorizontalAlignment="Left">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/age.png" Height="20"/>
+                            <TextBlock x:Name="textAge" MouseDown="textAge_MouseDown" Text="Age" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <TextBox x:Name="txtAge" PreviewTextInput="AgeTextBox_PreviewTextInput" TextChanged="txtAge_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" MaxLength="3">
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                    <Button Style="{StaticResource Navbutton}" Content="Sign up" HorizontalAlignment="Center" Margin="0,24,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159"/>
                 </StackPanel>
-                <Button Style="{StaticResource Navbutton}" Content="Sign Up" HorizontalAlignment="Left" Margin="9,388,0,0" VerticalAlignment="Top" Click="SignUpButton_Click" Grid.Column="1"/>
             </Grid>
         </Border>
     </Border>
