@@ -43,16 +43,17 @@ namespace GoingOutApp
             //    Age = AgeTextBox.Text,
             //    Gender = MaleRadioButton.IsChecked == true ? "Male" : "Female"
             //};
-            var username = UsernameTextBox.Text;
-            var password = PasswordBox.Password;
-            var name = NameTextBox.Text;
-            var surname = SurnameTextBox.Text;
-            int age = Convert.ToInt32(AgeTextBox.Text);
-            var gender = MaleRadioButton.IsChecked == true ? "Male" : "Female";
+           
+            string username = txtUser.Text;
+            string password = txtPassword.Password;
+            string name = txtName.Text;
+            string surname = txtSurname.Text;
+            int age = Convert.ToInt32(txtAge.Text);
+            //var gender = MaleRadioButton.IsChecked == true ? "Male" : "Female";
 
-            if(AccountValidation(username, password, name, surname, age, gender))
+            if(AccountValidation(username, password, name, surname, age, "M"))
             {
-                _database.CreateAccount(username, password, name, surname, age, gender); 
+                _database.CreateAccount(username, password, name, surname, age, "M"); 
             }
             else
             {
@@ -60,12 +61,6 @@ namespace GoingOutApp
 
             }
 
-            UsernameTextBox.Text = "dupa";
-            string username = txtUser.Text;
-            string password = txtPassword.Password;
-            string name = txtName.Text;
-            string surname = txtSurname.Text;
-            string age = txtAge.Text;
         }
 
 
