@@ -11,10 +11,6 @@ namespace GoingOutApp.Models
         public int EventId { get; set; }
         [ForeignKey("UserId")]
         public int UserId { get; set; }
-
         public string ParticipantStatus { get; set; }
-
-
-
     }
 }

@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.PortableExecutable;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using GoingOutApp.Models;
+using GoingOutApp.Services;
 
 namespace GoingOutApp
 {
@@ -21,21 +14,14 @@ namespace GoingOutApp
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        public List<User> DatabaseUsers { get; private set; }
+
+        private DataContext _database { get; set; }
         public RegisterWindow()
         {
             InitializeComponent();
+            _database = new DataContext();
         }
-
-        public class RegisterUserData
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-            public string Name { get; set; }
-            public string Surname { get; set; }
-            public string Age { get; set; }
-            public string Gender { get; set; }
-        }
-
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -57,12 +43,32 @@ namespace GoingOutApp
             //    Age = AgeTextBox.Text,
             //    Gender = MaleRadioButton.IsChecked == true ? "Male" : "Female"
             //};
+            var username = UsernameTextBox.Text;
+            var password = PasswordBox.Password;
+            var name = NameTextBox.Text;
+            var surname = SurnameTextBox.Text;
+            int age = Convert.ToInt32(AgeTextBox.Text);
+            var gender = MaleRadioButton.IsChecked == true ? "Male" : "Female";
+
+            if(AccountValidation(username, password, name, surname, age, gender))
+            {
+                _database.CreateAccount(username, password, name, surname, age, gender); 
+            }
+            else
+            {
+                // Wyświetlenie błędu
+
+            }
+
+            UsernameTextBox.Text = "dupa";
             string username = txtUser.Text;
             string password = txtPassword.Password;
             string name = txtName.Text;
             string surname = txtSurname.Text;
             string age = txtAge.Text;
         }
+
+
         private void AgeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             e.Handled = !IsTextAllowed(e.Text);
@@ -72,6 +78,34 @@ namespace GoingOutApp
         {
             return System.Text.RegularExpressions.Regex.IsMatch(text, "[0-9]");
         }
+       
+        private void RefreshData()
+        {
+            DatabaseUsers = _database.Users.ToList();
+        }
+       
+        private bool AccountValidation(string username, string password, string name, string surname, int age, string gender)
+        {
+            bool validation;
+            // sprawdzenie czy wprowadzono poprawne dane
+            validation = ifAccountWithThatUserNameCanBeCreated(username);
+            //validation = Kolejna metoda do walidacji 
+            //validation = Kolejna metoda do walidacji 
+            //validation = Kolejna metoda do walidacji 
+            return validation;
+        }
+
+        #region ValidationMethods
+        private bool ifAccountWithThatUserNameCanBeCreated(string login)
+        {
+            RefreshData();
+            var ifUserExists = DatabaseUsers.Any(u => u.UserName == login);
+
+            return !ifUserExists;
+        }
+
+        // tutaj twórz metody do walidacji 
+        #endregion
         private void textUser_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtUser.Focus();
