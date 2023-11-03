@@ -10,17 +10,14 @@ namespace GoingOutApp
     /// </summary>
     public partial class LoginWindow : Window
     {
+        private DataContext _database { get; set; }
         private static RegisterWindow? _registerWindowInstance;
         public LoginWindow()
         {
             InitializeComponent();
+            _database = new DataContext();
         }
 
-        public class LoginUserData
-        {
-            public string Username { get; set; }
-            public string Password { get; set; }
-        }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -33,9 +30,17 @@ namespace GoingOutApp
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUser.Text;
-            //string password = PasswordBox.Password;
-            txtUser.Text = "Dupa";
+            var username = txtUser.Text;
+            var password = txtPassword.Password;
+            var correctData = _database.ValidateSignIn(username, password);
+            if (correctData)
+            {
+                // wyswietl info o zalogowaniu 
+            }
+            else
+            {
+                // niepoprawne dane
+            }
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
