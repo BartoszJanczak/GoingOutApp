@@ -23,7 +23,7 @@ namespace GoingOutApp
     {  
         string mapPath = AppDomain.CurrentDomain.BaseDirectory + @"..\..\..\data\images\mapa.png";
 
-        private static ProfileWindow ?_profileWindowInstance;
+        private static LoginWindow ?_profileWindowInstance;
         private static AddTaskwindow? _addWindowInstance;
 
         public MainWindow()
@@ -70,7 +70,7 @@ namespace GoingOutApp
         {
             if (_profileWindowInstance == null)
             {
-                _profileWindowInstance = new ProfileWindow();
+                _profileWindowInstance = new LoginWindow();
                 _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
                 _profileWindowInstance.Show();
             }

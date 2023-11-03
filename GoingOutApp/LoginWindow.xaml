@@ -1,0 +1,67 @@
+﻿<Window x:Class="GoingOutApp.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GoingOutApp"
+        mc:Ignorable="d"
+        Title="ProfileWindow" Height="398" Width="483"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
+    <Border CornerRadius="50">
+        <Border CornerRadius="50"
+                BorderThickness="5" Margin="0,0,0,36">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E0E0E0" Offset="0"/>
+                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
+                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
+                    <GradientStop Color="#808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#B0B0B0" Offset="0"/>
+                    <GradientStop Color="#909090" Offset="0.25"/>
+                    <GradientStop Color="#707070" Offset="0.75"/>
+                    <GradientStop Color="#505050" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="380 5 0 0 "/>
+                    <TextBlock Text="Signing in" FontFamily="Verdana" FontSize="28" Height="42" Width="142" Foreground="White"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/user.png" Height="20"/>
+                            <TextBlock x:Name="textUser" MouseDown="textUser_MouseDown" Text="Username" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <TextBox x:Name="txtUser" TextChanged="txtUser_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                            </TextBox>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="5">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/lock.png" Height="20"/>
+                            <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " />
+                            <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
+                        </Grid>
+                    </Border>
+                    <Button Style="{StaticResource Navbutton}" Content="Sign in" HorizontalAlignment="Left" Margin="110,22,0,0" VerticalAlignment="Top" Click="SignUpButton_Click" Grid.ColumnSpan="2" RenderTransformOrigin="0.566,0.538"/>
+                    <Button Style="{StaticResource Navbutton}" Content="Sign up" HorizontalAlignment="Left" Margin="216,-50,0,0" VerticalAlignment="Top" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+</Window>
