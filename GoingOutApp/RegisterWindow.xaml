@@ -26,10 +26,10 @@
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#B0B0B0" Offset="0"/>
-                    <GradientStop Color="#909090" Offset="0.25"/>
-                    <GradientStop Color="#707070" Offset="0.75"/>
-                    <GradientStop Color="#505050" Offset="1"/>
+                    <GradientStop Color="#FDFDFD" Offset="0"/>
+                    <GradientStop Color="#E6E6E6" Offset="0.25"/>
+                    <GradientStop Color="#CFCFCF" Offset="0.75"/>
+                    <GradientStop Color="#B8B8B8" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>

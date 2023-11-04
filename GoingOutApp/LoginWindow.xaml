@@ -25,16 +25,16 @@
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#B0B0B0" Offset="0"/>
-                    <GradientStop Color="#909090" Offset="0.25"/>
-                    <GradientStop Color="#707070" Offset="0.75"/>
-                    <GradientStop Color="#505050" Offset="1"/>
+                    <GradientStop Color="#FDFDFD" Offset="0"/>
+                    <GradientStop Color="#E6E6E6" Offset="0.25"/>
+                    <GradientStop Color="#CFCFCF" Offset="0.75"/>
+                    <GradientStop Color="#B8B8B8" Offset="1"/>
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center">
                     <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="380 5 0 0 "/>
-                    <TextBlock Text="Signing in" FontFamily="Verdana" FontSize="28" Height="42" Width="142" Foreground="White"/>
+                    <TextBlock Text="Signing in" FontFamily="Verdana" FontSize="28" Height="42" Width="142" Foreground="Black"/>
                     <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
