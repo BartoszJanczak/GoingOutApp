@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace GoingOutApp.Services
 {
@@ -23,7 +22,7 @@ namespace GoingOutApp.Services
         {
             using (DataContext context = new DataContext())
             {
-                context.Users.Add(new Models.User
+                context.Users.Add(new User
                 {
                     UserName = username,
                     Password = encodedPassword,
@@ -38,27 +37,7 @@ namespace GoingOutApp.Services
             }
         }
 
-        public bool ValidateSignIn(string username,string password)
-        {
-            using (DataContext context = new DataContext())
-            {
-                var user = context.Users.FirstOrDefault(u => u.UserName == username);
-                if(user != null)
-                {
-                    byte[] salt = Convert.FromBase64String(user.Password);
-                    byte[] hash = Convert.FromBase64String(user.Key);
-
-                    using (var deriveBytes = new Rfc2898DeriveBytes(password, salt))
-                    {
-                        byte[] enteredPasswordHash = deriveBytes.GetBytes(hash.Length);
-
-                        bool passwordIsValid = hash.SequenceEqual(enteredPasswordHash);
-
-                        return passwordIsValid;
-                    }
-                }
-                  return false;
-            }
-        }
+       
+       
     }
 }

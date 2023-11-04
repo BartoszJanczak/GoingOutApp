@@ -32,13 +32,16 @@ namespace GoingOutApp
         {
             var username = txtUser.Text;
             var password = txtPassword.Password;
-            var correctData = _database.ValidateSignIn(username, password);
+            var correctData = UserService.ValidateSignIn(username, password);
             if (correctData)
             {
+                MessageBox.Show("Witamy" + UserService.LoggedInUser.Name +" "+ UserService.LoggedInUser.Surname);
                 // wyswietl info o zalogowaniu 
             }
             else
             {
+                MessageBox.Show("Witamy" + UserService.LoggedInUser.Name + " " + UserService.LoggedInUser.Surname);
+
                 // niepoprawne dane
             }
         }

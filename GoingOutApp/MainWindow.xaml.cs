@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoingOutApp.Services;
+using System;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -14,6 +15,7 @@ namespace GoingOutApp
 
         private static LoginWindow ?_profileWindowInstance;
         private static AddTaskwindow? _addWindowInstance;
+        private static UserProfileWindow? _userProfileWindowInstance;
 
         public MainWindow()
         {
@@ -59,9 +61,18 @@ namespace GoingOutApp
         {
             if (_profileWindowInstance == null)
             {
-                _profileWindowInstance = new LoginWindow();
-                _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
-                _profileWindowInstance.Show();
+                if(UserService.LoggedInUser == null)
+                {
+                    _profileWindowInstance = new LoginWindow();
+                    _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _profileWindowInstance.Show();
+                }
+                else
+                {
+                    _userProfileWindowInstance = new UserProfileWindow();
+                    _userProfileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _userProfileWindowInstance.Show();
+                }
             }
             else
             {
