@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="542" Width="606"
+        Title="RegisterWindow" Height="596" Width="606"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"
@@ -35,8 +35,7 @@
             <Grid>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
                     <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="500 5 0 0"/>
-                    <TextBlock Text="Signing up" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Top"  Height="42" Width="160" Foreground="White" Grid.ColumnSpan="2"/>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12">
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 0 0 6">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -48,7 +47,8 @@
                             </TextBox>
                         </Grid>
                     </Border>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="5">
+                    <TextBlock x:Name="txtUsernameValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 6 0 6">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -59,7 +59,20 @@
                             <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Height="26"/>
                         </Grid>
                     </Border>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12">
+                    <TextBlock x:Name="txtPasswordValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 6 0 6">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/lock.png" Height="20"/>
+                            <TextBlock x:Name="textPassword2" MouseDown="textPassword2_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " Height="26"/>
+                            <PasswordBox x:Name="txtPassword2" PasswordChanged="txtPassword2_PasswordChanged" Style="{StaticResource textBox}" Height="26"/>
+                        </Grid>
+                    </Border>
+                    <TextBlock x:Name="txtPassword2Validation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 6 0 6">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -71,7 +84,8 @@
                             </TextBox>
                         </Grid>
                     </Border>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="5">
+                    <TextBlock x:Name="txtNameValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 6 0 6">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -83,7 +97,8 @@
                             </TextBox>
                         </Grid>
                     </Border>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="85" Background="White" Margin="173 12 0 0" HorizontalAlignment="Left">
+                    <TextBlock x:Name="txtSurnameValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="85" Background="White" Margin="173 6 0 0" HorizontalAlignment="Left">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -91,11 +106,12 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/age.png" Height="20"/>
                             <TextBlock x:Name="textAge" MouseDown="textAge_MouseDown" Text="Age" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
-                            <TextBox x:Name="txtAge" PreviewTextInput="AgeTextBox_PreviewTextInput" TextChanged="txtAge_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" MaxLength="3" Height="26">
+                            <TextBox x:Name="txtAge" PreviewTextInput="AgeTextBox_PreviewTextInput" TextChanged="txtAge_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" MaxLength="3" Height="26" Text="0">
                             </TextBox>
                         </Grid>
                     </Border>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="18" Height="40">
+                    <TextBlock x:Name="txtAgeValidation" Text="asdasd" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Left" Visibility="Collapsed" Margin="173 0 0 0" Foreground="White"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 12 0 8" Height="40">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="7 4">
                             <Button Name="maleButton" Click="MaleButton_Click" Background="White" BorderThickness="0" Style="{StaticResource MyButtonStyle}">
                                 <StackPanel Orientation="Horizontal" Margin="0 0 10 0">
@@ -111,6 +127,7 @@
                             </Button>
                         </StackPanel>
                     </Border>
+                    <TextBlock x:Name="txtGenderValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
                     <Button Style="{StaticResource Navbutton}" Content="Sign up" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159"/>
                 </StackPanel>
             </Grid>
