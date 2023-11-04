@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Xml.Linq;
 using GoingOutApp.Models;
 using GoingOutApp.Services;
 
@@ -17,6 +20,8 @@ namespace GoingOutApp
         public List<User> DatabaseUsers { get; private set; }
 
         private DataContext _database { get; set; }
+
+        string selectedGender = "";
         public RegisterWindow()
         {
             InitializeComponent();
@@ -34,26 +39,25 @@ namespace GoingOutApp
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            //UserData userData = new UserData()
-            //{
-            //    Username = UsernameTextBox.Text,
-            //    Password = PasswordTextBox.Text,
-            //    Name = NameTextBox.Text,
-            //    Surname = SurnameTextBox.Text,
-            //    Age = AgeTextBox.Text,
-            //    Gender = MaleRadioButton.IsChecked == true ? "Male" : "Female"
-            //};
-           
             string username = txtUser.Text;
             string password = txtPassword.Password;
             string name = txtName.Text;
             string surname = txtSurname.Text;
-            int age = Convert.ToInt32(txtAge.Text);
-            //var gender = MaleRadioButton.IsChecked == true ? "Male" : "Female";
+            int age = 0;
+            string gender = selectedGender.ToString();
 
-            if(AccountValidation(username, password, name, surname, age, "M"))
+            try
             {
-                _database.CreateAccount(username, password, name, surname, age, "M"); 
+                age = Convert.ToInt32(txtAge.Text);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Wprowadzono nieprawidłowy wiek. Proszę wpisać liczbę całkowitą.");
+                return;
+            }
+            if (AccountValidation(username, password, name, surname, age, gender))
+            {
+                _database.CreateAccount(username, password, name, surname, age, gender); 
             }
             else
             {
@@ -62,7 +66,6 @@ namespace GoingOutApp
             }
 
         }
-
 
         private void AgeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -81,13 +84,44 @@ namespace GoingOutApp
        
         private bool AccountValidation(string username, string password, string name, string surname, int age, string gender)
         {
-            bool validation;
-            // sprawdzenie czy wprowadzono poprawne dane
-            validation = ifAccountWithThatUserNameCanBeCreated(username);
-            //validation = Kolejna metoda do walidacji 
-            //validation = Kolejna metoda do walidacji 
-            //validation = Kolejna metoda do walidacji 
-            return validation;
+            if (!ifAccountWithThatUserNameCanBeCreated(username))
+            {
+                MessageBox.Show("Konto o podanej nazwie użytkownika już istnieje.");
+                return false;
+            }
+            if (!ifAllFieldsAreCompleted(username, password, name, surname, age))
+            {
+                MessageBox.Show("Proszę wypełnić wszystkie wymagane pola.");
+                return false;
+            }
+            if (!ifGenderIsSelected())
+            {
+                MessageBox.Show("Proszę wybrać płeć.");
+                return false;
+            }
+            if (!ifStrongPassword(password))
+            {
+                MessageBox.Show("Hasło musi się składać z minimum 8 znaków, w tym zawierać duże i małe litery, cyfry i znaki specjalne (np. !,@,#,$,%).");
+                return false;
+            }
+            if (!ifNameValid(name))
+            {
+                MessageBox.Show("Imię musi zaczynać się z wielkiej litery i nie może zawierać cyfr.");
+                return false;
+            }
+            if (!ifSurnameValid(surname))
+            {
+                MessageBox.Show("Nazwisko musi zaczynać się z wielkiej litery i nie może zawierać cyfr.");
+                return false;
+            }
+            if(!ifAgeValid(age))
+            {
+                MessageBox.Show("Podaj poprawny wiek");
+                return false;
+            }
+            MessageBox.Show("Pomyślnie zarejestrowano konto.");
+            Close();
+            return true;
         }
 
         #region ValidationMethods
@@ -99,8 +133,86 @@ namespace GoingOutApp
             return !ifUserExists;
         }
 
-        // tutaj twórz metody do walidacji 
+        private bool ifAllFieldsAreCompleted(string username, string password, string name, string surname, int age)
+        {
+            if (string.IsNullOrWhiteSpace(username) ||
+                string.IsNullOrWhiteSpace(password) ||
+                string.IsNullOrWhiteSpace(name) ||
+                string.IsNullOrWhiteSpace(surname) ||
+                age.ToString() == "")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ifGenderIsSelected()
+        {
+            if (string.IsNullOrWhiteSpace(selectedGender))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ifStrongPassword(string password)
+        {
+            if (password.Length < 8)
+            {
+                return false;
+            }
+
+            if (!Regex.IsMatch(password, "[A-Z]"))
+            {
+                return false;
+            }
+
+            if (!Regex.IsMatch(password, "[a-z]"))
+            {
+                return false;
+            }
+
+            if (!Regex.IsMatch(password, "[0-9]"))
+            {
+                return false;
+            }
+
+            if (!Regex.IsMatch(password, "[!@#\\$%^&*()]"))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        private bool ifNameValid(string name)
+        {
+            if (!Regex.IsMatch(name, "^[A-Z][a-zA-Z]*$"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ifSurnameValid(string surname)
+        {
+            if (!Regex.IsMatch(surname, "^[A-Z][a-zA-Z]*$"))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private bool ifAgeValid(int age)
+        {
+            if (age <= 0 || age > 150) 
+            { 
+                return false;
+            }
+            return true;
+        }
+
         #endregion
+        #region FieldsVisibility
         private void textUser_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtUser.Focus();
@@ -117,6 +229,7 @@ namespace GoingOutApp
                 textUser.Visibility = Visibility.Visible;
             }
         }
+
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtPassword.Focus();
@@ -183,5 +296,18 @@ namespace GoingOutApp
                 textAge.Visibility = Visibility.Visible;
             }
         }
+        private void MaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            MaleText.Foreground = new SolidColorBrush(Colors.Blue);
+            FemaleText.Foreground = new SolidColorBrush(Color.FromRgb(172, 176, 175));
+            selectedGender = "Male";
+        }
+        private void FemaleButton_Click(object sender, RoutedEventArgs e)
+        {
+            FemaleText.Foreground = new SolidColorBrush(Colors.Pink);
+            MaleText.Foreground = new SolidColorBrush(Color.FromRgb(172, 176, 175));
+            selectedGender = "Female";
+        }
+        #endregion
     }
 }
