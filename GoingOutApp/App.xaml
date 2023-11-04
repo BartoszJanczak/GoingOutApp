@@ -8,22 +8,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/templates/Navbutton.xaml"/>
                 <ResourceDictionary Source="/templates/Windowbutton.xaml"/>
+                <ResourceDictionary Source="/templates/TextBlock.xaml"/>
+                <ResourceDictionary Source="/templates/TextBox.xaml"/>
+                <ResourceDictionary Source="/templates/GenderButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        <Style x:Key="textHint" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="18"/>
-                <Setter Property="Grid.Column" Value="1"/>
-                <Setter Property="Panel.ZIndex" Value="1"/>
-                <Setter Property="Margin" Value="10 0 0 0"/>
-                <Setter Property="Foreground" Value="#acb0af"/>
-        </Style>
-
-        <Style x:Key="textBox" TargetType="Control">
-            <Setter Property="FontSize" Value="18" />
-            <Setter Property="Grid.Column" Value="1" />
-            <Setter Property="Margin" Value="10 0 0 0" />
-            <Setter Property="Foreground" Value="#878787" />
-            <Setter Property="BorderBrush" Value="Transparent" />
-        </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
