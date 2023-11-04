@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +18,7 @@ namespace GoingOutApp
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        public List<User> DatabaseUsers { get; private set; }
+        public List<User> ?DatabaseUsers { get; private set; }
 
         private DataContext _database { get; set; }
 
@@ -58,6 +59,8 @@ namespace GoingOutApp
             if (AccountValidation(username, password, name, surname, age, gender))
             {
                 _database.CreateAccount(username, password, name, surname, age, gender); 
+                var result = EncodePassword(password, 20); 
+                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, "M");
             }
             else
             {
@@ -65,6 +68,19 @@ namespace GoingOutApp
 
             }
 
+        }
+        private Tuple<string, string> EncodePassword(string password, int bytes)
+        {
+            using (var deriveBytes = new Rfc2898DeriveBytes(password, bytes))
+            {
+                byte[] salt = deriveBytes.Salt;
+                byte[] key = deriveBytes.GetBytes(bytes);
+
+                string encodedSalt = Convert.ToBase64String(salt);
+                string encodedKey = Convert.ToBase64String(key);
+
+                return new Tuple<string, string>(encodedSalt, encodedKey);
+            }
         }
 
         private void AgeTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
