@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="/templates/TextBlock.xaml"/>
                 <ResourceDictionary Source="/templates/TextBox.xaml"/>
                 <ResourceDictionary Source="/templates/GenderButton.xaml"/>
+                <ResourceDictionary Source="/templates/EventList.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
