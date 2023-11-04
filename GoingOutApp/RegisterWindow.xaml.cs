@@ -58,9 +58,8 @@ namespace GoingOutApp
             }
             if (AccountValidation(username, password, name, surname, age, gender))
             {
-                _database.CreateAccount(username, password, name, surname, age, gender); 
                 var result = EncodePassword(password, 20); 
-                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, "M");
+                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, gender);
             }
             else
             {
