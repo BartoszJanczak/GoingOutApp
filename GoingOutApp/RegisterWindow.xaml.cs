@@ -44,18 +44,9 @@ namespace GoingOutApp
             string password = txtPassword.Password;
             string name = txtName.Text;
             string surname = txtSurname.Text;
-            int age = 0;
+            int age = Convert.ToInt32(txtAge.Text);
             string gender = selectedGender.ToString();
 
-            try
-            {
-                age = Convert.ToInt32(txtAge.Text);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Wprowadzono nieprawidłowy wiek. Proszę wpisać liczbę całkowitą.");
-                return;
-            }
             if (AccountValidation(username, password, name, surname, age, gender))
             {
                 var result = EncodePassword(password, 20); 
@@ -63,9 +54,10 @@ namespace GoingOutApp
             }
             else
             {
-                // Wyświetlenie błędu
+                
 
             }
+
 
         }
         private Tuple<string, string> EncodePassword(string password, int bytes)
@@ -99,55 +91,84 @@ namespace GoingOutApp
        
         private bool AccountValidation(string username, string password, string name, string surname, int age, string gender)
         {
-            if (!ifAccountWithThatUserNameCanBeCreated(username))
-            {
-                MessageBox.Show("Konto o podanej nazwie użytkownika już istnieje.");
-                return false;
-            }
+            bool validation = true;
+
             if (!ifAllFieldsAreCompleted(username, password, name, surname, age))
             {
                 MessageBox.Show("Proszę wypełnić wszystkie wymagane pola.");
-                return false;
+                validation = false;
+            }
+            if (!ifAccountWithThatUserNameCanBeCreated(username))
+            {
+                txtUsernameValidation.Visibility = Visibility.Visible;
+                validation = false;
+            }
+            else
+            {
+                txtUsernameValidation.Visibility = Visibility.Collapsed;
             }
             if (!ifGenderIsSelected())
             {
-                MessageBox.Show("Proszę wybrać płeć.");
-                return false;
+                txtGenderValidation.Visibility = Visibility.Visible;
+                validation = false;
+            }
+            else
+            {
+                txtGenderValidation.Visibility = Visibility.Collapsed;
             }
             if (!ifStrongPassword(password))
             {
-                MessageBox.Show("Hasło musi się składać z minimum 8 znaków, w tym zawierać duże i małe litery, cyfry i znaki specjalne (np. !,@,#,$,%).");
-                return false;
+                txtPasswordValidation.Visibility = Visibility.Visible;
+                validation = false;
+            }
+            else
+            {
+                txtPasswordValidation.Visibility = Visibility.Collapsed;
+            }
+            if (!ifPasswordEqual(password))
+            {
+                txtPassword2Validation.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                txtPassword2Validation.Visibility = Visibility.Collapsed;
             }
             if (!ifNameValid(name))
             {
-                MessageBox.Show("Imię musi zaczynać się z wielkiej litery i nie może zawierać cyfr.");
-                return false;
+                txtNameValidation.Visibility = Visibility.Visible;
+                validation = false;
+            }
+            else
+            {
+                txtNameValidation.Visibility = Visibility.Collapsed;
             }
             if (!ifSurnameValid(surname))
             {
-                MessageBox.Show("Nazwisko musi zaczynać się z wielkiej litery i nie może zawierać cyfr.");
-                return false;
+                txtSurnameValidation.Visibility = Visibility.Visible;
+                validation = false;
+            }
+            else
+            {
+                txtSurnameValidation.Visibility= Visibility.Collapsed;
             }
             if(!ifAgeValid(age))
             {
-                MessageBox.Show("Podaj poprawny wiek");
-                return false;
+                txtAgeValidation.Visibility = Visibility.Visible;
+                validation = false;
             }
+            else
+            {
+                txtAgeValidation.Visibility = Visibility.Collapsed;
+            }
+            if (validation)
+            {
             MessageBox.Show("Pomyślnie zarejestrowano konto.");
             Close();
-            return true;
+            }
+            return validation;
         }
 
         #region ValidationMethods
-        private bool ifAccountWithThatUserNameCanBeCreated(string login)
-        {
-            RefreshData();
-            var ifUserExists = DatabaseUsers.Any(u => u.UserName == login);
-
-            return !ifUserExists;
-        }
-
         private bool ifAllFieldsAreCompleted(string username, string password, string name, string surname, int age)
         {
             if (string.IsNullOrWhiteSpace(username) ||
@@ -161,10 +182,20 @@ namespace GoingOutApp
             return true;
         }
 
+        private bool ifAccountWithThatUserNameCanBeCreated(string login)
+        {
+            RefreshData();
+            var ifUserExists = DatabaseUsers.Any(u => u.UserName == login);
+            txtUsernameValidation.Text = "Konto o podanej nazwie użytkownika już istnieje.";
+
+            return !ifUserExists;
+        }
+
         private bool ifGenderIsSelected()
         {
             if (string.IsNullOrWhiteSpace(selectedGender))
             {
+                txtGenderValidation.Text = "Proszę wybrać płeć.";
                 return false;
             }
             return true;
@@ -174,26 +205,44 @@ namespace GoingOutApp
         {
             if (password.Length < 8)
             {
+                txtPasswordValidation.Text = "Hasło musi się składać z minimum 8 znaków.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
+                txtPasswordValidation.Text = "Hasło musi zawierać wielkie litery.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[a-z]"))
             {
+                txtPasswordValidation.Text = "Hasło musi zawierać małe litery";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[0-9]"))
             {
+                txtPasswordValidation.Text = "Hasło musi zawierać cyfry.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[!@#\\$%^&*()]"))
             {
+                txtPasswordValidation.Text = "Hasło musi zawierać znaki specjalne (np. !,@,#,$,%).";
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ifPasswordEqual(string password)
+        {
+            string enteredPassword = txtPassword2.Password;
+
+            if (enteredPassword != password)
+            {
+                txtPassword2Validation.Text = "Hasła muszą być takie same.";
                 return false;
             }
 
@@ -203,6 +252,7 @@ namespace GoingOutApp
         {
             if (!Regex.IsMatch(name, "^[A-Z][a-zA-Z]*$"))
             {
+                txtNameValidation.Text = "Imię musi zaczynać się z wielkiej litery i nie może zawierać cyfr.";
                 return false;
             }
             return true;
@@ -212,6 +262,7 @@ namespace GoingOutApp
         {
             if (!Regex.IsMatch(surname, "^[A-Z][a-zA-Z]*$"))
             {
+                txtSurnameValidation.Text = "Nazwisko musi zaczynać się z wielkiej litery i nie może zawierać cyfr.";
                 return false;
             }
             return true;
@@ -220,7 +271,8 @@ namespace GoingOutApp
         private bool ifAgeValid(int age)
         {
             if (age <= 0 || age > 150) 
-            { 
+            {
+                txtAgeValidation.Text = "Podaj poprawny wiek.";
                 return false;
             }
             return true;
@@ -261,6 +313,24 @@ namespace GoingOutApp
                 textPassword.Visibility = Visibility.Visible;
             }
         }
+
+        private void textPassword2_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtPassword2.Focus();
+        }
+
+        private void txtPassword2_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtPassword2.Password) && txtPassword2.Password.Length > 0)
+            {
+                textPassword2.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textPassword2.Visibility = Visibility.Visible;
+            }
+        }
+
         private void textName_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtName.Focus();
