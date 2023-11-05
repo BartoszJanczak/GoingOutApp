@@ -1,4 +1,5 @@
-﻿using GoingOutApp.Services;
+﻿using GoingOutApp.Models;
+using GoingOutApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +19,35 @@ namespace GoingOutApp
     /// <summary>
     /// Interaction logic for UserProfileWindow.xaml
     /// </summary>
+    /// 
+
+    
+
     public partial class UserProfileWindow : Window
     {
-        public UserProfileWindow()
+        User LoggedInUser { get; set; }
+        public UserProfileWindow(User user)
         {
+            LoggedInUser = user;
             InitializeComponent();
+            InitControls();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public void InitControls()
+        {
+            Name.Text ="Name: "+ LoggedInUser.Name;
+            Surname.Text ="Surame: "+ LoggedInUser.Surname;
+            Age.Text = "Age: " + Convert.ToString(LoggedInUser.Age);
+            var gender = LoggedInUser.Gender == "M"? "Male" : "Female";
+            Gender.Text = "Gender: " + gender;
+        }
+        private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
             UserService.Logout();
+            this.Close();
+        }
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

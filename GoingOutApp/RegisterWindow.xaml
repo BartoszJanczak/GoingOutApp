@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="596" Width="606"
+        Title="RegisterWindow" Height="596" Width="406"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"
@@ -14,7 +14,7 @@
 
     <Border CornerRadius="50">
         <Border CornerRadius="50"
-                BorderThickness="5">
+                BorderThickness="5" Margin="-11,0,21,0">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                     <GradientStop Color="#E0E0E0" Offset="0"/>
@@ -34,7 +34,7 @@
             </Border.Background>
             <Grid>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top">
-                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="500 5 0 0"/>
+                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="300 5 0 0"/>
                     <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 0 0 6">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
@@ -98,7 +98,7 @@
                         </Grid>
                     </Border>
                     <TextBlock x:Name="txtSurnameValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
-                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="85" Background="White" Margin="173 6 0 0" HorizontalAlignment="Left">
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="85" Background="White" Margin="73 6 0 0" HorizontalAlignment="Left">
                         <Grid Margin="7 4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="auto"/>
@@ -110,7 +110,7 @@
                             </TextBox>
                         </Grid>
                     </Border>
-                    <TextBlock x:Name="txtAgeValidation" Text="asdasd" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Left" Visibility="Collapsed" Margin="173 0 0 0" Foreground="White"/>
+                    <TextBlock x:Name="txtAgeValidation" Text="asdasd" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Left" Visibility="Collapsed" Margin="73 0 0 0" Foreground="White"/>
                     <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="0 12 0 8" Height="40">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="7 4">
                             <Button Name="maleButton" Click="MaleButton_Click" Background="White" BorderThickness="0" Style="{StaticResource MyButtonStyle}">

@@ -69,7 +69,7 @@ namespace GoingOutApp
                 }
                 else
                 {
-                    _userProfileWindowInstance = new UserProfileWindow();
+                    _userProfileWindowInstance = new UserProfileWindow(UserService.LoggedInUser);
                     _userProfileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
                     _userProfileWindowInstance.Show();
                 }

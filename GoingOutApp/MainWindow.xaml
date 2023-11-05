@@ -40,30 +40,142 @@
                     <ColumnDefinition Width="3*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="GoingOut" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="59,18,0,0" Grid.Column="1" Height="42" Width="136" Foreground="Black"/>
+                <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black"/>
 
-                <ListView Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="10,81,0,36" Background="Transparent" Foreground="Black">
-                    <ListViewItem>Koncert zespołu rock</ListViewItem>
-                    <ListViewItem>Kino samochodowe</ListViewItem>
-                    <ListViewItem>Warsztaty kulinarne</ListViewItem>
-                    <ListViewItem>Piknik w parku</ListViewItem>
-                    <ListViewItem>Wystawa sztuki</ListViewItem>
-                    <ListViewItem>Impreza kulturalna</ListViewItem>
-                    <ListViewItem>Zajęcia jogi na plaży</ListViewItem>
-                    <ListViewItem>Festiwal filmowy</ListViewItem>
-                    <ListViewItem>Konferencja naukowa</ListViewItem>
-                    <ListViewItem>Turniej szachowy</ListViewItem>
-                    <ListViewItem>Webinar o rozwoju</ListViewItem>
-                    <ListViewItem>Zlot samochodowy</ListViewItem>
-                    <ListViewItem>Kino plenerowe</ListViewItem>
+                <ListView Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="10,81,0,36" Background="Transparent" Foreground="Black" HorizontalAlignment="Center">
+                    <ListViewItem Width="450" Height="110" HorizontalAlignment="Left">
+                        <Grid Background="White" Width="450" Height="100">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="Kręgle"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock HorizontalAlignment="Left" Text="20:00" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <TextBlock FontWeight="Bold" FontSize="11">Opole, ul Mickiewicza 89</TextBlock>
+                                <TextBlock FontWeight="Bold" FontSize="13">Opis:</TextBlock>
+                                <TextBlock FontSize="13">Krótki opis dotyczący wydarzenia</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Width="450" Height="110" HorizontalAlignment="Left">
+                        <Grid Background="White" Width="450" Height="100">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="Kino samochodowe"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock HorizontalAlignment="Left" Text="21:30" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <TextBlock FontWeight="Bold" FontSize="11">Opole, ul Adamskich 189</TextBlock>
+                                <TextBlock FontWeight="Bold" FontSize="13">Opis:</TextBlock>
+                                <TextBlock FontSize="13">Krótki opis dotyczący wydarzenia</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Width="450" Height="110" HorizontalAlignment="Left">
+                        <Grid Background="White" Width="450" Height="100">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="Kręgle"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock HorizontalAlignment="Left" Text="20:00" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <TextBlock FontWeight="Bold" FontSize="11">Opole, ul Mickiewicza 89</TextBlock>
+                                <TextBlock FontWeight="Bold" FontSize="13">Opis:</TextBlock>
+                                <TextBlock FontSize="13">Krótki opis dotyczący wydarzenia</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Width="450" Height="110" HorizontalAlignment="Left">
+                        <Grid Background="White" Width="450" Height="100">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="Wystawa sztuki"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock HorizontalAlignment="Left" Text="18:00" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <TextBlock FontWeight="Bold" FontSize="11">Opole, ul Kopernika 2</TextBlock>
+                                <TextBlock FontWeight="Bold" FontSize="13">Opis:</TextBlock>
+                                <TextBlock FontSize="13">Krótki opis dotyczący wydarzenia</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                    </ListViewItem>
+                    <ListViewItem Width="450" Height="110" HorizontalAlignment="Left">
+                        <Grid Background="White" Width="450" Height="100">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel  Orientation="Horizontal" Grid.Column="0">
+                                <TextBlock HorizontalAlignment="Left" FontSize="18" FontWeight="Bold" Text="Piknik w parku"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Column="2">
+                                <TextBlock HorizontalAlignment="Left" Text="12:00" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="0">
+                                <TextBlock FontWeight="Bold" FontSize="11">Opole, Park Opolski</TextBlock>
+                                <TextBlock FontWeight="Bold" FontSize="13">Opis:</TextBlock>
+                                <TextBlock FontSize="13">Krótki opis dotyczący wydarzenia</TextBlock>
+                            </StackPanel>
+
+                        </Grid>
+                    </ListViewItem>
                 </ListView>
 
-                <Image x:Name="MapBox" Grid.Column="1" Stretch="UniformToFill" Margin="16,82,26,38"/>
-                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Height="50" Width="88" Click="ProfileButton_Click"/>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Height="49" Width="114"/>
-                <Button Style="{StaticResource Windowbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="694,18,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
-                <Button Style="{StaticResource Windowbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="646,18,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
-                <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Center" Margin="0,14,0,0" VerticalAlignment="Top" Height="50" Width="88" Click="AddButton_Click"/>
+                <Image x:Name="MapBox" Grid.Column="1" Stretch="UniformToFill" Margin="62,105,62,105" RenderTransformOrigin="0.548,0.542"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="120" />
+                <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="702,15,0,0" VerticalAlignment="Top" Width="40"   Grid.Column="1"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="657,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top" Width="60"  Click="AddButton_Click"/>
 
                 <!--NIE WIEM CZEMU TO NIE DZIAŁA-->
                 <!--<Label Content="&#xf133;" Foreground="White" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Height="34" Width="28" FontFamily="/data/fonts/#Font Awesome 6 Free Solid" FontSize="20" Grid.Column="1"/>-->

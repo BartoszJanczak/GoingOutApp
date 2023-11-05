@@ -1,13 +1,54 @@
 ﻿<Window x:Class="GoingOutApp.UserProfileWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
-        Title="UserProfileWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Log out" Style="{StaticResource Navbutton}" BorderBrush="{x:Null}" RenderTransformOrigin="0.5,0.5" Margin="679,10,24,375" Click="Button_Click"></Button>
+        Title="ProfileWindow" Height="600" Width="803"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True">
+    <Border CornerRadius="50">
+        <Border CornerRadius="50"
+                BorderThickness="5" Margin="0,0,0,36">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E0E0E0" Offset="0"/>
+                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
+                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
+                    <GradientStop Color="#808080" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
-    </Grid>
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#FDFDFD" Offset="0"/>
+                    <GradientStop Color="#E6E6E6" Offset="0.25"/>
+                    <GradientStop Color="#CFCFCF" Offset="0.75"/>
+                    <GradientStop Color="#B8B8B8" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+             
+                <StackPanel Grid.Row="0" HorizontalAlignment="right" Orientation="Horizontal" Margin="0 0 15 0">
+                    <Button Style="{StaticResource  Windowbutton}" x:Name="LogOutButton" Click="LogOutButton_Click" Content="Log Out"  Height="42" Width="100" Margin="0 0 10 0 "/>
+                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="0 0 0 0 "/>
+                </StackPanel>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Style="{StaticResource textHint}" Text="User data:"/>
+                    <TextBlock Style="{StaticResource textHint}"  x:Name="Name"/>
+                    <TextBlock Style="{StaticResource textHint}"  x:Name="Surname"/>
+                    <TextBlock Style="{StaticResource textHint}"  x:Name="Age"/>
+                    <TextBlock Style="{StaticResource textHint}"  x:Name="Gender"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
 </Window>

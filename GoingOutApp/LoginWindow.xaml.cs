@@ -35,12 +35,18 @@ namespace GoingOutApp
             var correctData = UserService.ValidateSignIn(username, password);
             if (correctData)
             {
-                MessageBox.Show("Witamy" + UserService.LoggedInUser.Name +" "+ UserService.LoggedInUser.Surname);
+                var result = MessageBox.Show("Udało się pomyślnie zalogować.");
+                if(result == MessageBoxResult.OK)
+                {
+                    this.Close();
+                    UserProfileWindow user = new UserProfileWindow(UserService.LoggedInUser);
+                    user.Show();
+                }
                 // wyswietl info o zalogowaniu 
             }
             else
             {
-                MessageBox.Show("Witamy" + UserService.LoggedInUser.Name + " " + UserService.LoggedInUser.Surname);
+                MessageBox.Show("Wprowadzono niepoprawne dane.");
 
                 // niepoprawne dane
             }
