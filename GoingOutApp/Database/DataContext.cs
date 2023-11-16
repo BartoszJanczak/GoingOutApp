@@ -1,6 +1,7 @@
 ﻿using GoingOutApp.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GoingOutApp.Services
@@ -37,7 +38,34 @@ namespace GoingOutApp.Services
             }
         }
 
-       
-       
+        public void AddEvent(string eventName, string photoPath, string photoDescription, string eventDescription, string eventLocation, DateTime eventDateTime, int numberOfplaces, string otherInfo)
+        {
+            using (DataContext context = new DataContext())
+            {
+                context.Events.Add(new Event
+                {
+                    EventName = eventName,
+                    PhotoPath = photoPath,
+                    PhotoDescription = photoDescription,
+                    EventDescription = eventDescription,
+                    EventLocation = eventLocation,
+                    EventDateTime = eventDateTime,
+                    NumberOfplaces = numberOfplaces,
+                    OtherInfo = otherInfo
+
+                });
+                context.SaveChanges();
+            }
+        }
+        public List<Event> GetEvents()
+        {
+            using (DataContext context = new DataContext())
+            {
+                // Pobierz wszystkie wydarzenia z bazy danych
+                List<Event> events = context.Events.ToList();
+
+                return events;
+            }
+        }
     }
 }
