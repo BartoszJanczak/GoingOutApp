@@ -41,10 +41,10 @@
                 <TextBlock Text="Adding new event" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,67,0,0" Height="42" Width="258" Foreground="Black" Grid.ColumnSpan="2"/>
 
                 <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="403,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
-                <TextBox HorizontalAlignment="Left" Margin="0,136,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-                <TextBox HorizontalAlignment="Left" Margin="0,188,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top" Width="106"/>
-                <TextBox HorizontalAlignment="Left" Margin="266,238,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="258" Height="85" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="AddEventName" HorizontalAlignment="Left" Margin="0,136,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
+                <TextBox x:Name="AddEventLocation" HorizontalAlignment="Left" Margin="0,188,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <TextBox x:Name="AddEventDesc" HorizontalAlignment="Left" Margin="266,238,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="258" Height="85" Grid.ColumnSpan="2"/>
             </Grid>
         </Border>
     </Border>
