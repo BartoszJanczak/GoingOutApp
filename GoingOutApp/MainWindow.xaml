@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280"
@@ -18,43 +19,50 @@
                 BorderThickness="5">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E0E0E0" Offset="0"/>
-                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
-                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
-                    <GradientStop Color="#808080" Offset="1"/>
+                    <GradientStop Color="#E0E0E0" Offset="0" />
+                    <GradientStop Color="#C0C0C0" Offset="0.25" />
+                    <GradientStop Color="#A0A0A0" Offset="0.75" />
+                    <GradientStop Color="#808080" Offset="1" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FDFDFD" Offset="0"/>
-                    <GradientStop Color="#E6E6E6" Offset="0.25"/>
-                    <GradientStop Color="#CFCFCF" Offset="0.75"/>
-                    <GradientStop Color="#B8B8B8" Offset="1"/>
-
+                    <GradientStop Color="#FDFDFD" Offset="0" />
+                    <GradientStop Color="#E6E6E6" Offset="0.25" />
+                    <GradientStop Color="#CFCFCF" Offset="0.75" />
+                    <GradientStop Color="#B8B8B8" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black"/>
+                <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black" />
 
                 <ListView x:Name="ListOfEvents" Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="0,81,0,36" Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="460">
 
                 </ListView>
 
-                <Image x:Name="MapBox" Grid.Column="1" Stretch="UniformToFill" Margin="62,105,62,105" RenderTransformOrigin="0.548,0.542"/>
-                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
                 <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="120" />
-                <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="702,15,0,0" VerticalAlignment="Top" Width="40"   Grid.Column="1"/>
-                <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="657,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527"/>
-                <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top" Width="60"  Click="AddButton_Click"/>
+                <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="702,15,0,0" VerticalAlignment="Top" Width="40"   Grid.Column="1" />
+                <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="657,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527" />
+                <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top" Width="60"  Click="AddButton_Click" />
 
-                <!--NIE WIEM CZEMU TO NIE DZIAŁA-->
-                <!--<Label Content="&#xf133;" Foreground="White" HorizontalAlignment="Center" Margin="0,18,0,0" VerticalAlignment="Top" Height="34" Width="28" FontFamily="/data/fonts/#Font Awesome 6 Free Solid" FontSize="20" Grid.Column="1"/>-->
+                <Grid Grid.Column="1" Margin="50 100 50 50">
+                    <m:Map  x:Name="Map" Mode="AerialWithLabels"  MouseLeftButtonDown="Window_mousedown" Center="50.668, 17.925" ZoomLevel="15" CredentialsProvider="tdR8B4UFCok6HiAPmoQ3~K8lYPO2jpRrn2Eo7sfgHRQ~ArKu6p1ZhDGu_ekMQ6eam5QBW67AVHme_OOL_4LkpzH0P8ScgJT2w-UtzHnjRbr4">
+                        <m:MapItemsControl ItemsSource="{Binding Points}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <m:Pushpin Location="{Binding Location}" Background="{Binding PinColor}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </m:MapItemsControl>
+                    </m:Map>
+                </Grid>
             </Grid>
         </Border>
     </Border>
