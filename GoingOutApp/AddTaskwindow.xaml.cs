@@ -45,7 +45,6 @@ namespace GoingOutApp
             photoPath[1] = 0;
             photoPath[2] = byte.MaxValue;
 
-
             _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 5, "otherinfo");
             EventAdded?.Invoke(this, EventArgs.Empty);
             Close();

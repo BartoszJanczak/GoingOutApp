@@ -13,5 +13,7 @@ namespace GoingOutApp.Models
         public string Surname { get; set; }
         public int Age { get; set; }
         public string Gender { get; set; }
+        public string SecurityQuestion { get; set; }
+        public string SecurityAnswer { get; set; }
     }
 }

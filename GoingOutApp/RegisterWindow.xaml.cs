@@ -18,6 +18,15 @@ namespace GoingOutApp
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        public enum SecurityQuestion
+        {
+            FavoriteColor,
+            FirstPet,
+            BirthCity,
+            FavoriteBook,
+            DreamJob,
+            None
+        }
         public List<User> ?DatabaseUsers { get; private set; }
 
         private DataContext _database { get; set; }
@@ -46,11 +55,14 @@ namespace GoingOutApp
             string surname = txtSurname.Text;
             int age = Convert.ToInt32(txtAge.Text);
             string gender = selectedGender.ToString();
+            string securityAnswer = txtAnswer.Text;
+            SecurityQuestion selectedQuestion = MapComboBoxSelectionToEnum();
+            string securityQuestionAsString = selectedQuestion.ToString();
 
             if (AccountValidation(username, password, name, surname, age, gender))
             {
                 var result = EncodePassword(password, 20); 
-                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, gender);
+                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, gender, securityQuestionAsString, securityAnswer);
             }
             else
             {
@@ -71,6 +83,25 @@ namespace GoingOutApp
                 string encodedKey = Convert.ToBase64String(key);
 
                 return new Tuple<string, string>(encodedSalt, encodedKey);
+            }
+        }
+
+        private SecurityQuestion MapComboBoxSelectionToEnum()
+        {
+            switch (cmbSecurityQuestion.SelectedIndex)
+            {
+                case 0:
+                    return SecurityQuestion.FavoriteColor;
+                case 1:
+                    return SecurityQuestion.FirstPet;
+                case 2:
+                    return SecurityQuestion.BirthCity;
+                case 3:
+                    return SecurityQuestion.FavoriteBook;
+                case 4:
+                    return SecurityQuestion.DreamJob;
+                default:
+                    return SecurityQuestion.None; // Domyślna wartość, można dostosować do własnych potrzeb
             }
         }
 
@@ -392,6 +423,40 @@ namespace GoingOutApp
             FemaleText.Foreground = new SolidColorBrush(Colors.Pink);
             MaleText.Foreground = new SolidColorBrush(Color.FromRgb(172, 176, 175));
             selectedGender = "Female";
+        }
+
+        private void textQuestion_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            cmbSecurityQuestion.IsDropDownOpen = true;
+        }
+
+        private void cmbSecurityQuestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cmbSecurityQuestion.SelectedItem != null)
+            {
+                textQuestion.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textQuestion.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void textAnswer_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            txtAnswer.Focus();
+        }
+
+        private void txtAnswer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtAnswer.Text) && txtAnswer.Text.Length > 0)
+            {
+                textAnswer.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textAnswer.Visibility = Visibility.Visible;
+            }
         }
         #endregion
     }

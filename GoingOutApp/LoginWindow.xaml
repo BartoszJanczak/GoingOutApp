@@ -58,9 +58,11 @@
                             <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}"/>
                         </Grid>
                     </Border>
-                    <Button Style="{StaticResource Navbutton}" Content="Sign in" HorizontalAlignment="Left" Margin="110,22,0,0" VerticalAlignment="Top" Click="SignInButton_Click" Grid.ColumnSpan="2" RenderTransformOrigin="0.566,0.538"/>
+                    <Button Style="{StaticResource Navbutton}" Content="Sign in" HorizontalAlignment="Left" Margin="110,42,0,0" VerticalAlignment="Top" Click="SignInButton_Click" Grid.ColumnSpan="2" RenderTransformOrigin="0.566,0.538"/>
                     <Button Style="{StaticResource Navbutton}" Content="Sign up" HorizontalAlignment="Left" Margin="216,-50,0,0" VerticalAlignment="Top" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159"/>
                 </StackPanel>
+                <Label Content="Zresetuj hasło" HorizontalAlignment="Left" Margin="137,199,0,0" VerticalAlignment="Top" Width="85" Foreground="Blue"
+                  MouseDown="ResetLabel_MouseDown" MouseEnter="ResetLabel_MouseEnter" MouseLeave="ResetLabel_MouseLeave" Cursor="Hand"/>
             </Grid>
         </Border>
     </Border>

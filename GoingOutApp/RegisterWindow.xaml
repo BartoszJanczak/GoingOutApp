@@ -128,6 +128,35 @@
                         </StackPanel>
                     </Border>
                     <TextBlock x:Name="txtGenderValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="White" Margin="0 -5 0 0"/>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="350" Background="White" Margin="0 6 0 0">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/question.png" Height="20"/>
+                            <TextBlock x:Name="textQuestion" MouseDown="textQuestion_MouseDown" Text="Security question" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <ComboBox x:Name="cmbSecurityQuestion" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="30" SelectionChanged="cmbSecurityQuestion_SelectionChanged" Width="Auto">
+                                <ComboBoxItem Content="What is your favorite color?" />
+                                <ComboBoxItem Content="What is the name of your first pet?" />
+                                <ComboBoxItem Content="In which city were you born?" />
+                                <ComboBoxItem Content="What is your favorite book?" />
+                                <ComboBoxItem Content="What is your dream job?" />
+                            </ComboBox>
+                        </Grid>
+                    </Border>
+                    <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="12 12 12 6">
+                        <Grid Margin="7 4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="/data/images/answer.png" Height="20"/>
+                            <TextBlock x:Name="textAnswer" MouseDown="textAnswer_MouseDown" Text="Answer" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                            <TextBox x:Name="txtAnswer" TextChanged="txtAnswer_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                            </TextBox>
+                        </Grid>
+                    </Border>
                     <Button Style="{StaticResource Navbutton}" Content="Sign up" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159"/>
                 </StackPanel>
             </Grid>
