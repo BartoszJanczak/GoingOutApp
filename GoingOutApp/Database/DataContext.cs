@@ -18,7 +18,7 @@ namespace GoingOutApp.Services
         public DbSet<EventComment> EventComments { get; set; }
         public DbSet<EventParticipant> EventParticipants { get; set; }
 
-        public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender)
+        public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender, string securityQuestion, string securityAnswer)
         {
             using (DataContext context = new DataContext())
             {
@@ -31,12 +31,14 @@ namespace GoingOutApp.Services
                     Surname = surname,
                     Age = age,
                     Gender = gender,
+                    SecurityQuestion = securityQuestion,
+                    SecurityAnswer = securityAnswer,
                 });
                 context.SaveChanges();
             }
         }
 
-        public void UpdatePassword(string username, string newPassword, string key)
+        public void UpdatePassword(string username, string newPassword, string key, string securityQuestion, string serucrityAnswer)
         {
             using (DataContext context = new DataContext())
             {
