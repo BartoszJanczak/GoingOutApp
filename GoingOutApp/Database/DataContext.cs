@@ -63,7 +63,6 @@ namespace GoingOutApp.Services
                     PhotoPath = photoPath,
                     PhotoDescription = photoDescription,
                     EventDescription = eventDescription,
-                    EventLocation = eventCountry,
                     Street = eventStreet,
                     City = eventCity,
                     NumberOfBuilding = eventBuildingNumber,
