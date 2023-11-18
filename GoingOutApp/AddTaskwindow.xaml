@@ -42,9 +42,22 @@
 
                 <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="403,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
                 <TextBox x:Name="AddEventName" HorizontalAlignment="Left" Margin="0,136,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-                <TextBox x:Name="AddEventLocation" HorizontalAlignment="Left" Margin="0,188,0,0" TextWrapping="Wrap" Text="Location" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,361,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
-                <TextBox x:Name="AddEventDesc" HorizontalAlignment="Left" Margin="266,238,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="258" Height="85" Grid.ColumnSpan="2"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="24,427,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <TextBox x:Name="AddEventDesc" HorizontalAlignment="Left" Margin="266,316,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="258" Height="84" Grid.ColumnSpan="2"/>
+                <TextBox x:Name="txtCity" Grid.Column="1" HorizontalAlignment="Left" Margin="0,177,0,0" TextWrapping="Wrap" Text="City" VerticalAlignment="Top" Width="154"/>
+                <TextBox x:Name="txtStreet" Grid.Column="1" HorizontalAlignment="Left" Margin="0,220,0,0" TextWrapping="Wrap" Text="Street" VerticalAlignment="Top" Width="154"/>
+                <TextBox x:Name="txtNumberOfBuilding" Grid.Column="1" HorizontalAlignment="Left" Margin="0,268,0,0" TextWrapping="Wrap" Text="Number of building" VerticalAlignment="Top" Width="154"/>
+                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="226,67,0,0" TextWrapping="Wrap" Text="Wyglad zrobie w niedziele, masz 3 kolumny w bazie: Miasto, Ulica, Numer budynku a dane sa z tego formularza" VerticalAlignment="Top" FontSize="32" Height="544" Width="238" RenderTransformOrigin="0.5,0.5">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform AngleX="-0.131"/>
+                            <RotateTransform/>
+                            <TranslateTransform X="-0.498"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+
             </Grid>
         </Border>
     </Border>

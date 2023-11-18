@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Xml.Linq;
 
 namespace GoingOutApp
@@ -26,21 +27,29 @@ namespace GoingOutApp
         {
             Close();
         }
-
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             string eventName = AddEventName.Text;
             //string PhotoPath = photoPath,
             //string PhotoDescription = photoDescription,
             string eventDescription = AddEventDesc.Text;
-            string eventLocation = AddEventLocation.Text;
             //string EventDateTime = eventDateTime,
             //string NumberOfplaces = numberOfplaces,
             //string OtherInfo = otherInfo
+            string eventCity = txtCity.Text;
+            string eventStreet = txtStreet.Text;
+            string eventBuildingNumber = txtNumberOfBuilding.Text;
 
-            // _database.AddEvent(eventName, "photopath", "photodesc", eventDescription, eventLocation, DateTime.Now, 5, "otherinfo");
+            byte[] photoPath = new byte[3];
+            photoPath[0] = byte.MinValue;
+            photoPath[1] = 0;
+            photoPath[2] = byte.MaxValue;
+
+
+            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 5, "otherinfo");
             EventAdded?.Invoke(this, EventArgs.Empty);
             Close();
         }
+
     }
 }
