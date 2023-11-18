@@ -3,6 +3,7 @@ using GoingOutApp.Services;
 using GoingOutApp.ViewModel;
 using Microsoft.Maps.MapControl.WPF;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Drawing;
 using System.Windows;
