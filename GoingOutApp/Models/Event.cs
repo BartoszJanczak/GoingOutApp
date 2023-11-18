@@ -11,8 +11,9 @@ namespace GoingOutApp.Models
 
         [ForeignKey("EventId")]
         public int EventCreatorId { get; set; }
+
         public string EventName { get; set; }
-        public string PhotoPath { get; set; }
+        public byte[] Photo { get; set; }
         public string PhotoDescription { get; set; }
         public string EventDescription { get; set; }
         public string EventLocation { get; set; }

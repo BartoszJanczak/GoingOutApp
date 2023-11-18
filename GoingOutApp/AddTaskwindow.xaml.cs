@@ -26,6 +26,7 @@ namespace GoingOutApp
         {
             Close();
         }
+
         private void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             string eventName = AddEventName.Text;
@@ -37,10 +38,9 @@ namespace GoingOutApp
             //string NumberOfplaces = numberOfplaces,
             //string OtherInfo = otherInfo
 
-            _database.AddEvent(eventName, "photopath", "photodesc", eventDescription, eventLocation, DateTime.Now, 5, "otherinfo");
+            // _database.AddEvent(eventName, "photopath", "photodesc", eventDescription, eventLocation, DateTime.Now, 5, "otherinfo");
             EventAdded?.Invoke(this, EventArgs.Empty);
             Close();
-           
         }
     }
 }

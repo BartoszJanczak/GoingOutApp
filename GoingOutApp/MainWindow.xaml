@@ -43,7 +43,6 @@
                 <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black" />
 
                 <ListView x:Name="ListOfEvents" Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="0,81,0,36" Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="460">
-
                 </ListView>
 
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />

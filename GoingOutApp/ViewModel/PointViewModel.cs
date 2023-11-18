@@ -14,6 +14,12 @@ namespace GoingOutApp.ViewModel
         private Location _location;
         private Brush _pinColor;
 
+        public PointViewModel(double x, double y, Brush Color)
+        {
+            PinColor = Color;
+            Location = new Location(x, y);
+        }
+
         public Location Location
         {
             get { return _location; }
