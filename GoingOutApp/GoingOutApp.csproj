@@ -9,10 +9,12 @@
 
   <ItemGroup>
     <None Remove="data\images\age.png" />
+    <None Remove="data\images\answer.png" />
     <None Remove="data\images\female.png" />
     <None Remove="data\images\lock.png" />
     <None Remove="data\images\male.png" />
     <None Remove="data\images\name.png" />
+    <None Remove="data\images\question.png" />
     <None Remove="data\images\surname.png" />
     <None Remove="data\images\user.png" />
   </ItemGroup>
@@ -29,10 +31,12 @@
 
   <ItemGroup>
     <Resource Include="data\images\age.png" />
+    <Resource Include="data\images\answer.png" />
     <Resource Include="data\images\female.png" />
     <Resource Include="data\images\lock.png" />
     <Resource Include="data\images\male.png" />
     <Resource Include="data\images\name.png" />
+    <Resource Include="data\images\question.png" />
     <Resource Include="data\images\surname.png" />
     <Resource Include="data\images\user.png" />
   </ItemGroup>

@@ -34,11 +34,12 @@ namespace GoingOutApp
             //string PhotoDescription = photoDescription,
             string eventDescription = AddEventDesc.Text;
             string eventLocation = AddEventLocation.Text;
+            byte mojByte = 42;
             //string EventDateTime = eventDateTime,
             //string NumberOfplaces = numberOfplaces,
             //string OtherInfo = otherInfo
 
-            // _database.AddEvent(eventName, "photopath", "photodesc", eventDescription, eventLocation, DateTime.Now, 5, "otherinfo");
+            _database.AddEvent(eventName, mojByte, "photodesc", eventDescription, "city", "street", eventLocation, DateTime.Now, 5, "otherinfo");
             EventAdded?.Invoke(this, EventArgs.Empty);
             Close();
         }

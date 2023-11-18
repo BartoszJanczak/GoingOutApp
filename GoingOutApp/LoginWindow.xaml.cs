@@ -98,5 +98,21 @@ namespace GoingOutApp
                 textPassword.Visibility = Visibility.Visible;
             }
         }
+
+        private void ResetLabel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            ResetPasswordWindow resetWindow = new ResetPasswordWindow();
+            resetWindow.ShowDialog();
+        }
+
+        private void ResetLabel_MouseEnter(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Hand;
+        }
+
+        private void ResetLabel_MouseLeave(object sender, MouseEventArgs e)
+        {
+            this.Cursor = Cursors.Arrow;
+        }
     }
 }
