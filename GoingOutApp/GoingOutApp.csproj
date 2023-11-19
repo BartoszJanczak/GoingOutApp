@@ -10,6 +10,7 @@
   <ItemGroup>
     <None Remove="data\images\age.png" />
     <None Remove="data\images\answer.png" />
+    <None Remove="data\images\concert.jpg" />
     <None Remove="data\images\female.png" />
     <None Remove="data\images\lock.png" />
     <None Remove="data\images\male.png" />
@@ -32,6 +33,7 @@
   <ItemGroup>
     <Resource Include="data\images\age.png" />
     <Resource Include="data\images\answer.png" />
+    <Resource Include="data\images\concert.jpg" />
     <Resource Include="data\images\female.png" />
     <Resource Include="data\images\lock.png" />
     <Resource Include="data\images\male.png" />

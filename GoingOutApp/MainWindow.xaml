@@ -42,8 +42,26 @@
 
                 <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black" />
 
-                <ListView x:Name="ListOfEvents" Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="0,81,0,36" Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="460">
+                <ListView x:Name="ListOfEvents" Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="0,81,0,36" Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="500" MouseDoubleClick="ListOfEvents_MouseDoubleClick">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="Auto" />
+                            <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
+                        </GridView>
+                    </ListView.View>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="Margin" Value="5"/>
+                            <Setter Property="Padding" Value="10"/>
+                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                            <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                            <Setter Property="Height" Value="50"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        </Style>
+                    </ListView.ItemContainerStyle>
                 </ListView>
+
+
 
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
                 <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="120" />
