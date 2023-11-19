@@ -41,23 +41,62 @@
                 <TextBlock Text="Adding new event" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,67,0,0" Height="42" Width="258" Foreground="Black" Grid.ColumnSpan="2"/>
 
                 <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="403,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1"/>
-                <TextBox x:Name="AddEventName" HorizontalAlignment="Left" Margin="0,136,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="154" Grid.Column="1"/>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="24,427,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
-                <TextBox x:Name="AddEventDesc" HorizontalAlignment="Left" Margin="266,316,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Width="258" Height="84" Grid.ColumnSpan="2"/>
-                <TextBox x:Name="txtCity" Grid.Column="1" HorizontalAlignment="Left" Margin="0,177,0,0" TextWrapping="Wrap" Text="City" VerticalAlignment="Top" Width="154"/>
-                <TextBox x:Name="txtStreet" Grid.Column="1" HorizontalAlignment="Left" Margin="0,220,0,0" TextWrapping="Wrap" Text="Street" VerticalAlignment="Top" Width="154"/>
-                <TextBox x:Name="txtNumberOfBuilding" Grid.Column="1" HorizontalAlignment="Left" Margin="0,268,0,0" TextWrapping="Wrap" Text="Number of building" VerticalAlignment="Top" Width="154"/>
-                <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="226,67,0,0" TextWrapping="Wrap" Text="Wyglad zrobie w niedziele, masz 3 kolumny w bazie: Miasto, Ulica, Numer budynku a dane sa z tego formularza" VerticalAlignment="Top" FontSize="32" Height="544" Width="238" RenderTransformOrigin="0.5,0.5">
-                    <TextBlock.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform AngleX="-0.131"/>
-                            <RotateTransform/>
-                            <TranslateTransform X="-0.498"/>
-                        </TransformGroup>
-                    </TextBlock.RenderTransform>
-                </TextBlock>
-
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,124,294,431" Grid.ColumnSpan="2">
+                    <Grid Margin="7 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textName" MouseDown="textName_MouseDown" Text="Name" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBox x:Name="AddEventName" TextChanged="AddEventName_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,170,294,385" Grid.ColumnSpan="2">
+                    <Grid Margin="7 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textCity" MouseDown="textCity_MouseDown" Text="City" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBox x:Name="AddEventCity" TextChanged="AddEventCity_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,219,294,336" Grid.ColumnSpan="2">
+                    <Grid Margin="7 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textStreet" MouseDown="textStreet_MouseDown" Text="Street" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBox x:Name="AddEventStreet" TextChanged="AddEventStreet_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,262,294,293" Grid.ColumnSpan="2">
+                    <Grid Margin="7 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textBuilding" MouseDown="textBuilding_MouseDown" Text="Number of building" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBox x:Name="AddEventBuilding" TextChanged="AddEventBuilding_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="176,312,160,130" Grid.ColumnSpan="2">
+                    <Grid Margin="7 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textDescription" MouseDown="textDescription_MouseDown" Text="Description" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBox x:Name="AddEventDescription" TextChanged="AddEventDescription_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,476,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
             </Grid>
         </Border>
     </Border>
