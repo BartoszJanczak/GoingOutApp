@@ -94,6 +94,27 @@ namespace GoingOutApp.Services
             }
         }
 
+        public void SignUpForEvent(int eventId, int userId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var existingParticipant = context.EventParticipants
+                    .FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
+
+                if (existingParticipant == null)
+                {
+                    context.EventParticipants.Add(new EventParticipant
+                    {
+                        EventId = eventId,
+                        UserId = userId,
+                        ParticipantStatus = "1"
+                    });
+
+                    context.SaveChanges();
+                }
+            }
+        }
+
         //public Event GetEventById(int id)
         //{
         //    using (DataContext context = new DataContext())
@@ -114,6 +135,17 @@ namespace GoingOutApp.Services
 
                 return returnEvent;
                
+            }
+        }
+
+        public static User GetLoggedInUser(string username, string password)
+        {
+            using (DataContext context = new DataContext())
+            {
+                // Sprawdź, czy użytkownik istnieje w bazie danych
+                User loggedInUser = context.Users.FirstOrDefault(u => u.UserName == username && u.Password == password);
+
+                return loggedInUser;
             }
         }
 
