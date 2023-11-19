@@ -11,6 +11,7 @@ namespace GoingOutApp.Models
         [ForeignKey("EventId")]
         public int EventId { get; set; }
 
-        public string Adres { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }

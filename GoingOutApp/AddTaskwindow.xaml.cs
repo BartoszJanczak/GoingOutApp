@@ -1,6 +1,9 @@
-﻿using GoingOutApp.Services;
+﻿using GoingOutApp.Models;
+using GoingOutApp.Services;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Linq;
@@ -17,6 +20,8 @@ namespace GoingOutApp
 
         public event EventHandler EventAdded;
 
+        public event EventHandler PinAdded;
+
         public AddTaskwindow()
         {
             InitializeComponent();
@@ -27,7 +32,8 @@ namespace GoingOutApp
         {
             Close();
         }
-        private void SubmitButton_Click(object sender, RoutedEventArgs e)
+
+        private async void SubmitButton_Click(object sender, RoutedEventArgs e)
         {
             string eventName = AddEventName.Text;
             //string PhotoPath = photoPath,
@@ -46,9 +52,16 @@ namespace GoingOutApp
             photoPath[2] = byte.MaxValue;
 
             _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 5, "otherinfo");
+            var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
+            var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
+
+            var cords = await LocationService.GetLocationByCords(location);
+
+            _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
+
             EventAdded?.Invoke(this, EventArgs.Empty);
+            PinAdded?.Invoke(this, EventArgs.Empty);
             Close();
         }
-
     }
 }

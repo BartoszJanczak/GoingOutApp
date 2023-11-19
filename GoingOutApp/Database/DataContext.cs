@@ -1,8 +1,12 @@
 ﻿using GoingOutApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace GoingOutApp.Services
 {
@@ -17,6 +21,22 @@ namespace GoingOutApp.Services
         public DbSet<Event> Events { get; set; }
         public DbSet<EventComment> EventComments { get; set; }
         public DbSet<EventParticipant> EventParticipants { get; set; }
+
+        public DbSet<EventPushPin> EventPushPins { get; set; }
+
+        public void CreatePushPin(int eventId, double locationX, double locationY)
+        {
+            using (DataContext context = new DataContext())
+            {
+                context.EventPushPins.Add(new EventPushPin
+                {
+                    EventId = eventId,
+                    X = locationX,
+                    Y = locationY
+                });
+                context.SaveChanges();
+            }
+        }
 
         public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender, string securityQuestion, string securityAnswer)
         {
@@ -74,12 +94,46 @@ namespace GoingOutApp.Services
             }
         }
 
+        //public Event GetEventById(int id)
+        //{
+        //    using (DataContext context = new DataContext())
+        //    {
+        //        // Pobierz wszystkie wydarzenia z bazy danych
+
+        //        private event = context.Events.Where(e => e.EventId = id);
+
+        //        return events;
+        //    }
+        //}
+
+        public Event GetEvent(int id)
+        {
+            using (DataContext context = new DataContext())
+            {
+                Event returnEvent = context.Events.ToList().Where(e => e.EventId == id).First();
+
+                return returnEvent;
+               
+            }
+        }
+
         public List<Event> GetEvents()
         {
             using (DataContext context = new DataContext())
             {
                 // Pobierz wszystkie wydarzenia z bazy danych
                 List<Event> events = context.Events.ToList();
+
+                return events;
+            }
+        }
+
+        public List<EventPushPin> GetEventPushPins()
+        {
+            using (DataContext context = new DataContext())
+            {
+                // Pobierz wszystkie wydarzenia z bazy danych
+                List<EventPushPin> events = context.EventPushPins.ToList();
 
                 return events;
             }

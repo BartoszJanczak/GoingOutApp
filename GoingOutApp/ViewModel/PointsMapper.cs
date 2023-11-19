@@ -1,4 +1,6 @@
-﻿using Microsoft.Maps.MapControl.WPF;
+﻿using GoingOutApp.Models;
+using GoingOutApp.Services;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,18 +18,26 @@ namespace GoingOutApp.ViewModel
             return new System.Windows.Point(pointViewModel.Location.Altitude, pointViewModel.Location.Longitude);
         }
 
-        public static PointViewModel Map(System.Windows.Point pointViewModel)
-        {
-            return new PointViewModel(pointViewModel.X, pointViewModel.Y, Brushes.AliceBlue);
-        }
+        //public static ObservableCollection<PointViewModel> Map(List<System.Windows.Point> windowsPoints)
+        //{
+        //    ObservableCollection<PointViewModel> pointViewModels = new ObservableCollection<PointViewModel>();
 
-        public static ObservableCollection<PointViewModel> Map(List<System.Windows.Point> windowsPoints)
+        //    foreach (var windowsPoint in windowsPoints)
+        //    {
+        //        PointViewModel pointViewModel = new PointViewModel(windowsPoint.X, windowsPoint.Y, Brushes.AliceBlue);
+        //        pointViewModels.Add(pointViewModel);
+        //    }
+
+        //    return pointViewModels;
+        //}
+
+        public static ObservableCollection<PointViewModel> Map(List<EventPushPin> windowsPoints)
         {
             ObservableCollection<PointViewModel> pointViewModels = new ObservableCollection<PointViewModel>();
 
             foreach (var windowsPoint in windowsPoints)
             {
-                PointViewModel pointViewModel = new PointViewModel(windowsPoint.X, windowsPoint.Y, Brushes.AliceBlue);
+                PointViewModel pointViewModel = new PointViewModel(windowsPoint.EventId, windowsPoint.X, windowsPoint.Y, LocationService.GetRandomBrush());
                 pointViewModels.Add(pointViewModel);
             }
 
