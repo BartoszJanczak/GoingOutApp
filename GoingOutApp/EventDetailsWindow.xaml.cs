@@ -18,6 +18,7 @@ namespace GoingOutApp
     /// </summary>
     public partial class EventDetailsWindow : Window
     {
+        private DataContext _database { get; set; }
         public EventDetailsWindow(Event selectedEvent)
         {
             InitializeComponent();
@@ -36,7 +37,27 @@ namespace GoingOutApp
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
+            if (DataContext is Event selectedEvent)
+            {
+                if (UserService.LoggedInUser != null)
+                {
+                    int eventId = selectedEvent.EventId;
+                    int userId = UserService.LoggedInUser.UserId;
 
+                    using (DataContext dataContext = new DataContext())
+                    {
+                        dataContext.SignUpForEvent(eventId, userId);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Błąd: Nie zalogowano użytkownika.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Błąd: Nie można pobrać danych wydarzenia.");
+            }
         }
     }
 }
