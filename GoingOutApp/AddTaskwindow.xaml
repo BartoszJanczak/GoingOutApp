@@ -52,7 +52,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,170,294,385" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,182,294,373" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -63,7 +63,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,219,294,336" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,241,294,314" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -74,7 +74,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,262,294,293" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,295,294,261" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -85,7 +85,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="176,312,160,130" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,349,47,203" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -96,7 +96,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,476,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,432,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
             </Grid>
         </Border>
     </Border>
