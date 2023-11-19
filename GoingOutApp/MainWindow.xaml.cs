@@ -184,6 +184,7 @@ namespace GoingOutApp
                 var eventPin = pushPins.Where(p => p.EventId == clickedEvent).First();
 
                 Map.Center = eventPin.Location;
+                Map.ZoomLevel = 15;
             }
         }
 
