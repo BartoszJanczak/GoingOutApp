@@ -94,24 +94,45 @@ namespace GoingOutApp.Services
             }
         }
 
-        public void SignUpForEvent(int eventId, int userId)
+        public void SignUpForEvent(DataContext context, int eventId, int userId)
         {
-            using (DataContext context = new DataContext())
+            var existingParticipant = context.EventParticipants
+                .FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
+
+            if (existingParticipant == null)
             {
-                var existingParticipant = context.EventParticipants
-                    .FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
-
-                if (existingParticipant == null)
+                context.EventParticipants.Add(new EventParticipant
                 {
-                    context.EventParticipants.Add(new EventParticipant
-                    {
-                        EventId = eventId,
-                        UserId = userId,
-                        ParticipantStatus = "1"
-                    });
+                    EventId = eventId,
+                    UserId = userId,
+                    ParticipantStatus = "1"
+                });
 
-                    context.SaveChanges();
+                var selectedEvent = context.Events.FirstOrDefault(e => e.EventId == eventId);
+                if (selectedEvent != null)
+                {
+                    selectedEvent.NumberOfplaces += 1;
                 }
+
+                context.SaveChanges();
+            }
+        }
+
+        public void CancelParticipation(DataContext context, int eventId, int userId)
+        {
+            var existingParticipant = context.EventParticipants.FirstOrDefault(ep => ep.EventId == eventId && ep.UserId == userId);
+
+            if (existingParticipant != null)
+            {
+                context.EventParticipants.Remove(existingParticipant);
+
+                var selectedEvent = context.Events.FirstOrDefault(e => e.EventId == eventId);
+                if (selectedEvent != null)
+                {
+                    selectedEvent.NumberOfplaces -= 1;
+                }
+
+                context.SaveChanges();
             }
         }
 

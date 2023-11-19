@@ -37,7 +37,7 @@ namespace GoingOutApp
             Name.Text ="Name: "+ LoggedInUser.Name;
             Surname.Text ="Surame: "+ LoggedInUser.Surname;
             Age.Text = "Age: " + Convert.ToString(LoggedInUser.Age);
-            var gender = LoggedInUser.Gender == "M"? "Male" : "Female";
+            var gender = LoggedInUser.Gender == "Male"? "Male" : "Female";
             Gender.Text = "Gender: " + gender;
         }
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
