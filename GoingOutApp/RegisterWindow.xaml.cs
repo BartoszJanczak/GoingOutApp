@@ -101,7 +101,7 @@ namespace GoingOutApp
                 case 4:
                     return SecurityQuestion.DreamJob;
                 default:
-                    return SecurityQuestion.None; // Domyślna wartość, można dostosować do własnych potrzeb
+                    return SecurityQuestion.None;
             }
         }
 

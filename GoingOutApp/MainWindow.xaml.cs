@@ -35,8 +35,16 @@ namespace GoingOutApp
         public MainWindow()
         {
             InitializeComponent();
-            OnShown();
             DataContext = this;
+            OnShown();
+            ListOfEvents.Items.Clear();
+
+            List<Event> events = _database.GetEvents();
+            foreach (var ev in events)
+            {
+                ListOfEvents.Items.Add(ev);
+            }
+
 
             Points = new ObservableCollection<PointViewModel>();
         }
@@ -45,19 +53,12 @@ namespace GoingOutApp
         {
             events = _database.GetEvents();
 
-            // Zakładając, że masz kontrolkę ListView o nazwie listViewEvents w MainWindow
-            ListOfEvents.Items.Clear(); // Wyczyść istniejące elementy
+            ListOfEvents.Items.Clear();
+            ListOfEvents.DisplayMemberPath = "EventName";
 
             foreach (Event ev in events)
             {
-                // Dodaj wydarzenie do ListView
-                ListOfEvents.Items.Add(new
-                {
-                    EventName = ev.EventName,
-                    //EventLocation = ev.EventLocation,
-                    EventDateTime = ev.EventDateTime.ToString(),
-                    // Reszta propercji
-                });
+                ListOfEvents.Items.Add(ev);
             }
         }
 
@@ -162,6 +163,18 @@ namespace GoingOutApp
         private void AddEventWindow_EventAdded(object sender, EventArgs e)
         {
             OnShown();
+        }
+
+        private void ListOfEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ListOfEvents.SelectedItem is Event selectedEvent)
+            {
+                EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent);
+                eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                eventDetailsWindow.Left = this.Left + 15;
+                eventDetailsWindow.Top = this.Top + 80;
+                eventDetailsWindow.Show();
+            }
         }
     }
 }
