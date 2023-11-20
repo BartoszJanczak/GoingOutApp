@@ -148,20 +148,63 @@ namespace GoingOutApp
             OnShown();
         }
 
+        // Stary kod na wszelki wypadek z metody ListOfEvents_MouseDoubleClick
+        //private void ListOfEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (ListOfEvents.SelectedItem is Event selectedEvent)
+        //    {
+        //        EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
+        //        eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+        //        eventDetailsWindow.Left = this.Left + 15;
+        //        eventDetailsWindow.Top = this.Top + 80;
+        //        eventDetailsWindow.Show();
+
+        //        var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).First();
+        //        Map.ZoomLevel = 15;
+
+        //        Map.Center = eventPin.Location;
+        //    }
+        //}
+
         private void ListOfEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListOfEvents.SelectedItem is Event selectedEvent)
             {
+                EventDetailsWindow existingWindow = Application.Current.Windows.OfType<EventDetailsWindow>().FirstOrDefault();
                 EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
-                eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-                eventDetailsWindow.Left = this.Left + 15;
-                eventDetailsWindow.Top = this.Top + 80;
-                eventDetailsWindow.Show();
 
-                var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).First();
-                Map.ZoomLevel = 15;
+                if (existingWindow == null)
+                {
+                    eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                    eventDetailsWindow.Left = this.Left + 15;
+                    eventDetailsWindow.Top = this.Top + 80;
+                    eventDetailsWindow.Show();
 
-                Map.Center = eventPin.Location;
+                    var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
+
+                    if (eventPin != null)
+                    {
+                        Map.ZoomLevel = 15;
+                        Map.Center = eventPin.Location;
+                    }
+                }
+                else
+                {
+                    existingWindow.Close();
+
+                    eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                    eventDetailsWindow.Left = this.Left + 15;
+                    eventDetailsWindow.Top = this.Top + 80;
+                    eventDetailsWindow.Show();
+
+                    var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
+
+                    if (eventPin != null)
+                    {
+                        Map.ZoomLevel = 15;
+                        Map.Center = eventPin.Location;
+                    }
+                }
             }
         }
 
