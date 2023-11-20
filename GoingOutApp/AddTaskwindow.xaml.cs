@@ -41,7 +41,20 @@ namespace GoingOutApp
             //string PhotoDescription = photoDescription,
             string eventDescription = AddEventDescription.Text;
             //string EventDateTime = eventDateTime,
-            //string NumberOfplaces = numberOfplaces,
+            {
+                if (int.TryParse(AddEventNumberOfPlaces.Text, out int numberOfPlaces))
+                {
+                    // Konwersja tekstu na liczbę całkowitą powiodła się
+                    Console.WriteLine("Wynik konwersji AddEventNumberOfPlaces.Text: " + numberOfPlaces);
+
+                    // Możesz teraz użyć zmiennej 'numberOfPlaces' jako liczby całkowitej w swoim kodzie
+                }
+                else
+                {
+                    // Konwersja tekstu na liczbę całkowitą nie powiodła się
+                    Console.WriteLine("Nie udało się przekonwertować tekstu na liczbę całkowitą dla AddEventNumberOfPlaces.Text.");
+                }
+            },
             //string OtherInfo = otherInfo
             string eventCity = AddEventCity.Text;
             string eventStreet = AddEventStreet.Text;
