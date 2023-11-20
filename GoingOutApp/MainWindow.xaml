@@ -68,11 +68,18 @@
                 <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top" Width="60"  Click="AddButton_Click" />
 
                 <Grid Grid.Column="1" Margin="50 100 50 50">
-                    <m:Map  x:Name="Map" Mode="AerialWithLabels"  MouseLeftButtonDown="Window_mousedown" Center="50.668, 17.925" ZoomLevel="15" CredentialsProvider="tdR8B4UFCok6HiAPmoQ3~K8lYPO2jpRrn2Eo7sfgHRQ~ArKu6p1ZhDGu_ekMQ6eam5QBW67AVHme_OOL_4LkpzH0P8ScgJT2w-UtzHnjRbr4">
+                    <m:Map  x:Name="Map" Mode="Road"  MouseLeftButtonDown="Window_mousedown" Center="50.668, 17.925" ZoomLevel="15" CredentialsProvider="tdR8B4UFCok6HiAPmoQ3~K8lYPO2jpRrn2Eo7sfgHRQ~ArKu6p1ZhDGu_ekMQ6eam5QBW67AVHme_OOL_4LkpzH0P8ScgJT2w-UtzHnjRbr4">
                         <m:MapItemsControl ItemsSource="{Binding pushPins}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <m:Pushpin Location="{Binding Location}" Background="{Binding PinColor}"  MouseLeftButtonDown="Pushpin_MouseLeftButtonDown" MouseEnter="Pushpin_MouseEnter" MouseLeave="Pushpin_MouseLeave" />
+                                    <m:Pushpin Location="{Binding Location}" Background="{Binding PinColor}"  MouseLeftButtonDown="Pushpin_MouseLeftButtonDown" MouseEnter="Pushpin_MouseEnter" MouseLeave="Pushpin_MouseLeave">
+                                        <m:Pushpin.Template>
+                                            <ControlTemplate TargetType="m:Pushpin">
+                                                <!-- Define your custom content here (emoticon image in this example) -->
+                                                <Image Source="C:\Users\Maciej\Downloads\jebanie.png" Width="40" Height="40" />
+                                            </ControlTemplate>
+                                        </m:Pushpin.Template>
+                                    </m:Pushpin>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </m:MapItemsControl>
