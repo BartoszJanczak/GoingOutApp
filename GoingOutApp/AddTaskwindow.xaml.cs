@@ -52,7 +52,7 @@ namespace GoingOutApp
             photoPath[1] = 0;
             photoPath[2] = byte.MaxValue;
 
-            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 5, "otherinfo");
+            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 0, "otherinfo");
             var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
             var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 

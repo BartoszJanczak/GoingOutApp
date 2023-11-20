@@ -25,20 +25,28 @@ namespace GoingOutApp
 
     public partial class UserProfileWindow : Window
     {
+        private DataContext _database { get; set; }
         User LoggedInUser { get; set; }
         public UserProfileWindow(User user)
         {
             LoggedInUser = user;
+            _database = new DataContext();
             InitializeComponent();
             InitControls();
+            ShowParticipatedEvents();
         }
         public void InitControls()
         {
             Name.Text ="Name: "+ LoggedInUser.Name;
-            Surname.Text ="Surame: "+ LoggedInUser.Surname;
+            Surname.Text ="Surname: "+ LoggedInUser.Surname;
             Age.Text = "Age: " + Convert.ToString(LoggedInUser.Age);
             var gender = LoggedInUser.Gender == "Male"? "Male" : "Female";
             Gender.Text = "Gender: " + gender;
+        }
+        private void ShowParticipatedEvents()
+        {
+            List<Event> participatedEvents = _database.GetParticipatedEvents(LoggedInUser.UserId);
+            ParticipatedEventsItemsControl.ItemsSource = participatedEvents;
         }
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {

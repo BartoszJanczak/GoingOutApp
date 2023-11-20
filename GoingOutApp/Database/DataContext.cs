@@ -136,6 +136,23 @@ namespace GoingOutApp.Services
             }
         }
 
+        public List<Event> GetParticipatedEvents(int userId)
+        {
+            using (DataContext dataContext = new DataContext())
+            {
+                var eventIds = dataContext.EventParticipants
+                    .Where(ep => ep.UserId == userId)
+                    .Select(ep => ep.EventId)
+                    .ToList();
+
+                var participatedEvents = dataContext.Events
+                    .Where(e => eventIds.Contains(e.EventId))
+                    .ToList();
+
+                return participatedEvents;
+            }
+        }
+
         //public Event GetEventById(int id)
         //{
         //    using (DataContext context = new DataContext())
