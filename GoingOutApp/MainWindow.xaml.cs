@@ -152,7 +152,7 @@ namespace GoingOutApp
         {
             if (ListOfEvents.SelectedItem is Event selectedEvent)
             {
-                EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent);
+                EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
                 eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 eventDetailsWindow.Left = this.Left + 15;
                 eventDetailsWindow.Top = this.Top + 80;
@@ -175,7 +175,7 @@ namespace GoingOutApp
                 var esa = _database.GetEvent(clickedEvent);
 
 
-                EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(esa);
+                EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(esa.EventId);
 
                 eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
                 eventDetailsWindow.Left = this.Left + 15;
