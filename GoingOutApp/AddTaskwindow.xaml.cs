@@ -129,5 +129,15 @@ namespace GoingOutApp
         {
             AddEvent_TextChanged(AddEventDescription.Text, textDescription);
         }
+
+        private void textNumberOfPlaces_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            text_MouseDown(AddEventNumberOfPlaces);
+        }
+
+        private void AddEventNumberOfPlaces_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AddEvent_TextChanged(AddEventNumberOfPlaces.Text, textNumberOfPlaces);
+        }
     }
 }
