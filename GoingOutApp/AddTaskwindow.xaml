@@ -108,7 +108,15 @@
                     </Grid>
                 </Border>
                 <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,462,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
-                <DatePicker x:Name="AddEventDate" Grid.Column="1" HorizontalAlignment="Left" Margin="206,246,0,0" VerticalAlignment="Top" Height="24" Width="201"/>
+                <DatePicker x:Name="AddEventDate" Grid.Column="1" HorizontalAlignment="Left" Margin="206,244,0,0" VerticalAlignment="Top" Height="30" Width="201" FontSize="18"/>
+                <StackPanel Margin="206,295,67,205" Grid.Column="1">
+                    <TextBlock Text="Choose category:" FontSize="18"/>
+                    <ComboBox x:Name="cmbCategory" SelectedIndex="0" FontFamily="Verdana" FontSize="18">
+                        <ComboBoxItem Content="Social"/>
+                        <ComboBoxItem Content="Show"/>
+                        <ComboBoxItem Content="Sport"/>
+                    </ComboBox>
+                </StackPanel>
             </Grid>
         </Border>
     </Border>

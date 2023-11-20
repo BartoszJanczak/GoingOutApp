@@ -23,6 +23,14 @@ namespace GoingOutApp
 
         public event EventHandler PinAdded;
 
+        public enum EventCategory
+        {
+            Social,
+            Show,
+            Sport
+        }
+
+
         public AddTaskwindow()
         {
             InitializeComponent();
@@ -59,6 +67,9 @@ namespace GoingOutApp
             photoPath[1] = 0;
             photoPath[2] = byte.MaxValue;
 
+            EventCategory eventCategory = (EventCategory)cmbCategory.SelectedIndex;
+
+            // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma ) 
             _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
             var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
             var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
