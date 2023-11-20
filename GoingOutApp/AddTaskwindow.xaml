@@ -52,18 +52,18 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,182,294,373" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="75,178,40,377">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="textCity" MouseDown="textCity_MouseDown" Text="City" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBlock x:Name="textCity" MouseDown="textCity_MouseDown" Text="City, postcode" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
                         <TextBox x:Name="AddEventCity" TextChanged="AddEventCity_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,241,294,314" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="75,241,40,314">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -74,7 +74,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,295,294,261" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="75,308,40,248">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -85,7 +85,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,349,47,203" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,390,47,162" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -96,7 +96,27 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,432,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="206,178,67,378" Grid.Column="1">
+                    <Grid Margin="7 4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="textNumberOfPlaces" MouseDown="textNumberOfPlaces_MouseDown" Text="Number of places" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBox x:Name="AddEventNumberOfPlaces" TextChanged="AddEventNumberOfPlaces_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
+                        </TextBox>
+                    </Grid>
+                </Border>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,462,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <DatePicker x:Name="AddEventDate" Grid.Column="1" HorizontalAlignment="Left" Margin="206,244,0,0" VerticalAlignment="Top" Height="30" Width="201" FontSize="18"/>
+                <StackPanel Margin="206,295,67,205" Grid.Column="1">
+                    <TextBlock Text="Choose category:" FontSize="18"/>
+                    <ComboBox x:Name="cmbCategory" SelectedIndex="0" FontFamily="Verdana" FontSize="18">
+                        <ComboBoxItem Content="Social"/>
+                        <ComboBoxItem Content="Show"/>
+                        <ComboBoxItem Content="Sport"/>
+                    </ComboBox>
+                </StackPanel>
             </Grid>
         </Border>
     </Border>

@@ -23,6 +23,14 @@ namespace GoingOutApp
 
         public event EventHandler PinAdded;
 
+        public enum EventCategory
+        {
+            Social,
+            Show,
+            Sport
+        }
+
+
         public AddTaskwindow()
         {
             InitializeComponent();
@@ -38,10 +46,17 @@ namespace GoingOutApp
         {
             string eventName = AddEventName.Text;
             //string PhotoPath = photoPath,
-            //string PhotoDescription = photoDescription,
             string eventDescription = AddEventDescription.Text;
-            //string EventDateTime = eventDateTime,
-            //string NumberOfplaces = numberOfplaces,
+            string eventDate = string.Empty;
+            if(!string.IsNullOrEmpty(AddEventDate.Text))
+            {
+                eventDate = AddEventDate.Text;
+            }
+            else
+            {
+                eventDate = DateTime.Now.ToString();
+            }                
+            int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
             //string OtherInfo = otherInfo
             string eventCity = AddEventCity.Text;
             string eventStreet = AddEventStreet.Text;
@@ -52,7 +67,10 @@ namespace GoingOutApp
             photoPath[1] = 0;
             photoPath[2] = byte.MaxValue;
 
-            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 0, "otherinfo");
+            EventCategory eventCategory = (EventCategory)cmbCategory.SelectedIndex;
+
+            // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma ) 
+            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
             var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
             var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
@@ -64,88 +82,80 @@ namespace GoingOutApp
             PinAdded?.Invoke(this, EventArgs.Empty);
             Close();
         }
+
+        private void text_MouseDown(Control control)
+        {
+            control.Focus();
+        }
+
+        private void AddEvent_TextChanged(string AddEvent, TextBlock textBlock)
+        {
+            if (!string.IsNullOrEmpty(AddEvent) && AddEvent.Length > 0)
+            {
+                textBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                textBlock.Visibility = Visibility.Visible;
+            }
+        }
         private void textName_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            AddEventName.Focus();
+            text_MouseDown(AddEventName);
         }
 
         private void AddEventName_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(AddEventName.Text) && AddEventName.Text.Length > 0)
-            {
-                textName.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textName.Visibility = Visibility.Visible;
-            }
+            AddEvent_TextChanged(AddEventName.Text, textName);
         }
 
         private void textCity_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            AddEventCity.Focus();
+            text_MouseDown(AddEventCity);
         }
 
         private void AddEventCity_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(AddEventCity.Text) && AddEventCity.Text.Length > 0)
-            {
-                textCity.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textCity.Visibility = Visibility.Visible;
-            }
+            AddEvent_TextChanged(AddEventCity.Text, textCity);
         }
 
         private void textStreet_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            AddEventStreet.Focus();
+            text_MouseDown(AddEventStreet);
         }
 
         private void AddEventStreet_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(AddEventStreet.Text) && AddEventStreet.Text.Length > 0)
-            {
-                textStreet.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textStreet.Visibility = Visibility.Visible;
-            }
+            AddEvent_TextChanged(AddEventStreet.Text, textStreet);
         }
 
         private void textBuilding_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            AddEventBuilding.Focus();
+            text_MouseDown(AddEventBuilding);
         }
 
         private void AddEventBuilding_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(AddEventBuilding.Text) && AddEventBuilding.Text.Length > 0)
-            {
-                textBuilding.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textBuilding.Visibility = Visibility.Visible;
-            }
+            AddEvent_TextChanged(AddEventBuilding.Text, textBuilding);
         }
         private void textDescription_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            AddEventDescription.Focus();
+            text_MouseDown(AddEventDescription);
         }
 
         private void AddEventDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(AddEventDescription.Text) && AddEventDescription.Text.Length > 0)
-            {
-                textDescription.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                textDescription.Visibility = Visibility.Visible;
-            }
+            AddEvent_TextChanged(AddEventDescription.Text, textDescription);
+        }
+
+        private void textNumberOfPlaces_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            text_MouseDown(AddEventNumberOfPlaces);
+        }
+
+        private void AddEventNumberOfPlaces_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            AddEvent_TextChanged(AddEventNumberOfPlaces.Text, textNumberOfPlaces);
         }
     }
 }
