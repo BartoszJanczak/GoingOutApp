@@ -38,23 +38,17 @@ namespace GoingOutApp
         {
             string eventName = AddEventName.Text;
             //string PhotoPath = photoPath,
-            //string PhotoDescription = photoDescription,
             string eventDescription = AddEventDescription.Text;
-            //string EventDateTime = eventDateTime,
+            string eventDate = string.Empty;
+            if(!string.IsNullOrEmpty(AddEventDate.Text))
             {
-                if (int.TryParse(AddEventNumberOfPlaces.Text, out int numberOfPlaces))
-                {
-                    // Konwersja tekstu na liczbę całkowitą powiodła się
-                    Console.WriteLine("Wynik konwersji AddEventNumberOfPlaces.Text: " + numberOfPlaces);
-
-                    // Możesz teraz użyć zmiennej 'numberOfPlaces' jako liczby całkowitej w swoim kodzie
-                }
-                else
-                {
-                    // Konwersja tekstu na liczbę całkowitą nie powiodła się
-                    Console.WriteLine("Nie udało się przekonwertować tekstu na liczbę całkowitą dla AddEventNumberOfPlaces.Text.");
-                }
-            },
+                eventDate = AddEventDate.Text;
+            }
+            else
+            {
+                eventDate = DateTime.Now.ToString();
+            }                
+            int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
             //string OtherInfo = otherInfo
             string eventCity = AddEventCity.Text;
             string eventStreet = AddEventStreet.Text;
@@ -65,7 +59,7 @@ namespace GoingOutApp
             photoPath[1] = 0;
             photoPath[2] = byte.MaxValue;
 
-            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, DateTime.Now, 0, "otherinfo");
+            _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
             var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
             var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 

@@ -85,7 +85,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,433,47,119" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,390,47,162" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -96,7 +96,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="75,370,40,186">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="206,178,67,378" Grid.Column="1">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
@@ -107,7 +107,8 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,505,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,462,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click"/>
+                <DatePicker x:Name="AddEventDate" Grid.Column="1" HorizontalAlignment="Left" Margin="206,246,0,0" VerticalAlignment="Top" Height="24" Width="201"/>
             </Grid>
         </Border>
     </Border>

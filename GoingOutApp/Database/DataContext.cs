@@ -73,7 +73,7 @@ namespace GoingOutApp.Services
             }
         }
 
-        public void AddEvent(string eventName, byte[] photoPath, string photoDescription, string eventDescription, string eventCity, string eventStreet, string eventBuildingNumber, DateTime eventDateTime, int numberOfplaces, string otherInfo)
+        public void AddEvent(string eventName, byte[] photoPath, string photoDescription, string eventDescription, string eventCity, string eventStreet, string eventBuildingNumber, string eventDateTime, int numberOfplaces, string otherInfo)
         {
             using (DataContext context = new DataContext())
             {

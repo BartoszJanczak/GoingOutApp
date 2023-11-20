@@ -20,7 +20,7 @@ namespace GoingOutApp.Models
         public string Street { get; set; }
         public string City { get; set; }
         public string NumberOfBuilding { get; set; }
-        public DateTime EventDateTime { get; set; }
+        public string EventDateTime { get; set; }
         public int NumberOfplaces { get; set; }
         public string OtherInfo { get; set; }
     }
