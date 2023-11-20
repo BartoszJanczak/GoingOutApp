@@ -58,7 +58,7 @@
                             <ColumnDefinition Width="auto"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="textCity" MouseDown="textCity_MouseDown" Text="City" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
+                        <TextBlock x:Name="textCity" MouseDown="textCity_MouseDown" Text="City, postcode" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}"/>
                         <TextBox x:Name="AddEventCity" TextChanged="AddEventCity_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}">
                         </TextBox>
                     </Grid>
