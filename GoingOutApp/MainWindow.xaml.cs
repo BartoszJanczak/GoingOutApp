@@ -25,8 +25,11 @@ namespace GoingOutApp
     public partial class MainWindow : Window
     {
         private static LoginWindow? _profileWindowInstance;
+        private static RegisterWindow? _registerWindowInstance;
         private static AddTaskwindow? _addWindowInstance;
         private static UserProfileWindow? _userProfileWindowInstance;
+        private static EventDetailsWindow? _eventDetailsWindowInstance;
+        private static ResetPasswordWindow? _resetPasswordWindowInstance;
         private DataContext _database { get; set; } = new DataContext();
 
         private List<Event> events = new List<Event>();
@@ -74,13 +77,24 @@ namespace GoingOutApp
         {
             // ZMAYKANIE WSZYSTKICH OKIEN TRZEBA ZROBIC BO JAK OTWORZYSZ JAKIES INNE I POTEM WSZYSTKO ZAMKNIESZ TO SIE PROGRAM NIE KONCZY IDK
             this.Close();
-            //_profileWindowInstance.Close();
             if (_addWindowInstance != null)
                 _addWindowInstance.Close();
 
             if (_profileWindowInstance != null)
                 _profileWindowInstance.Close();
-            //_userProfileWindowInstance.Close();
+
+            if (_eventDetailsWindowInstance != null)
+                _eventDetailsWindowInstance.Close();
+
+            if (_userProfileWindowInstance != null)
+                _userProfileWindowInstance.Close();
+
+            if (_registerWindowInstance != null)
+                _registerWindowInstance.Close();
+
+            if (_resetPasswordWindowInstance != null)
+                _resetPasswordWindowInstance.Close();
+
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -173,37 +187,23 @@ namespace GoingOutApp
                 EventDetailsWindow existingWindow = Application.Current.Windows.OfType<EventDetailsWindow>().FirstOrDefault();
                 EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
 
-                if (existingWindow == null)
-                {
-                    eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-                    eventDetailsWindow.Left = this.Left + 15;
-                    eventDetailsWindow.Top = this.Top + 80;
-                    eventDetailsWindow.Show();
-
-                    var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
-
-                    if (eventPin != null)
-                    {
-                        Map.ZoomLevel = 15;
-                        Map.Center = eventPin.Location;
-                    }
-                }
-                else
+                if (existingWindow != null)
                 {
                     existingWindow.Close();
+                }
 
-                    eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-                    eventDetailsWindow.Left = this.Left + 15;
-                    eventDetailsWindow.Top = this.Top + 80;
-                    eventDetailsWindow.Show();
+                eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                eventDetailsWindow.Left = this.Left + 15;
+                eventDetailsWindow.Top = this.Top + 80;
+                eventDetailsWindow.Show();
+                _eventDetailsWindowInstance = eventDetailsWindow;
 
-                    var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
+                var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
 
-                    if (eventPin != null)
-                    {
-                        Map.ZoomLevel = 15;
-                        Map.Center = eventPin.Location;
-                    }
+                if (eventPin != null)
+                {
+                    Map.ZoomLevel = 15;
+                    Map.Center = eventPin.Location;
                 }
             }
         }
