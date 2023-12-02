@@ -127,18 +127,27 @@ namespace GoingOutApp
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            if (_addWindowInstance == null)
+            if (UserService.LoggedInUser != null)
             {
-                _addWindowInstance = new AddTaskwindow();
-                _addWindowInstance.Owner = this;
-                _addWindowInstance.EventAdded += AddEventWindow_EventAdded;
-                _addWindowInstance.PinAdded += AddPin_EventAdded;
-                _addWindowInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
-                _addWindowInstance.Show();
+                if (_addWindowInstance == null)
+                {
+                    _addWindowInstance = new AddTaskwindow();
+                    _addWindowInstance.Owner = this;
+                    _addWindowInstance.EventAdded += AddEventWindow_EventAdded;
+                    _addWindowInstance.PinAdded += AddPin_EventAdded;
+                    _addWindowInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _addWindowInstance.Show();
+                }
+                else
+                {
+                    _addWindowInstance.Focus();
+                }
             }
             else
             {
-                _addWindowInstance.Focus();
+                _profileWindowInstance = new LoginWindow();
+                _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                _profileWindowInstance.Show();              
             }
         }
 
