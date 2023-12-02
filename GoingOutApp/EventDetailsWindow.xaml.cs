@@ -11,6 +11,8 @@ using System.Xml.Linq;
 using GoingOutApp.Models;
 using GoingOutApp.Services;
 using Microsoft.Extensions.Logging;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace GoingOutApp
 {
@@ -29,6 +31,7 @@ namespace GoingOutApp
 
             _eventId = eventId;
             RefreshDataContext();
+            LoadPhoto();
             SetList();
         }
 
@@ -185,6 +188,25 @@ namespace GoingOutApp
             foreach (string ep in participants)
             {
                 listOfParticipants.Items.Add(ep);
+            }
+        }
+
+        private void LoadPhoto()
+        {
+            try
+            {
+                byte[] photoBytes = _database.GetPhoto(_eventId);
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = new MemoryStream(photoBytes);
+                bitmap.EndInit();
+
+                photo.Source = bitmap;
+            }
+            catch (Exception ex) 
+            {
+                photo.Source = null;
             }
         }
     }
