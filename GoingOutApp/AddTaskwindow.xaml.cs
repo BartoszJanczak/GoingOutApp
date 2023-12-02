@@ -48,43 +48,51 @@ namespace GoingOutApp
         {
             if (AddEventName.Text.Length > 0 && AddEventCity.Text.Length > 0 && AddEventStreet.Text.Length > 0 && AddEventBuilding.Text.Length > 0 && AddEventNumberOfPlaces.Text.Length > 0 && AddEventDate.Text.Length > 0 && AddEventDescription.Text.Length > 0)
             {
-                string eventName = AddEventName.Text;
-                //string PhotoPath = photoPath,
-                string eventDescription = AddEventDescription.Text;
-                string eventDate = string.Empty;
-                if (!string.IsNullOrEmpty(AddEventDate.Text))
+                if (int.TryParse(AddEventBuilding.Text, out _) && int.TryParse(AddEventNumberOfPlaces.Text, out _))
                 {
-                    eventDate = AddEventDate.Text;
+                    string eventName = AddEventName.Text;
+                    //string PhotoPath = photoPath,
+                    string eventDescription = AddEventDescription.Text;
+                    string eventDate = string.Empty;
+                    if (!string.IsNullOrEmpty(AddEventDate.Text))
+                    {
+                        eventDate = AddEventDate.Text;
+                    }
+                    else
+                    {
+                        eventDate = DateTime.Now.ToString();
+                    }
+                    int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
+                    //string OtherInfo = otherInfo
+                    string eventCity = AddEventCity.Text;
+                    string eventStreet = AddEventStreet.Text;
+                    string eventBuildingNumber = AddEventBuilding.Text;
+
+                    byte[] photoPath = new byte[3];
+                    photoPath[0] = byte.MinValue;
+                    photoPath[1] = 0;
+                    photoPath[2] = byte.MaxValue;
+
+                    EventCategory eventCategory = (EventCategory)cmbCategory.SelectedIndex;
+
+                    // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma )
+                    _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
+                    var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
+                    var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
+
+                    var cords = await LocationService.GetLocationByCords(location);
+
+                    _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
+
+                    EventAdded?.Invoke(this, EventArgs.Empty);
+                    PinAdded?.Invoke(this, EventArgs.Empty);
+                    Close();
                 }
                 else
                 {
-                    eventDate = DateTime.Now.ToString();
+                    txtNumberInfo.Text = "Number of places should be a number";
+                    txtPlacesInfo.Text = "Number of building should be a number";
                 }
-                int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
-                //string OtherInfo = otherInfo
-                string eventCity = AddEventCity.Text;
-                string eventStreet = AddEventStreet.Text;
-                string eventBuildingNumber = AddEventBuilding.Text;
-
-                byte[] photoPath = new byte[3];
-                photoPath[0] = byte.MinValue;
-                photoPath[1] = 0;
-                photoPath[2] = byte.MaxValue;
-
-                EventCategory eventCategory = (EventCategory)cmbCategory.SelectedIndex;
-
-                // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma )
-                _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
-                var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
-                var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
-
-                var cords = await LocationService.GetLocationByCords(location);
-
-                _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
-
-                EventAdded?.Invoke(this, EventArgs.Empty);
-                PinAdded?.Invoke(this, EventArgs.Empty);
-                Close();
             }
             else
             {
