@@ -1,0 +1,30 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Styl dla ListView -->
+    <Style x:Key="ParticipantsList" TargetType="ListView">
+        <!-- ... (Twoje istniejące ustawienia) ... -->
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="2"/>
+                    <!-- Ustaw IsEnabled na False, aby zablokować możliwość klikania -->
+                    <Setter Property="IsEnabled" Value="False"/>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Styl dla pojedynczego ListViewItem -->
+    <Style TargetType="ListViewItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Border BorderBrush="Gray" BorderThickness="0,0,0,1">
+                        <ContentPresenter/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
