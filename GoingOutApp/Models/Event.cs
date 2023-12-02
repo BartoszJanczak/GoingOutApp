@@ -24,5 +24,6 @@ namespace GoingOutApp.Models
         public int NumberOfplaces { get; set; }
         public string OtherInfo { get; set; }
         public int TakenPlaces { get; set; }
+        public string EventCategory { get; set; }
     }
 }
