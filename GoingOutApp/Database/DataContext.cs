@@ -230,5 +230,15 @@ namespace GoingOutApp.Services
                 return participants;
             }
         }
+
+        public byte[] GetPhoto(int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var photoBytes = context.Events.Where(ep => ep.EventId == eventId).Select(x => x.PhotoPath).FirstOrDefault();
+                return photoBytes;
+            }
+        }
+
     }
 }

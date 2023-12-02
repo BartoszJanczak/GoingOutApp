@@ -8,6 +8,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Xml.Linq;
 using System.Windows.Input;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace GoingOutApp
 {
@@ -24,6 +27,8 @@ namespace GoingOutApp
         public event EventHandler PinAdded;
 
         private string defaultNumberOfPlacesValue = "0";
+
+        private byte[] photoBytes;
 
         User user { get; set; }
 
@@ -72,15 +77,15 @@ namespace GoingOutApp
                     string eventBuildingNumber = AddEventBuilding.Text;
                     int eventCreatorId = user.UserId;
 
-                    byte[] photoPath = new byte[3];
-                    photoPath[0] = byte.MinValue;
-                    photoPath[1] = 0;
-                    photoPath[2] = byte.MaxValue;
+                    //byte[] photoPath = new byte[3];
+                    //photoPath[0] = byte.MinValue;
+                    //photoPath[1] = 0;
+                    //photoPath[2] = byte.MaxValue;
 
                     EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
                     string eventCategory = eventCategoryEnum.ToString();
 
-                    _database.AddEvent(eventCreatorId, eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                    _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
                     var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
                     var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
@@ -190,6 +195,28 @@ namespace GoingOutApp
         {
             AddEventNumberOfPlaces.IsEnabled = false;
             AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
+        }
+
+        private void AddPhoto_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            //openFileDialog.Filter
+
+            if (openFileDialog.ShowDialog() == true) 
+            {
+                string filePath = openFileDialog.FileName;
+
+                try
+                {
+                    photoBytes = File.ReadAllBytes(filePath);
+                    BitmapImage bitmap = new BitmapImage(new Uri(filePath));
+                    imagePreview.Source = bitmap;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error while opening: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
     }
 }

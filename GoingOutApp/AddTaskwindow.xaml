@@ -120,6 +120,8 @@
                 </StackPanel>
                 <TextBlock x:Name="txtNumberInfo" HorizontalAlignment="Left" Height="17" Margin="75,347,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Grid.ColumnSpan="2" Foreground="Blue"/>
                 <TextBlock x:Name="txtPlacesInfo" HorizontalAlignment="Left" Height="17" Margin="206,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Foreground="Blue" Grid.Column="1"/>
+                <Button x:Name="AddPhoto" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Add photo" HorizontalAlignment="Left" Margin="12,175,0,0" VerticalAlignment="Top" Width="134" Click="AddPhoto_Click" Background="Gray" />
+                <Image x:Name="imagePreview" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,234,0,0" Width="155" Height="144" Grid.Column="1"/>
             </Grid>
         </Border>
     </Border>
