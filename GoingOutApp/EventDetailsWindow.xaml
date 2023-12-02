@@ -18,51 +18,51 @@
                 BorderThickness="5" Margin="0,0,10,0">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E0E0E0" Offset="0"/>
-                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
-                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
-                    <GradientStop Color="#808080" Offset="1"/>
+                    <GradientStop Color="#E0E0E0" Offset="0" />
+                    <GradientStop Color="#C0C0C0" Offset="0.25" />
+                    <GradientStop Color="#A0A0A0" Offset="0.75" />
+                    <GradientStop Color="#808080" Offset="1" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FDFDFD" Offset="0"/>
-                    <GradientStop Color="#E6E6E6" Offset="0.25"/>
-                    <GradientStop Color="#CFCFCF" Offset="0.75"/>
-                    <GradientStop Color="#B8B8B8" Offset="1"/>
+                    <GradientStop Color="#FDFDFD" Offset="0" />
+                    <GradientStop Color="#E6E6E6" Offset="0.25" />
+                    <GradientStop Color="#CFCFCF" Offset="0.75" />
+                    <GradientStop Color="#B8B8B8" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="429">
-                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="380 5 0 0"/>
+                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="380 5 0 0" />
                     <TextBlock Text="{Binding EventName}" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" />
 
                     <!--<Image Source="{Binding PhotoPath}" Height="200" Margin="0,10,0,0" /> -->
 
                     <Image Source="/data/images/concert.jpg" Height="200" Margin="0,10,0,0" />
 
-                    <TextBlock Text="{Binding EventDescription}" TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14"/>
+                    <TextBlock Text="{Binding EventDescription}" TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
 
-                    <TextBlock Text="Location:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14"/>
-                    <TextBlock Text="{Binding City}" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="13"/>
+                    <TextBlock Text="Location:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
+                    <TextBlock Text="{Binding City}" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="13" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBlock Text="{Binding Street}" Margin="0,0,10,5" HorizontalAlignment="Center" FontSize="14"/>
-                        <TextBlock Text="{Binding NumberOfBuilding}" Margin="0,0,0,5" HorizontalAlignment="Left" FontSize="14"/>
+                        <TextBlock Text="{Binding Street}" Margin="0,0,10,5" HorizontalAlignment="Center" FontSize="14" />
+                        <TextBlock Text="{Binding NumberOfBuilding}" Margin="0,0,0,5" HorizontalAlignment="Left" FontSize="14" />
                     </StackPanel>
 
-                    <TextBlock Text="Date and Time:" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="14"/>
-                    <TextBlock Text="{Binding EventDateTime}" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14"/>
+                    <TextBlock Text="Date and Time:" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="14" />
+                    <TextBlock Text="{Binding EventDateTime}" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14" />
 
-                    <TextBlock Text="Participants:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14"/>
-                    <TextBlock Text="{Binding NumberOfplaces}" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14"/>
+                    <TextBlock Text="Participants:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
+                    <TextBlock x:Name="ParticipantsTextBlock" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14" />
 
-                    <TextBlock Text="Additional Information:" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="14"/>
-                    <TextBlock Text="{Binding OtherInfo}" TextWrapping="Wrap" Margin="0,0,0,10" HorizontalAlignment="Center" FontSize="14"/>
-                    <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159"/>
+                    <TextBlock Text="Additional Information:" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="14" />
+                    <TextBlock Text="{Binding OtherInfo}" TextWrapping="Wrap" Margin="0,0,0,10" HorizontalAlignment="Center" FontSize="14" />
+                    <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" />
                     <Button x:Name="CancelParticipationButton" Style="{StaticResource Navbutton}" Content="Cancel Participation" HorizontalAlignment="Center" Margin="10,6,0,0" VerticalAlignment="Bottom" Click="CancelParticipationButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Visibility="Collapsed" />
                 </StackPanel>
             </Grid>

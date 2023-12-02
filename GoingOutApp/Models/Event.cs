@@ -23,5 +23,6 @@ namespace GoingOutApp.Models
         public string EventDateTime { get; set; }
         public int NumberOfplaces { get; set; }
         public string OtherInfo { get; set; }
+        public int TakenPlaces { get; set; }
     }
 }

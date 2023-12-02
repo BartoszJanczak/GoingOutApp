@@ -45,6 +45,15 @@ namespace GoingOutApp
             {
                 Event selectedEvent = dataContext.GetEvent(_eventId);
                 DataContext = selectedEvent;
+
+                if (selectedEvent.NumberOfplaces == 0)
+                {
+                    ParticipantsTextBlock.Text = $"{selectedEvent.TakenPlaces}";
+                }
+                else
+                {
+                    ParticipantsTextBlock.Text = $"{selectedEvent.TakenPlaces}/{selectedEvent.NumberOfplaces} places taken";
+                }
             }
         }
 
@@ -94,12 +103,19 @@ namespace GoingOutApp
                         }
                         else
                         {
-                            dataContext.SignUpForEvent(dataContext, eventId, userId);
+                            if (selectedEvent.NumberOfplaces == 0 || selectedEvent.TakenPlaces < selectedEvent.NumberOfplaces)
+                            {
+                                dataContext.SignUpForEvent(dataContext, eventId, userId);
 
-                            TakePartButton.Visibility = Visibility.Collapsed;
-                            CancelParticipationButton.Visibility = Visibility.Visible;
+                                TakePartButton.Visibility = Visibility.Collapsed;
+                                CancelParticipationButton.Visibility = Visibility.Visible;
 
-                            RefreshDataContext();
+                                RefreshDataContext();
+                            }
+                            else
+                            {
+                                MessageBox.Show("The event is already full. Cannot sign up.");
+                            }
                         }
                     }
                 }
