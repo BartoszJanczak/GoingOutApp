@@ -55,7 +55,9 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/lock.png" Height="20" />
                             <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " />
-                            <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" />
+                            <PasswordBox x:Name="txtPassword" Margin="10 0 25 0" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" />
+                            <TextBox Name="passwordTxtBox" Margin="10 0 25 0" Visibility="Collapsed" Style="{StaticResource textBox}" LostFocus="PasswordTxtBox_LostFocus" />
+                            <Image Grid.Column="1" Margin="145 0 0 0" Name="eyeImage" Source="/data/images/show.png" Height="20" MouseDown="EyeImage_MouseDown" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Grid>
                     </Border>
                     <Button Style="{StaticResource Navbutton}" Content="Sign in" HorizontalAlignment="Left" Margin="110,42,0,0" VerticalAlignment="Top" Click="SignInButton_Click" Grid.ColumnSpan="2" RenderTransformOrigin="0.566,0.538" />
