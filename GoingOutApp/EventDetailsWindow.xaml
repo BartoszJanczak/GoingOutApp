@@ -65,6 +65,13 @@
                     <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" />
                     <Button x:Name="CancelParticipationButton" Style="{StaticResource Navbutton}" Content="Cancel Participation" HorizontalAlignment="Center" Margin="10,6,0,0" VerticalAlignment="Bottom" Click="CancelParticipationButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Visibility="Collapsed" />
                 </StackPanel>
+                <ListView x:Name="listOfParticipants" HorizontalAlignment="Left" Height="160" Margin="19,373,0,0" VerticalAlignment="Top" Width="147" d:ItemsSource="{d:SampleData ItemCount=5}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
         </Border>
     </Border>

@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Xml.Linq;
 using GoingOutApp.Models;
 using GoingOutApp.Services;
+using Microsoft.Extensions.Logging;
 
 namespace GoingOutApp
 {
@@ -18,8 +19,9 @@ namespace GoingOutApp
     /// </summary>
     public partial class EventDetailsWindow : Window
     {
-        private DataContext _database { get; set; }
+        private DataContext _database { get; set; } = new DataContext();
         private int _eventId;
+        private List<string> participants = new List<string>();
 
         public EventDetailsWindow(int eventId)
         {
@@ -27,6 +29,7 @@ namespace GoingOutApp
 
             _eventId = eventId;
             RefreshDataContext();
+            SetList();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -111,6 +114,7 @@ namespace GoingOutApp
                                 CancelParticipationButton.Visibility = Visibility.Visible;
 
                                 RefreshDataContext();
+                                SetList();
                             }
                             else
                             {
@@ -169,6 +173,17 @@ namespace GoingOutApp
             else
             {
                 MessageBox.Show("Unable to download event data.");
+            }
+        }
+
+        private void SetList()
+        {
+            listOfParticipants.Items.Clear();
+            participants = _database.GetParticipants(_eventId);
+
+            foreach (string ep in participants)
+            {
+                listOfParticipants.Items.Add(ep);
             }
         }
     }

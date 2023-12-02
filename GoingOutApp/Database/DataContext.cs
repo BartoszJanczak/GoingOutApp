@@ -1,5 +1,6 @@
 ﻿using GoingOutApp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
@@ -213,6 +214,20 @@ namespace GoingOutApp.Services
                 List<EventPushPin> events = context.EventPushPins.ToList();
 
                 return events;
+            }
+        }
+
+        public List<string> GetParticipants(int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                // Pobierz nazwy użytkowników z modelu User, którzy są uczestnikami wydarzenia o danym identyfikatorze (eventId)
+                var participants = context.EventParticipants
+                    .Where(ep => ep.EventId == eventId)
+                    .Join(context.Users, ep => ep.UserId, u => u.UserId, (ep, u) => u.UserName)
+                    .ToList();
+
+                return participants;
             }
         }
     }
