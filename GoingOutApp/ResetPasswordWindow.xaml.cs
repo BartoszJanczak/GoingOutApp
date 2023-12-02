@@ -27,9 +27,11 @@ namespace GoingOutApp
             DreamJob,
             None
         }
+
         private DataContext _database { get; set; }
         private static RegisterWindow? _registerWindowInstance;
         public List<User>? DatabaseUsers { get; private set; }
+
         public ResetPasswordWindow()
         {
             InitializeComponent();
@@ -61,9 +63,9 @@ namespace GoingOutApp
             }
             else
             {
-
             }
         }
+
         private Tuple<string, string> EncodePassword(string password, int bytes)
         {
             using (var deriveBytes = new Rfc2898DeriveBytes(password, bytes))
@@ -77,20 +79,26 @@ namespace GoingOutApp
                 return new Tuple<string, string>(encodedSalt, encodedKey);
             }
         }
+
         private SecurityQuestion MapComboBoxSelectionToEnum()
         {
             switch (cmbSecurityQuestion.SelectedIndex)
             {
                 case 0:
                     return SecurityQuestion.FavoriteColor;
+
                 case 1:
                     return SecurityQuestion.FirstPet;
+
                 case 2:
                     return SecurityQuestion.BirthCity;
+
                 case 3:
                     return SecurityQuestion.FavoriteBook;
+
                 case 4:
                     return SecurityQuestion.DreamJob;
+
                 default:
                     return SecurityQuestion.None; // Domyślna wartość, można dostosować do własnych potrzeb
             }
@@ -112,20 +120,20 @@ namespace GoingOutApp
 
             if (!ifAllFieldsAreCompleted(username, password, securityQuestion, securityAnswer))
             {
-                MessageBox.Show("Proszę wypełnić wszystkie wymagane pola.");
+                MessageBox.Show("Please complete all required fields.");
                 validation = false;
             }
             else
             {
                 if (!ifQuestionAndAnswerAreValid(username, securityQuestion, securityAnswer))
                 {
-                    MessageBox.Show("Pytanie pomocnicze i/lub odpowiedź nie zgadzają się.");
+                    MessageBox.Show("Security question and/or answer is not correct.");
                     validation = false;
                 }
             }
             if (!ifAccountWithThatUserExists(username))
             {
-                txtUsernameValidation.Text = "Nie istnieje użytkownik o podanej nazwie.";
+                txtUsernameValidation.Text = "The user with this username does not exist.";
                 txtUsernameValidation.Visibility = Visibility.Visible;
                 validation = false;
             }
@@ -161,17 +169,19 @@ namespace GoingOutApp
             }
             if (validation)
             {
-                MessageBox.Show("Pomyślnie zresetowano hasło.");
+                MessageBox.Show("Successfully reset the password.");
                 Close();
             }
             return validation;
         }
+
         #region ValidationMethods
+
         private bool ifAllFieldsAreCompleted(string username, string password, string securityQuestion, string securityAnswer)
         {
             if (string.IsNullOrWhiteSpace(username) ||
                 string.IsNullOrWhiteSpace(password) ||
-                securityQuestion == SecurityQuestion.None.ToString()  ||
+                securityQuestion == SecurityQuestion.None.ToString() ||
                 string.IsNullOrWhiteSpace(securityAnswer))
             {
                 return false;
@@ -186,44 +196,46 @@ namespace GoingOutApp
 
             return ifUserExists;
         }
+
         private bool ifQuestionSelected(string securityQuestion)
         {
             if (securityQuestion == SecurityQuestion.None.ToString())
             {
-                txtQuestionValidation.Text = "Należy wybrać pytanie pomocnicze.";
+                txtQuestionValidation.Text = "Select a security question.";
                 return false;
             }
             return true;
         }
+
         private bool ifStrongPassword(string password)
         {
             if (password.Length < 8)
             {
-                txtPasswordValidation.Text = "Hasło musi się składać z minimum 8 znaków.";
+                txtPasswordValidation.Text = "Password must be at least 8 characters long.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać wielkie litery.";
+                txtPasswordValidation.Text = "Password must contain uppercase letters.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[a-z]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać małe litery";
+                txtPasswordValidation.Text = "Password must contain lowercase letters.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[0-9]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać cyfry.";
+                txtPasswordValidation.Text = "Password must contain digits.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[!@#\\$%^&*()]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać znaki specjalne (np. !,@,#,$,%).";
+                txtPasswordValidation.Text = "Password must contain special characters (e.g. !,@,#,$,%).";
                 return false;
             }
 
@@ -236,7 +248,7 @@ namespace GoingOutApp
 
             if (enteredPassword != password)
             {
-                txtPassword2Validation.Text = "Hasła muszą być takie same.";
+                txtPassword2Validation.Text = "Passwords must match.";
                 return false;
             }
 
@@ -257,8 +269,11 @@ namespace GoingOutApp
                 return false;
             }
         }
-        #endregion
+
+        #endregion ValidationMethods
+
         #region FieldsVisibility
+
         private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (!string.IsNullOrEmpty(txtUser.Text) && txtUser.Text.Length > 0)
@@ -275,7 +290,7 @@ namespace GoingOutApp
         {
             cmbSecurityQuestion.IsDropDownOpen = true;
         }
-        
+
         private void cmbSecurityQuestion_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (cmbSecurityQuestion.SelectedItem != null)
@@ -295,15 +310,16 @@ namespace GoingOutApp
 
         private void txtAnswer_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtAnswer.Text) && txtAnswer.Text.Length > 0) 
+            if (!string.IsNullOrEmpty(txtAnswer.Text) && txtAnswer.Text.Length > 0)
             {
                 textAnswer.Visibility = Visibility.Collapsed;
             }
-            else 
-            { 
+            else
+            {
                 textAnswer.Visibility = Visibility.Visible;
             }
         }
+
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtPassword.Focus();
@@ -337,6 +353,7 @@ namespace GoingOutApp
                 textPassword2.Visibility = Visibility.Visible;
             }
         }
-        #endregion
+
+        #endregion FieldsVisibility
     }
 }

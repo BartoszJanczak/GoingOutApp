@@ -20,6 +20,7 @@ namespace GoingOutApp
     {
         private DataContext _database { get; set; }
         private int _eventId;
+
         public EventDetailsWindow(int eventId)
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace GoingOutApp
             _eventId = eventId;
             RefreshDataContext();
         }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -86,16 +88,14 @@ namespace GoingOutApp
 
                         if (isUserSignedUp)
                         {
-                            MessageBox.Show("Już jesteś zapisany na to wydarzenie.");
+                            MessageBox.Show("You are already signed up for this event.");
                             TakePartButton.Visibility = Visibility.Collapsed;
                             CancelParticipationButton.Visibility = Visibility.Visible;
                         }
                         else
                         {
-                            // Zapisz użytkownika na wydarzenie
                             dataContext.SignUpForEvent(dataContext, eventId, userId);
 
-                            // Pokaż przycisk "Cancel Participation" i ukryj "Take Part"
                             TakePartButton.Visibility = Visibility.Collapsed;
                             CancelParticipationButton.Visibility = Visibility.Visible;
 
@@ -112,7 +112,7 @@ namespace GoingOutApp
             }
             else
             {
-                MessageBox.Show("Błąd: Nie można pobrać danych wydarzenia.");
+                MessageBox.Show("Unable to download event data.");
             }
         }
 
@@ -140,7 +140,7 @@ namespace GoingOutApp
                         }
                         else
                         {
-                            MessageBox.Show("Nie jesteś zapisany na to wydarzenie.");
+                            MessageBox.Show("You are not signed up for this event.");
                         }
                     }
                 }
@@ -152,7 +152,7 @@ namespace GoingOutApp
             }
             else
             {
-                MessageBox.Show("Błąd: Nie można pobrać danych wydarzenia.");
+                MessageBox.Show("Unable to download event data.");
             }
         }
     }

@@ -27,16 +27,19 @@ namespace GoingOutApp
             DreamJob,
             None
         }
-        public List<User> ?DatabaseUsers { get; private set; }
+
+        public List<User>? DatabaseUsers { get; private set; }
 
         private DataContext _database { get; set; }
 
-        string selectedGender = "";
+        private string selectedGender = "";
+
         public RegisterWindow()
         {
             InitializeComponent();
             _database = new DataContext();
         }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -61,17 +64,14 @@ namespace GoingOutApp
 
             if (AccountValidation(username, password, name, surname, age, gender))
             {
-                var result = EncodePassword(password, 20); 
+                var result = EncodePassword(password, 20);
                 _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, gender, securityQuestionAsString, securityAnswer);
             }
             else
             {
-                
-
             }
-
-
         }
+
         private Tuple<string, string> EncodePassword(string password, int bytes)
         {
             using (var deriveBytes = new Rfc2898DeriveBytes(password, bytes))
@@ -92,14 +92,19 @@ namespace GoingOutApp
             {
                 case 0:
                     return SecurityQuestion.FavoriteColor;
+
                 case 1:
                     return SecurityQuestion.FirstPet;
+
                 case 2:
                     return SecurityQuestion.BirthCity;
+
                 case 3:
                     return SecurityQuestion.FavoriteBook;
+
                 case 4:
                     return SecurityQuestion.DreamJob;
+
                 default:
                     return SecurityQuestion.None;
             }
@@ -114,19 +119,19 @@ namespace GoingOutApp
         {
             return System.Text.RegularExpressions.Regex.IsMatch(text, "[0-9]");
         }
-       
+
         private void RefreshData()
         {
             DatabaseUsers = _database.Users.ToList();
         }
-       
+
         private bool AccountValidation(string username, string password, string name, string surname, int age, string gender)
         {
             bool validation = true;
 
             if (!ifAllFieldsAreCompleted(username, password, name, surname, age))
             {
-                MessageBox.Show("Proszę wypełnić wszystkie wymagane pola.");
+                MessageBox.Show("Please fill in all required fields.");
                 validation = false;
             }
             if (!ifAccountWithThatUserNameCanBeCreated(username))
@@ -180,9 +185,9 @@ namespace GoingOutApp
             }
             else
             {
-                txtSurnameValidation.Visibility= Visibility.Collapsed;
+                txtSurnameValidation.Visibility = Visibility.Collapsed;
             }
-            if(!ifAgeValid(age))
+            if (!ifAgeValid(age))
             {
                 txtAgeValidation.Visibility = Visibility.Visible;
                 validation = false;
@@ -193,13 +198,14 @@ namespace GoingOutApp
             }
             if (validation)
             {
-            MessageBox.Show("Pomyślnie zarejestrowano konto.");
-            Close();
+                MessageBox.Show("Account successfully registered.");
+                Close();
             }
             return validation;
         }
 
         #region ValidationMethods
+
         private bool ifAllFieldsAreCompleted(string username, string password, string name, string surname, int age)
         {
             if (string.IsNullOrWhiteSpace(username) ||
@@ -217,7 +223,7 @@ namespace GoingOutApp
         {
             RefreshData();
             var ifUserExists = DatabaseUsers.Any(u => u.UserName == login);
-            txtUsernameValidation.Text = "Konto o podanej nazwie użytkownika już istnieje.";
+            txtUsernameValidation.Text = "An account with this username already exists.";
 
             return !ifUserExists;
         }
@@ -226,7 +232,7 @@ namespace GoingOutApp
         {
             if (string.IsNullOrWhiteSpace(selectedGender))
             {
-                txtGenderValidation.Text = "Proszę wybrać płeć.";
+                txtGenderValidation.Text = "Please select a gender.";
                 return false;
             }
             return true;
@@ -236,31 +242,31 @@ namespace GoingOutApp
         {
             if (password.Length < 8)
             {
-                txtPasswordValidation.Text = "Hasło musi się składać z minimum 8 znaków.";
+                txtPasswordValidation.Text = "Password must be at least 8 characters long.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[A-Z]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać wielkie litery.";
+                txtPasswordValidation.Text = "Password must contain uppercase letters.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[a-z]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać małe litery";
+                txtPasswordValidation.Text = "Password must contain lowercase letters.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[0-9]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać cyfry.";
+                txtPasswordValidation.Text = "Password must contain digits.";
                 return false;
             }
 
             if (!Regex.IsMatch(password, "[!@#\\$%^&*()]"))
             {
-                txtPasswordValidation.Text = "Hasło musi zawierać znaki specjalne (np. !,@,#,$,%).";
+                txtPasswordValidation.Text = "Password must contain special characters (e.g. !,@,#,$,%).";
                 return false;
             }
 
@@ -273,17 +279,18 @@ namespace GoingOutApp
 
             if (enteredPassword != password)
             {
-                txtPassword2Validation.Text = "Hasła muszą być takie same.";
+                txtPassword2Validation.Text = "Passwords must match.";
                 return false;
             }
 
             return true;
         }
+
         private bool ifNameValid(string name)
         {
             if (!Regex.IsMatch(name, "^[A-Z][a-zA-Z]*$"))
             {
-                txtNameValidation.Text = "Imię musi zaczynać się z wielkiej litery i nie może zawierać cyfr.";
+                txtNameValidation.Text = "Name must start with uppercase letter and cannot contain digits.";
                 return false;
             }
             return true;
@@ -293,7 +300,7 @@ namespace GoingOutApp
         {
             if (!Regex.IsMatch(surname, "^[A-Z][a-zA-Z]*$"))
             {
-                txtSurnameValidation.Text = "Nazwisko musi zaczynać się z wielkiej litery i nie może zawierać cyfr.";
+                txtSurnameValidation.Text = "Surname must start with uppercase letter and cannot contain digits.";
                 return false;
             }
             return true;
@@ -301,16 +308,18 @@ namespace GoingOutApp
 
         private bool ifAgeValid(int age)
         {
-            if (age <= 0 || age > 150) 
+            if (age <= 0 || age > 150)
             {
-                txtAgeValidation.Text = "Podaj poprawny wiek.";
+                txtAgeValidation.Text = "Please provide a valid age.";
                 return false;
             }
             return true;
         }
 
-        #endregion
+        #endregion ValidationMethods
+
         #region FieldsVisibility
+
         private void textUser_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtUser.Focus();
@@ -412,12 +421,14 @@ namespace GoingOutApp
                 textAge.Visibility = Visibility.Visible;
             }
         }
+
         private void MaleButton_Click(object sender, RoutedEventArgs e)
         {
             MaleText.Foreground = new SolidColorBrush(Colors.Blue);
             FemaleText.Foreground = new SolidColorBrush(Color.FromRgb(172, 176, 175));
             selectedGender = "Male";
         }
+
         private void FemaleButton_Click(object sender, RoutedEventArgs e)
         {
             FemaleText.Foreground = new SolidColorBrush(Colors.Pink);
@@ -458,6 +469,7 @@ namespace GoingOutApp
                 textAnswer.Visibility = Visibility.Visible;
             }
         }
-        #endregion
+
+        #endregion FieldsVisibility
     }
 }

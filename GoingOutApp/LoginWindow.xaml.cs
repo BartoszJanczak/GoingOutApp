@@ -12,6 +12,7 @@ namespace GoingOutApp
     {
         private DataContext _database { get; set; }
         private static RegisterWindow? _registerWindowInstance;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -35,20 +36,17 @@ namespace GoingOutApp
             var correctData = UserService.ValidateSignIn(username, password);
             if (correctData)
             {
-                var result = MessageBox.Show("Udało się pomyślnie zalogować.");
-                if(result == MessageBoxResult.OK)
+                var result = MessageBox.Show("Successfully logged in.");
+                if (result == MessageBoxResult.OK)
                 {
                     this.Close();
                     UserProfileWindow user = new UserProfileWindow(UserService.LoggedInUser);
                     user.Show();
                 }
-                // wyswietl info o zalogowaniu 
             }
             else
             {
-                MessageBox.Show("Wprowadzono niepoprawne dane.");
-
-                // niepoprawne dane
+                MessageBox.Show("Incorrect data was entered.");
             }
         }
 
@@ -65,7 +63,7 @@ namespace GoingOutApp
                 _registerWindowInstance.Focus(); // Skoncentruj się na istniejącym oknie profilu.
             }
         }
-        
+
         private void textUser_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtUser.Focus();
@@ -73,15 +71,16 @@ namespace GoingOutApp
 
         private void txtUser_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtUser.Text) && txtUser.Text.Length > 0) 
+            if (!string.IsNullOrEmpty(txtUser.Text) && txtUser.Text.Length > 0)
             {
                 textUser.Visibility = Visibility.Collapsed;
             }
-            else 
-            { 
+            else
+            {
                 textUser.Visibility = Visibility.Visible;
             }
         }
+
         private void textPassword_MouseDown(object sender, MouseButtonEventArgs e)
         {
             txtPassword.Focus();
