@@ -88,7 +88,8 @@ namespace GoingOutApp.Services
                     NumberOfBuilding = eventBuildingNumber,
                     EventDateTime = eventDateTime,
                     NumberOfplaces = numberOfplaces,
-                    OtherInfo = otherInfo
+                    OtherInfo = otherInfo,
+                    TakenPlaces = 0
                 });
                 context.SaveChanges();
             }
@@ -108,12 +109,7 @@ namespace GoingOutApp.Services
                     ParticipantStatus = "1"
                 });
 
-                var selectedEvent = context.Events.FirstOrDefault(e => e.EventId == eventId);
-                if (selectedEvent != null)
-                {
-                    selectedEvent.NumberOfplaces += 1;
-                }
-
+                UpdateTakenPlaces(eventId);
                 context.SaveChanges();
             }
         }
@@ -126,12 +122,7 @@ namespace GoingOutApp.Services
             {
                 context.EventParticipants.Remove(existingParticipant);
 
-                var selectedEvent = context.Events.FirstOrDefault(e => e.EventId == eventId);
-                if (selectedEvent != null)
-                {
-                    selectedEvent.NumberOfplaces -= 1;
-                }
-
+                UpdateTakenPlaces(eventId);
                 context.SaveChanges();
             }
         }
@@ -153,6 +144,19 @@ namespace GoingOutApp.Services
             }
         }
 
+        public void UpdateTakenPlaces(int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var selectedEvent = context.Events.FirstOrDefault(e => e.EventId == eventId);
+                if (selectedEvent != null)
+                {
+                    selectedEvent.TakenPlaces = context.EventParticipants.Count(ep => ep.EventId == eventId);
+                    context.SaveChanges();
+                }
+            }
+        }
+
         //public Event GetEventById(int id)
         //{
         //    using (DataContext context = new DataContext())
@@ -169,10 +173,11 @@ namespace GoingOutApp.Services
         {
             using (DataContext context = new DataContext())
             {
+                UpdateTakenPlaces(id);
+
                 Event returnEvent = context.Events.ToList().Where(e => e.EventId == id).First();
 
                 return returnEvent;
-               
             }
         }
 
