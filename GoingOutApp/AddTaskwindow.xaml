@@ -117,6 +117,8 @@
                         <ComboBoxItem Content="Sport"/>
                     </ComboBox>
                 </StackPanel>
+                <TextBlock x:Name="txtNumberInfo" HorizontalAlignment="Left" Height="22" Margin="75,347,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="283" Foreground="Blue" Grid.ColumnSpan="2"/>
+                <TextBlock x:Name="txtPlacesInfo" HorizontalAlignment="Left" Height="22" Margin="206,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="283" Foreground="Blue" Grid.Column="1"/>
             </Grid>
         </Border>
     </Border>
