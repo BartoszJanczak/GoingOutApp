@@ -157,6 +157,7 @@ namespace GoingOutApp
                             CancelParticipationButton.Visibility = Visibility.Collapsed;
 
                             RefreshDataContext();
+                            SetList();
                         }
                         else
                         {
