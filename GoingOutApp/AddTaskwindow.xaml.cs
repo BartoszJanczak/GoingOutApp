@@ -25,6 +25,8 @@ namespace GoingOutApp
 
         private string defaultNumberOfPlacesValue = "0";
 
+        User user { get; set; }
+
         public enum EventCategory
         {
             Social,
@@ -50,6 +52,7 @@ namespace GoingOutApp
             {
                 if (int.TryParse(AddEventBuilding.Text, out _) && int.TryParse(AddEventNumberOfPlaces.Text, out _))
                 {
+                    user = UserService.LoggedInUser;
                     string eventName = AddEventName.Text;
                     //string PhotoPath = photoPath,
                     string eventDescription = AddEventDescription.Text;
@@ -67,6 +70,7 @@ namespace GoingOutApp
                     string eventCity = AddEventCity.Text;
                     string eventStreet = AddEventStreet.Text;
                     string eventBuildingNumber = AddEventBuilding.Text;
+                    int eventCreatorId = user.UserId;
 
                     byte[] photoPath = new byte[3];
                     photoPath[0] = byte.MinValue;
@@ -76,7 +80,7 @@ namespace GoingOutApp
                     EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
                     string eventCategory = eventCategoryEnum.ToString();
 
-                    _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                    _database.AddEvent(eventCreatorId, eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
                     var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
                     var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
