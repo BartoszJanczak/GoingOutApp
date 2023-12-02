@@ -23,6 +23,8 @@ namespace GoingOutApp
 
         public event EventHandler PinAdded;
 
+        private string defaultNumberOfPlacesValue = "0";
+
         public enum EventCategory
         {
             Social,
@@ -30,11 +32,11 @@ namespace GoingOutApp
             Sport
         }
 
-
         public AddTaskwindow()
         {
             InitializeComponent();
             _database = new DataContext();
+            AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -48,14 +50,14 @@ namespace GoingOutApp
             //string PhotoPath = photoPath,
             string eventDescription = AddEventDescription.Text;
             string eventDate = string.Empty;
-            if(!string.IsNullOrEmpty(AddEventDate.Text))
+            if (!string.IsNullOrEmpty(AddEventDate.Text))
             {
                 eventDate = AddEventDate.Text;
             }
             else
             {
                 eventDate = DateTime.Now.ToString();
-            }                
+            }
             int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
             //string OtherInfo = otherInfo
             string eventCity = AddEventCity.Text;
@@ -69,7 +71,7 @@ namespace GoingOutApp
 
             EventCategory eventCategory = (EventCategory)cmbCategory.SelectedIndex;
 
-            // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma ) 
+            // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma )
             _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
             var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
             var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
@@ -99,6 +101,7 @@ namespace GoingOutApp
                 textBlock.Visibility = Visibility.Visible;
             }
         }
+
         private void textName_MouseDown(object sender, MouseButtonEventArgs e)
         {
             text_MouseDown(AddEventName);
@@ -138,6 +141,7 @@ namespace GoingOutApp
         {
             AddEvent_TextChanged(AddEventBuilding.Text, textBuilding);
         }
+
         private void textDescription_MouseDown(object sender, MouseButtonEventArgs e)
         {
             text_MouseDown(AddEventDescription);
@@ -156,6 +160,17 @@ namespace GoingOutApp
         private void AddEventNumberOfPlaces_TextChanged(object sender, TextChangedEventArgs e)
         {
             AddEvent_TextChanged(AddEventNumberOfPlaces.Text, textNumberOfPlaces);
+        }
+
+        private void LimitPlacesCheckbox_Checked(object sender, RoutedEventArgs e)
+        {
+            AddEventNumberOfPlaces.IsEnabled = true;
+        }
+
+        private void LimitPlacesCheckbox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            AddEventNumberOfPlaces.IsEnabled = false;
+            AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
         }
     }
 }
