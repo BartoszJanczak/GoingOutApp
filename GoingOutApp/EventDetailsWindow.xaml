@@ -37,13 +37,12 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="429">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="462">
                     <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="380 5 0 0" />
                     <TextBlock Text="{Binding EventName}" FontSize="24" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" />
+                    <Image Source="/data/images/concert.jpg" Height="200" />
 
                     <!--<Image Source="{Binding PhotoPath}" Height="200" Margin="0,10,0,0" /> -->
-
-                    <Image Source="/data/images/concert.jpg" Height="200" Margin="0,10,0,0" />
 
                     <TextBlock Text="{Binding EventDescription}" TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
 
@@ -65,6 +64,8 @@
                     <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" />
                     <Button x:Name="CancelParticipationButton" Style="{StaticResource Navbutton}" Content="Cancel Participation" HorizontalAlignment="Center" Margin="10,6,0,0" VerticalAlignment="Bottom" Click="CancelParticipationButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Visibility="Collapsed" />
                 </StackPanel>
+                <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="141" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+                <TextBlock HorizontalAlignment="Left" Height="21" Margin="362,355,0,0" TextWrapping="Wrap" Text="List of participants" VerticalAlignment="Top" Width="102"/>
             </Grid>
         </Border>
     </Border>
