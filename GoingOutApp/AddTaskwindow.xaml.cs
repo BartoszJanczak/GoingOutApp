@@ -73,10 +73,11 @@ namespace GoingOutApp
                     photoPath[1] = 0;
                     photoPath[2] = byte.MaxValue;
 
-                    EventCategory eventCategory = (EventCategory)cmbCategory.SelectedIndex;
+                    EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
+                    string eventCategory = eventCategoryEnum.ToString();
 
                     // (Marek) TODO: Dodać pole do bazy dla kategorii i przekazać eventCategory ( Wynik enuma )
-                    _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo");
+                    _database.AddEvent(eventName, photoPath, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
                     var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
                     var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
@@ -186,6 +187,14 @@ namespace GoingOutApp
         {
             AddEventNumberOfPlaces.IsEnabled = false;
             AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
+        }
+
+        static string GetEnumDescription(Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+
+            return attribute == null ? value.ToString() : attribute.Description;
         }
     }
 }
