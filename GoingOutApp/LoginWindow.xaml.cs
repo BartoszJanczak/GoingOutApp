@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using GoingOutApp.Services;
 
 namespace GoingOutApp
@@ -12,6 +14,7 @@ namespace GoingOutApp
     {
         private DataContext _database { get; set; }
         private static RegisterWindow? _registerWindowInstance;
+        private bool isPasswordVisible = false;
 
         public LoginWindow()
         {
@@ -112,6 +115,34 @@ namespace GoingOutApp
         private void ResetLabel_MouseLeave(object sender, MouseEventArgs e)
         {
             this.Cursor = Cursors.Arrow;
+        }
+
+        private void EyeImage_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            isPasswordVisible = !isPasswordVisible;
+
+            if (isPasswordVisible)
+            {
+                eyeImage.Source = new BitmapImage(new Uri("/data/images/hide.png", UriKind.Relative));
+                passwordTxtBox.Text = txtPassword.Password;
+                txtPassword.Visibility = Visibility.Collapsed;
+                passwordTxtBox.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                eyeImage.Source = new BitmapImage(new Uri("/data/images/show.png", UriKind.Relative));
+                txtPassword.Password = passwordTxtBox.Text;
+                passwordTxtBox.Visibility = Visibility.Collapsed;
+                txtPassword.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void PasswordTxtBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (isPasswordVisible)
+            {
+                txtPassword.Password = passwordTxtBox.Text;
+            }
         }
     }
 }
