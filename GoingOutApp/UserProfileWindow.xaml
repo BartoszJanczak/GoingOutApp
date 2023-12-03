@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
-        Title="ProfileWindow" Height="600" Width="803"
+        Title="ProfileWindow" Height="600" Width="456"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"
@@ -15,45 +15,45 @@
         <Border CornerRadius="50" BorderThickness="5" Margin="0,0,0,36">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E0E0E0" Offset="0"/>
-                    <GradientStop Color="#C0C0C0" Offset="0.25"/>
-                    <GradientStop Color="#A0A0A0" Offset="0.75"/>
-                    <GradientStop Color="#808080" Offset="1"/>
+                    <GradientStop Color="#E0E0E0" Offset="0" />
+                    <GradientStop Color="#C0C0C0" Offset="0.25" />
+                    <GradientStop Color="#A0A0A0" Offset="0.75" />
+                    <GradientStop Color="#808080" Offset="1" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FDFDFD" Offset="0"/>
-                    <GradientStop Color="#E6E6E6" Offset="0.25"/>
-                    <GradientStop Color="#CFCFCF" Offset="0.75"/>
-                    <GradientStop Color="#B8B8B8" Offset="1"/>
+                    <GradientStop Color="#FDFDFD" Offset="0" />
+                    <GradientStop Color="#E6E6E6" Offset="0.25" />
+                    <GradientStop Color="#CFCFCF" Offset="0.75" />
+                    <GradientStop Color="#B8B8B8" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" HorizontalAlignment="right" Orientation="Horizontal" Margin="0 0 15 0">
-                    <Button Style="{StaticResource  Windowbutton}" x:Name="LogOutButton" Click="LogOutButton_Click" Content="Log Out"  Height="42" Width="100" Margin="0 0 10 0 "/>
-                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="0 0 0 0 "/>
+                    <Button Style="{StaticResource  Windowbutton}" x:Name="LogOutButton" Click="LogOutButton_Click" Content="Log Out"  Height="42" Width="100" Margin="0 0 10 0 " />
+                    <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="0 0 0 0 " />
                 </StackPanel>
-                <StackPanel Grid.Row="1" Margin="10">
-                    <TextBlock Style="{StaticResource textHint}" Text="User data:" Foreground="Black" FontWeight="Bold" Margin="0 0 0 0"/>
+                <StackPanel Grid.Row="1" Margin="10" HorizontalAlignment="Center">
+                    <TextBlock Style="{StaticResource textHint}" Text="User data:" Foreground="Black" FontWeight="Bold" Margin="0 0 0 0" />
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Name" Foreground="Black" />
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Surname" Foreground="Black" />
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Age" Foreground="Black" />
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Gender" Foreground="Black" />
-                    <TextBlock Style="{StaticResource textHint}" Text="Events I Participate In" Margin="0 10 0 5" Foreground="Black" FontWeight="Bold"/>
-                    <ItemsControl x:Name="ParticipatedEventsItemsControl" Margin="0,0,0,0">
+                    <TextBlock Style="{StaticResource textHint}" Text="Events I Participate In" Margin="0 10 0 5" Foreground="Black" FontWeight="Bold" />
+                    <ItemsControl x:Name="ParticipatedEventsItemsControl" Margin="0,0,0,0" MaxWidth="400">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,10" Padding="10">
                                     <StackPanel>
-                                        <TextBlock Text="{Binding EventName}" FontWeight="Bold"/>
-                                        <TextBlock Text="{Binding EventDateTime}" FontStyle="Italic"/>
+                                        <TextBlock Text="{Binding EventName}" FontWeight="Bold" />
+                                        <TextBlock Text="{Binding EventDateTime}" FontStyle="Italic" />
                                     </StackPanel>
                                 </Border>
                             </DataTemplate>
