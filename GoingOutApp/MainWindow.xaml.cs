@@ -35,6 +35,8 @@ namespace GoingOutApp
         private List<Event> events = new List<Event>();
         public ObservableCollection<PointViewModel> pushPins { get; set; }
 
+        private bool sortDesc = false;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -56,9 +58,14 @@ namespace GoingOutApp
             }
         }
 
-        public void OnShown()
+        private void LoadData()
         {
             events = _database.GetEvents();
+        }
+
+        public void OnShown()
+        {
+            LoadData();
 
             ListOfEvents.Items.Clear();
             ListOfEvents.DisplayMemberPath = "EventName";
@@ -256,6 +263,76 @@ namespace GoingOutApp
             {
                 // Przywrócenie domyślnego kształtu kursora po opuszczeniu
                 element.Cursor = Cursors.Arrow;
+            }
+        }
+
+        private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string searchText = SearchBox.Text;
+            GetEventsByName(searchText);
+        }
+
+        private void GetEventsByName(string searchText)
+        {
+            ListOfEvents.Items.Clear();
+            var filtered = events.Where(e => e.EventName.ToLower().StartsWith(searchText.ToLower())).ToList();
+            foreach(var e in filtered)
+            {
+                ListOfEvents.Items.Add(e);
+            }
+        }
+
+        private void SortByName_Click(object sender, RoutedEventArgs e)
+        {
+            sortDesc = !sortDesc;
+            sortBySomething();
+        }
+
+        private void sortBySomething()
+        {
+           string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
+
+            ListOfEvents.Items.Clear();
+            var sorted = events;
+            if(sortDesc)
+            {
+                switch (orderByy)
+                {
+                    case "Name":
+                        sorted = events.OrderByDescending(e => e.EventName).ToList();
+                        break;
+                    case "Location":
+                        sorted = events.OrderByDescending(e => e.City).ToList();
+                        break;
+                    case "Places":
+                        sorted = events.OrderByDescending(e => e.NumberOfplaces).ToList();
+                        break;
+                    default:
+                        sorted = events.OrderByDescending(e => e.EventName).ToList();
+                        break;
+                }
+            }
+            else
+            {
+                switch (orderByy)
+                {
+                    case "Name":
+                        sorted = events.OrderBy(e => e.EventName).ToList();
+                        break;
+                    case "Location":
+                        sorted = events.OrderBy(e => e.City).ToList();
+                        break;
+                    case "Places":
+                        sorted = events.OrderBy(e => e.NumberOfplaces).ToList();
+                        break;
+                    default:
+                        sorted = events.OrderBy(e => e.EventName).ToList();
+                        break;
+                }
+            }
+            foreach (var sortedItem in sorted)
+            {
+                ListOfEvents.Items.Add(sortedItem);
             }
         }
     }

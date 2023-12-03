@@ -41,25 +41,53 @@
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black" />
+                <Grid Grid.Column="0" Margin="0,81,0,36">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
-                <ListView x:Name="ListOfEvents" Style="{StaticResource EventList}" Grid.Column="0" FontSize="20" Margin="0,81,0,36" Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="500" MouseDoubleClick="ListOfEvents_MouseDoubleClick">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="Auto" />
-                            <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
-                        </GridView>
-                    </ListView.View>
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="Margin" Value="5" />
-                            <Setter Property="Padding" Value="10" />
-                            <Setter Property="BorderBrush" Value="#E0E0E0" />
-                            <Setter Property="BorderThickness" Value="0,0,0,1" />
-                            <Setter Property="Height" Value="50" />
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBox Grid.Row="0" Grid.Column="0" x:Name="SearchBox" TextChanged="SearchBox_TextChanged"  />
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="169.333"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="1" Style="{StaticResource Navbutton}" Content="Sort by" Click="SortByName_Click"/>
+                            <ComboBox FontSize="20" Padding="10" Grid.Column="2" x:Name="sortBy" FocusVisualStyle="{x:Null}" Height="50" Width="Auto">
+                                <ComboBoxItem Content="Name" />
+                                <ComboBoxItem Content="Date" />
+                                <ComboBoxItem Content="Places" />
+                            </ComboBox>
+                        </Grid>
+                    </Grid>
+
+                    <ListView Grid.Row="1" x:Name="ListOfEvents" Style="{StaticResource EventList}"  FontSize="20"  Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="500" MouseDoubleClick="ListOfEvents_MouseDoubleClick">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="Auto" />
+                                <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Margin" Value="5" />
+                                <Setter Property="Padding" Value="10" />
+                                <Setter Property="BorderBrush" Value="#E0E0E0" />
+                                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                <Setter Property="Height" Value="50" />
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                </Grid>
 
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
                 <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="120" />
