@@ -209,5 +209,11 @@ namespace GoingOutApp
                 photo.Source = null;
             }
         }
+
+        private void ShowParticipants_Click(object sender, RoutedEventArgs e)
+        {
+            lblList.Visibility = Visibility.Visible;
+            listOfParticipants.Visibility = Visibility.Visible;
+        }
     }
 }
