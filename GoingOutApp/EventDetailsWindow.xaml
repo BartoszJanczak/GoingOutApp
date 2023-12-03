@@ -71,7 +71,7 @@
                     </Grid>
 
                 </StackPanel>
-                <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="153" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}" />
+                <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="153" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Collapsed"/>
                 <TextBlock x:Name="lblList" HorizontalAlignment="Left" Height="21" Margin="362,355,0,0" TextWrapping="Wrap" Text="List of participants" VerticalAlignment="Top" Width="102" Visibility="Collapsed"/>
             </Grid>
         </Border>
