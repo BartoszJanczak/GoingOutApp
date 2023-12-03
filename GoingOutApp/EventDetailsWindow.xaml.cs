@@ -231,6 +231,12 @@ namespace GoingOutApp
             }
         }
 
+        private void ShowParticipants_Click(object sender, RoutedEventArgs e)
+        {
+            lblList.Visibility = Visibility.Visible;
+            listOfParticipants.Visibility = Visibility.Visible;
+        }
+
         private void EditEvent_Click(object sender, RoutedEventArgs e)
         {
             using (DataContext dataContext = new DataContext())

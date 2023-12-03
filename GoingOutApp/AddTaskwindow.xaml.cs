@@ -12,6 +12,8 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.IO;
 using Microsoft.Extensions.Logging;
+using static System.Net.Mime.MediaTypeNames;
+using System.Windows.Markup;
 
 namespace GoingOutApp
 {
@@ -149,6 +151,13 @@ namespace GoingOutApp
                     EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
                     string eventCategory = eventCategoryEnum.ToString();
 
+                    if (photoBytes == null)
+                    {
+                        photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/concert.jpg");
+                    }
+                    _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                    var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
+                    var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
                     if (tryb == TrybOkna.New)
                     {
                         _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
