@@ -39,6 +39,9 @@ namespace GoingOutApp.Services
             }
         }
 
+
+        
+
         public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender, string securityQuestion, string securityAnswer)
         {
             using (DataContext context = new DataContext())
@@ -56,6 +59,26 @@ namespace GoingOutApp.Services
                     SecurityAnswer = securityAnswer,
                 });
                 context.SaveChanges();
+            }
+        }
+
+        public void UpdateEvent(Event eventToUpdate)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var ev = context.Events.FirstOrDefault(e=> e.EventId == eventToUpdate.EventId);
+                if (ev != null)
+                {
+                    ev.NumberOfplaces = eventToUpdate.NumberOfplaces;
+                    ev.EventName = eventToUpdate.EventName;
+                    ev.EventCategory = eventToUpdate.EventCategory;
+                    ev.EventDateTime = eventToUpdate.EventDateTime;
+                    ev.EventDescription = eventToUpdate.EventDescription;
+                    ev.PhotoDescription = eventToUpdate.PhotoDescription;
+                    ev.PhotoPath = eventToUpdate.PhotoPath;
+
+                    context.SaveChanges();
+                }
             }
         }
 

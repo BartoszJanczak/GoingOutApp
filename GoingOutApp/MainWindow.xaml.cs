@@ -44,6 +44,8 @@ namespace GoingOutApp
             OnShown();
             ListOfEvents.Items.Clear();
 
+            sortBy.SelectedIndex = 1;
+
             events = _database.GetEvents();
             foreach (var ev in events)
             {
@@ -157,7 +159,11 @@ namespace GoingOutApp
                 _profileWindowInstance.Show();              
             }
         }
-
+        public void RefreshData()
+        {
+            RefreshPins();
+            RefreshEvents();
+        }
         public void RefreshPins()
         {
             var pins = Mapper.Map(_database.GetEventPushPins());
@@ -167,35 +173,25 @@ namespace GoingOutApp
                 pushPins.Add(pin);
             }
         }
+        public void RefreshEvents()
+        {
+            var events = _database.GetEvents();
+
+            ListOfEvents.Items.Clear();
+            foreach (var ev in events)
+            {
+                ListOfEvents.Items.Add(ev);
+            }
+        }
 
         private void AddPin_EventAdded(object? sender, EventArgs e)
         {
             RefreshPins();
         }
-
         private void AddEventWindow_EventAdded(object sender, EventArgs e)
         {
             OnShown();
         }
-
-        // Stary kod na wszelki wypadek z metody ListOfEvents_MouseDoubleClick
-        //private void ListOfEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (ListOfEvents.SelectedItem is Event selectedEvent)
-        //    {
-        //        EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
-        //        eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-        //        eventDetailsWindow.Left = this.Left + 15;
-        //        eventDetailsWindow.Top = this.Top + 80;
-        //        eventDetailsWindow.Show();
-
-        //        var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).First();
-        //        Map.ZoomLevel = 15;
-
-        //        Map.Center = eventPin.Location;
-        //    }
-        //}
-
         private void ListOfEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListOfEvents.SelectedItem is Event selectedEvent)
@@ -213,7 +209,7 @@ namespace GoingOutApp
                 eventDetailsWindow.Top = this.Top + 80;
                 eventDetailsWindow.Show();
                 _eventDetailsWindowInstance = eventDetailsWindow;
-
+                eventDetailsWindow.Closed += EventDetailsWindow_Closed;
                 var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
 
                 if (eventPin != null)
@@ -222,6 +218,11 @@ namespace GoingOutApp
                     Map.Center = eventPin.Location;
                 }
             }
+        }
+
+        private void EventDetailsWindow_Closed(object? sender, EventArgs e)
+        {
+            RefreshData();
         }
 
         private void Pushpin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -247,7 +248,6 @@ namespace GoingOutApp
                 Map.ZoomLevel = 15;
             }
         }
-
         private void Pushpin_MouseEnter(object sender, MouseEventArgs e)
         {
             if (sender is FrameworkElement element)
@@ -256,22 +256,18 @@ namespace GoingOutApp
                 element.Cursor = Cursors.Hand;
             }
         }
-
         private void Pushpin_MouseLeave(object sender, MouseEventArgs e)
         {
             if (sender is FrameworkElement element)
             {
-                // Przywrócenie domyślnego kształtu kursora po opuszczeniu
                 element.Cursor = Cursors.Arrow;
             }
         }
-
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
             GetEventsByName(searchText);
         }
-
         private void GetEventsByName(string searchText)
         {
             ListOfEvents.Items.Clear();
@@ -281,13 +277,11 @@ namespace GoingOutApp
                 ListOfEvents.Items.Add(e);
             }
         }
-
         private void SortByName_Click(object sender, RoutedEventArgs e)
         {
             sortDesc = !sortDesc;
             sortBySomething();
         }
-
         private void sortBySomething()
         {
            string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
@@ -301,8 +295,8 @@ namespace GoingOutApp
                     case "Name":
                         sorted = events.OrderByDescending(e => e.EventName).ToList();
                         break;
-                    case "Location":
-                        sorted = events.OrderByDescending(e => e.City).ToList();
+                    case "Date":
+                        sorted = events.OrderByDescending(e => e.EventDateTime).ToList();
                         break;
                     case "Places":
                         sorted = events.OrderByDescending(e => e.NumberOfplaces).ToList();
@@ -319,8 +313,8 @@ namespace GoingOutApp
                     case "Name":
                         sorted = events.OrderBy(e => e.EventName).ToList();
                         break;
-                    case "Location":
-                        sorted = events.OrderBy(e => e.City).ToList();
+                    case "Date":
+                        sorted = events.OrderBy(e => e.EventDateTime).ToList();
                         break;
                     case "Places":
                         sorted = events.OrderBy(e => e.NumberOfplaces).ToList();

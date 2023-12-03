@@ -71,7 +71,7 @@
                     <ListView Grid.Row="1" x:Name="ListOfEvents" Style="{StaticResource EventList}"  FontSize="20"  Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="500" MouseDoubleClick="ListOfEvents_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="Auto" />
+                                <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="200" />
                                 <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
                             </GridView>
                         </ListView.View>

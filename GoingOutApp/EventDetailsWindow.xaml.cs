@@ -24,6 +24,7 @@ namespace GoingOutApp
         private DataContext _database { get; set; } = new DataContext();
         private int _eventId;
         private List<string> participants = new List<string>();
+        private static AddTaskwindow? _addWindowInstance;
 
         public EventDetailsWindow(int eventId)
         {
@@ -74,8 +75,21 @@ namespace GoingOutApp
                 {
                     bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
 
+                    var creatorId = dataContext.Events.FirstOrDefault(e => e.EventId == eventId).EventCreatorId;
+                    
+                  
+
                     if (isUserSignedUp)
                     {
+                        if (userId == creatorId)
+                        {
+                            EditEvent.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            EditEvent.Visibility = Visibility.Collapsed;
+                        }
+
                         TakePartButton.Visibility = Visibility.Collapsed;
                         CancelParticipationButton.Visibility = Visibility.Visible;
                     }
@@ -83,8 +97,15 @@ namespace GoingOutApp
                     {
                         TakePartButton.Visibility = Visibility.Visible;
                         CancelParticipationButton.Visibility = Visibility.Collapsed;
+                        EditEvent.Visibility = Visibility.Collapsed;
+
                     }
                 }
+            }
+            else
+            {
+                CancelParticipationButton.Visibility = Visibility.Collapsed;
+                EditEvent.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -209,5 +230,23 @@ namespace GoingOutApp
                 photo.Source = null;
             }
         }
+
+        private void EditEvent_Click(object sender, RoutedEventArgs e)
+        {
+            using (DataContext dataContext = new DataContext())
+            {
+                Event selectedEvent = dataContext.GetEvent(_eventId);
+                _addWindowInstance = new AddTaskwindow(selectedEvent) ;
+                _addWindowInstance.Owner = this;
+                _addWindowInstance.Show();
+                _addWindowInstance.Closed += AddWindowInstance_Closed;
+            }
+               
+        }
+        private void AddWindowInstance_Closed(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

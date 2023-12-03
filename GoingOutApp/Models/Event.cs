@@ -7,6 +7,26 @@ namespace GoingOutApp.Models
 {
     public class Event
     {
+        public Event()
+        {
+                
+        }
+        public Event(int eventCreatorId, string eventName, byte[] photoPath, string photoDescription, string eventDescription, string eventCity, string eventStreet, string eventBuildingNumber, string eventDate, int numberOfPlaces, string otherInfo, string eventCategory)
+        {
+            this.EventCreatorId = eventCreatorId;
+            this.EventName = eventName;
+            this.PhotoPath = photoPath;
+            this.PhotoDescription = photoDescription;
+            this.EventDescription = eventDescription;
+            this.City = eventCity;
+            this.Street = eventStreet;
+            this.NumberOfBuilding = eventBuildingNumber;
+            this.EventDateTime = eventDate;
+            this.NumberOfplaces = numberOfPlaces;
+            this.OtherInfo = otherInfo;
+            this.EventCategory = eventCategory;
+        }
+
         [Key]
         public int EventId { get; set; }
 

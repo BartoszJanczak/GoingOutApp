@@ -11,9 +11,15 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using System.IO;
+using Microsoft.Extensions.Logging;
 
 namespace GoingOutApp
 {
+    public enum TrybOkna
+    {
+        New,
+        Edit
+    }
     /// <summary>
     /// Interaction logic for AddTaskwindow.xaml
     /// </summary>
@@ -30,6 +36,10 @@ namespace GoingOutApp
 
         private byte[] photoBytes;
 
+        private TrybOkna tryb;
+
+        private GoingOutApp.Models.Event eventToEdit;
+
         User user { get; set; }
 
         public enum EventCategory
@@ -39,13 +49,60 @@ namespace GoingOutApp
             Sport
         }
 
+
         public AddTaskwindow()
         {
+            tryb = TrybOkna.New;
             InitializeComponent();
             _database = new DataContext();
             AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
+            TitleText.Text = "Add new event";
+            CancelButton.Visibility = Visibility.Hidden;
         }
 
+        public AddTaskwindow(GoingOutApp.Models.Event eventToEdit)
+        {
+            tryb = TrybOkna.Edit;
+            this.eventToEdit = eventToEdit;
+            InitializeComponent();
+            _database = new DataContext();
+            TitleText.Text = "Edit your event";
+            SubmitButton.Content = "Save";
+            CancelButton.Visibility = Visibility.Visible;
+
+            AddEventName.Text = eventToEdit.EventName;
+            AddEventCity.Text = eventToEdit.City;
+            AddEventCity.IsEnabled = false;
+            AddEventStreet.Text = eventToEdit.Street;
+            AddEventStreet.IsEnabled = false;
+            AddEventBuilding.Text = eventToEdit.NumberOfBuilding;
+            AddEventBuilding.IsEnabled = false;
+            cmbCategory.Text = eventToEdit.EventCategory; 
+            AddEventDate.Text = eventToEdit.EventDateTime;
+            AddEventDescription.Text = eventToEdit.EventDescription;
+            if(eventToEdit.NumberOfplaces != 0)
+            {
+                LimitPlacesCheckbox.IsChecked = true;
+                AddEventNumberOfPlaces.Text = Convert.ToString(eventToEdit.NumberOfplaces);
+            }
+            try
+            {
+                photoBytes = _database.GetPhoto(eventToEdit.EventId);
+
+                BitmapImage bitmap = new BitmapImage();
+                bitmap.BeginInit();
+                bitmap.StreamSource = new MemoryStream(photoBytes);
+                bitmap.EndInit();
+
+                imagePreview.Source = bitmap;
+            }
+            catch (Exception ex)
+            {
+                imagePreview.Source = null;
+            }
+        }
+
+        
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -57,6 +114,13 @@ namespace GoingOutApp
             {
                 if (int.TryParse(AddEventBuilding.Text, out _) && int.TryParse(AddEventNumberOfPlaces.Text, out _))
                 {
+
+
+                    if (tryb == TrybOkna.New)
+                    {
+                        var obiekt = new GoingOutApp.Models.Event();
+                    }
+
                     user = UserService.LoggedInUser;
                     string eventName = AddEventName.Text;
                     //string PhotoPath = photoPath,
@@ -85,16 +149,31 @@ namespace GoingOutApp
                     EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
                     string eventCategory = eventCategoryEnum.ToString();
 
-                    _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
-                    var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
-                    var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
+                    if (tryb == TrybOkna.New)
+                    {
+                        _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                        var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
+                        var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
-                    var cords = await LocationService.GetLocationByCords(location);
+                        var cords = await LocationService.GetLocationByCords(location);
 
-                    _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
+                        _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
 
-                    EventAdded?.Invoke(this, EventArgs.Empty);
-                    PinAdded?.Invoke(this, EventArgs.Empty);
+                        EventAdded?.Invoke(this, EventArgs.Empty);
+                        PinAdded?.Invoke(this, EventArgs.Empty);
+
+                    }
+                    else if(tryb == TrybOkna.Edit)
+                    {
+
+                        var objectToUpdate = new GoingOutApp.Models.Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                        objectToUpdate.EventId = eventToEdit.EventId;
+                        _database.UpdateEvent(objectToUpdate);
+                        EventAdded?.Invoke(this, EventArgs.Empty);
+
+
+                    }
+
                     Close();
                 }
                 else
@@ -109,6 +188,7 @@ namespace GoingOutApp
             }
         }
 
+        #region metody do klikania
         private void text_MouseDown(Control control)
         {
             control.Focus();
@@ -196,6 +276,8 @@ namespace GoingOutApp
             AddEventNumberOfPlaces.IsEnabled = false;
             AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
         }
+
+#endregion
 
         private void AddPhoto_Click(object sender, RoutedEventArgs e)
         {

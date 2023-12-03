@@ -61,8 +61,16 @@
 
                     <TextBlock Text="Additional Information:" FontWeight="Bold" Margin="0,5,0,0" HorizontalAlignment="Center" FontSize="14" />
                     <TextBlock Text="{Binding OtherInfo}" TextWrapping="Wrap" Margin="0,0,0,10" HorizontalAlignment="Center" FontSize="14" />
-                    <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" />
-                    <Button x:Name="CancelParticipationButton" Style="{StaticResource Navbutton}" Content="Cancel Participation" HorizontalAlignment="Center" Margin="10,6,0,0" VerticalAlignment="Bottom" Click="CancelParticipationButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Visibility="Collapsed" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="EditEvent" Style="{StaticResource Navbutton}" Content="Edit event" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="EditEvent_Click" Grid.Column="0" RenderTransformOrigin="0.509,-0.159" />
+                        <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" />
+                        <Button x:Name="CancelParticipationButton" Style="{StaticResource Navbutton}" Content="Cancel Participation" HorizontalAlignment="Center" Margin="10,6,0,0" VerticalAlignment="Bottom" Click="CancelParticipationButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Visibility="Collapsed" />
+                    </Grid>
+
                 </StackPanel>
                 <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="141" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}"/>
                 <TextBlock HorizontalAlignment="Left" Height="21" Margin="362,355,0,0" TextWrapping="Wrap" Text="List of participants" VerticalAlignment="Top" Width="102"/>

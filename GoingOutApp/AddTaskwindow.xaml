@@ -38,7 +38,7 @@
                     <ColumnDefinition Width="3*" />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Adding new event" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,67,0,0" Height="42" Width="258" Foreground="Black" Grid.ColumnSpan="2" />
+                <TextBlock x:Name="TitleText" Text="Adding new event" FontFamily="Verdana" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="266,67,0,0" Height="42" Width="258" Foreground="Black" Grid.ColumnSpan="2" />
 
                 <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="403,5,0,0" VerticalAlignment="Top" Height="42" Width="48" Grid.Column="1" />
                 <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="294,124,294,431" Grid.ColumnSpan="2">
@@ -108,11 +108,12 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,462,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click" />
+                <Button x:Name="SubmitButton"  Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,462,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click" />
+                <Button x:Name="CancelButton"  Style="{StaticResource Navbutton}" Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="26,512,0,0" VerticalAlignment="Top" Width="106" Click="ExitButton_Click" RenderTransformOrigin="0.759,0.547" />
                 <DatePicker x:Name="AddEventDate" Grid.Column="1" HorizontalAlignment="Left" Margin="206,244,0,0" VerticalAlignment="Top" Height="30" Width="201" FontSize="18" />
                 <StackPanel Margin="206,295,67,205" Grid.Column="1">
                     <TextBlock Text="Choose category:" FontSize="18" />
-                    <ComboBox x:Name="cmbCategory" SelectedIndex="0" FontFamily="Verdana" FontSize="18">
+                    <ComboBox x:Name="cmbCategory" SelectedIndex="0" FontFamily="Verdana" FontSize="18">    
                         <ComboBoxItem Content="Social" />
                         <ComboBoxItem Content="Show" />
                         <ComboBoxItem Content="Sport" />
