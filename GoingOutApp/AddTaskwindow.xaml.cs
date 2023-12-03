@@ -155,9 +155,7 @@ namespace GoingOutApp
                     {
                         photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/concert.jpg");
                     }
-                    _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
-                    var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
-                    var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
+                   
                     if (tryb == TrybOkna.New)
                     {
                         _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);

@@ -161,7 +161,6 @@ namespace GoingOutApp
         }
         public void RefreshData()
         {
-            RefreshPins();
             RefreshEvents();
         }
         public void RefreshPins()
