@@ -73,23 +73,23 @@ namespace GoingOutApp
 
                 using (DataContext dataContext = new DataContext())
                 {
-                    bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
+                    var creatorId = dataContext.Events.FirstOrDefault(e => e.EventId == eventId)?.EventCreatorId;
 
-                    var creatorId = dataContext.Events.FirstOrDefault(e => e.EventId == eventId).EventCreatorId;
-                    
-                  
+                    if (creatorId == userId)
+                    {
+                        EditEvent.Visibility = Visibility.Visible;
+                        DeleteEvent.Visibility = Visibility.Visible;
+                    }
+                    else
+                    {
+                        EditEvent.Visibility = Visibility.Collapsed;
+                        DeleteEvent.Visibility = Visibility.Collapsed;
+                    }
+
+                    bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
 
                     if (isUserSignedUp)
                     {
-                        if (userId == creatorId)
-                        {
-                            EditEvent.Visibility = Visibility.Visible;
-                        }
-                        else
-                        {
-                            EditEvent.Visibility = Visibility.Collapsed;
-                        }
-
                         TakePartButton.Visibility = Visibility.Collapsed;
                         CancelParticipationButton.Visibility = Visibility.Visible;
                     }
@@ -97,8 +97,6 @@ namespace GoingOutApp
                     {
                         TakePartButton.Visibility = Visibility.Visible;
                         CancelParticipationButton.Visibility = Visibility.Collapsed;
-                        EditEvent.Visibility = Visibility.Collapsed;
-
                     }
                 }
             }
@@ -106,7 +104,10 @@ namespace GoingOutApp
             {
                 CancelParticipationButton.Visibility = Visibility.Collapsed;
                 EditEvent.Visibility = Visibility.Collapsed;
+                DeleteEvent.Visibility = Visibility.Collapsed;
             }
+
+            // Reszta kodu...
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
@@ -225,7 +226,7 @@ namespace GoingOutApp
 
                 photo.Source = bitmap;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 photo.Source = null;
             }
@@ -242,17 +243,45 @@ namespace GoingOutApp
             using (DataContext dataContext = new DataContext())
             {
                 Event selectedEvent = dataContext.GetEvent(_eventId);
-                _addWindowInstance = new AddTaskwindow(selectedEvent) ;
+                _addWindowInstance = new AddTaskwindow(selectedEvent);
                 _addWindowInstance.Owner = this;
                 _addWindowInstance.Show();
                 _addWindowInstance.Closed += AddWindowInstance_Closed;
             }
-               
         }
+
         private void AddWindowInstance_Closed(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        private void DeleteEvent_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is Event selectedEvent && UserService.LoggedInUser != null)
+            {
+                int eventId = selectedEvent.EventId;
+                int userId = UserService.LoggedInUser.UserId;
+
+                using (DataContext dataContext = new DataContext())
+                {
+                    var creatorId = dataContext.Events.FirstOrDefault(ev => ev.EventId == eventId)?.EventCreatorId;
+
+                    if (creatorId == userId)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Are you sure you want to delete this event?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            dataContext.DeleteEvent(eventId);
+
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("You are not authorized to delete this event.", "Unauthorized", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    }
+                }
+            }
+        }
     }
 }

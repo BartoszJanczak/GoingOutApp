@@ -29,7 +29,7 @@ namespace GoingOutApp
         {
             InitializeComponent();
             _database = new DataContext();
-            _userToEdit = userToEdit; // Przypisz użytkownika do edycji
+            _userToEdit = userToEdit;
             InitializeFields();
         }
 
@@ -50,9 +50,6 @@ namespace GoingOutApp
             int age = Convert.ToInt32(txtAge.Text);
             string gender = selectedGender;
 
-            // Wykonaj walidację, tak jak to było w kodzie SignUpButton_Click
-
-            // Aktualizuj dane użytkownika
             _userToEdit.Name = name;
             _userToEdit.Surname = surname;
             _userToEdit.Age = age;
@@ -64,19 +61,17 @@ namespace GoingOutApp
 
         private void InitializeFields()
         {
-            // Ustaw wartości pól na podstawie danych użytkownika
             txtName.Text = _userToEdit.Name;
             txtSurname.Text = _userToEdit.Surname;
             txtAge.Text = _userToEdit.Age.ToString();
 
-            // Ustaw odpowiedni przycisk zaznaczenia płci
             if (_userToEdit.Gender == "Male")
             {
-                MaleButton_Click(null, null); // Wywołaj metodę zaznaczającą męski przycisk
+                MaleButton_Click(null, null);
             }
             else if (_userToEdit.Gender == "Female")
             {
-                FemaleButton_Click(null, null); // Wywołaj metodę zaznaczającą żeński przycisk
+                FemaleButton_Click(null, null);
             }
         }
 

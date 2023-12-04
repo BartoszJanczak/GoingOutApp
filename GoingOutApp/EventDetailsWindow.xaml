@@ -58,21 +58,22 @@
 
                     <TextBlock Text="Participants:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
                     <TextBlock x:Name="ParticipantsTextBlock" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14" />
-                    <Button x:Name="ShowParticipantsButton" Style="{StaticResource Navbutton}" Content="Show participants" HorizontalAlignment="Center" Margin="0,6,0,0" Click="ShowParticipants_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Height="46" Width="132" FontSize="12"/>
+                    <Button x:Name="ShowParticipantsButton" Style="{StaticResource Navbutton}" Content="Show participants" HorizontalAlignment="Center" Margin="0,6,0,0" Click="ShowParticipants_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Height="46" Width="132" FontSize="12" />
 
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Button x:Name="EditEvent" Style="{StaticResource Navbutton}" Content="Edit event" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="EditEvent_Click" Grid.Column="0" RenderTransformOrigin="0.509,-0.159" />
+                        <Button x:Name="EditEvent" Style="{StaticResource Navbutton}" Content="Edit event" HorizontalAlignment="Center" Margin="-10,6,0,0" VerticalAlignment="Bottom" Click="EditEvent_Click" Grid.Column="0" RenderTransformOrigin="0.509,-0.159" />
                         <Button x:Name="TakePartButton" Style="{StaticResource Navbutton}" Content="Take part" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="SignUpButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" />
                         <Button x:Name="CancelParticipationButton" Style="{StaticResource Navbutton}" Content="Cancel Participation" HorizontalAlignment="Center" Margin="10,6,0,0" VerticalAlignment="Bottom" Click="CancelParticipationButton_Click" Grid.Column="1" RenderTransformOrigin="0.509,-0.159" Visibility="Collapsed" />
+                        <Button x:Name="DeleteEvent" Style="{StaticResource Navbutton}" Content="Delete" HorizontalAlignment="Center" Margin="0,6,0,0" VerticalAlignment="Bottom" Click="DeleteEvent_Click" Grid.Column="2" RenderTransformOrigin="0.509,-0.159" />
                     </Grid>
-
                 </StackPanel>
-                <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="153" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Collapsed"/>
-                <TextBlock x:Name="lblList" HorizontalAlignment="Left" Height="21" Margin="362,355,0,0" TextWrapping="Wrap" Text="List of participants" VerticalAlignment="Top" Width="102" Visibility="Collapsed"/>
+                <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="153" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Collapsed" />
+                <TextBlock x:Name="lblList" HorizontalAlignment="Left" Height="21" Margin="362,355,0,0" TextWrapping="Wrap" Text="List of participants" VerticalAlignment="Top" Width="102" Visibility="Collapsed" />
             </Grid>
         </Border>
     </Border>

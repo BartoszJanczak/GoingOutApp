@@ -39,9 +39,6 @@ namespace GoingOutApp.Services
             }
         }
 
-
-        
-
         public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender, string securityQuestion, string securityAnswer)
         {
             using (DataContext context = new DataContext())
@@ -66,7 +63,7 @@ namespace GoingOutApp.Services
         {
             using (DataContext context = new DataContext())
             {
-                var ev = context.Events.FirstOrDefault(e=> e.EventId == eventToUpdate.EventId);
+                var ev = context.Events.FirstOrDefault(e => e.EventId == eventToUpdate.EventId);
                 if (ev != null)
                 {
                     ev.NumberOfplaces = eventToUpdate.NumberOfplaces;
@@ -77,6 +74,20 @@ namespace GoingOutApp.Services
                     ev.PhotoDescription = eventToUpdate.PhotoDescription;
                     ev.PhotoPath = eventToUpdate.PhotoPath;
 
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void DeleteEvent(int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var selectedEvent = context.Events.FirstOrDefault(e => e.EventId == eventId);
+                if (selectedEvent != null)
+                {
+                    // Remove event
+                    context.Events.Remove(selectedEvent);
                     context.SaveChanges();
                 }
             }
@@ -262,6 +273,5 @@ namespace GoingOutApp.Services
                 return photoBytes;
             }
         }
-
     }
 }
