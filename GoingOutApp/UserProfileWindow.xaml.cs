@@ -19,14 +19,13 @@ namespace GoingOutApp
     /// <summary>
     /// Interaction logic for UserProfileWindow.xaml
     /// </summary>
-    /// 
-
-    
+    ///
 
     public partial class UserProfileWindow : Window
     {
         private DataContext _database { get; set; }
-        User LoggedInUser { get; set; }
+        private User LoggedInUser { get; set; }
+
         public UserProfileWindow(User user)
         {
             LoggedInUser = user;
@@ -35,27 +34,42 @@ namespace GoingOutApp
             InitControls();
             ShowParticipatedEvents();
         }
+
         public void InitControls()
         {
-            Name.Text ="Name: "+ LoggedInUser.Name;
-            Surname.Text ="Surname: "+ LoggedInUser.Surname;
+            Name.Text = "Name: " + LoggedInUser.Name;
+            Surname.Text = "Surname: " + LoggedInUser.Surname;
             Age.Text = "Age: " + Convert.ToString(LoggedInUser.Age);
-            var gender = LoggedInUser.Gender == "Male"? "Male" : "Female";
+            var gender = LoggedInUser.Gender == "Male" ? "Male" : "Female";
             Gender.Text = "Gender: " + gender;
         }
+
         private void ShowParticipatedEvents()
         {
             List<Event> participatedEvents = _database.GetParticipatedEvents(LoggedInUser.UserId);
             ParticipatedEventsItemsControl.ItemsSource = participatedEvents;
         }
+
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
             UserService.Logout();
             this.Close();
         }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void EditUserData_Click(object sender, RoutedEventArgs e)
+        {
+            // Otwórz okno edycji danych użytkownika
+            EditProfileWindow editUserDataWindow = new EditProfileWindow(LoggedInUser);
+            editUserDataWindow.Owner = this;
+            editUserDataWindow.ShowDialog();
+
+            // Zaktualizuj dane na widoku po zamknięciu okna edycji danych użytkownika
+            InitControls();
         }
     }
 }
