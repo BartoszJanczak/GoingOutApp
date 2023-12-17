@@ -42,6 +42,8 @@ namespace GoingOutApp
 
         private GoingOutApp.Models.Event eventToEdit;
 
+        private System.Windows.Point cordsFromMap;
+
         User user { get; set; }
 
         public enum EventCategory
@@ -60,6 +62,29 @@ namespace GoingOutApp
             AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
             TitleText.Text = "Add new event";
             CancelButton.Visibility = Visibility.Hidden;
+        }
+        public AddTaskwindow(double x, double y)
+        {
+            tryb = TrybOkna.New;
+            InitializeComponent();
+            _database = new DataContext();
+            AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
+            TitleText.Text = "Add new event";
+            CancelButton.Visibility = Visibility.Hidden;
+            cordsFromMap.X = x;
+            cordsFromMap.Y = y;
+            Init();
+        }
+
+        public async void Init()
+        {
+            var cords = await LocationService.GetAddressInfoByCoords(cordsFromMap.X, cordsFromMap.Y);
+
+            AddEventCity.Text = cords.City +" " + cords.PostalCode;
+            AddEventStreet.Text = cords.Street == "" ? "Brak" : cords.Street;
+            AddEventBuilding.Text = cords.HouseNumber;
+ 
+
         }
 
         public AddTaskwindow(GoingOutApp.Models.Event eventToEdit)
@@ -114,9 +139,7 @@ namespace GoingOutApp
         {
             if (AddEventName.Text.Length > 0 && AddEventCity.Text.Length > 0 && AddEventStreet.Text.Length > 0 && AddEventBuilding.Text.Length > 0 && AddEventNumberOfPlaces.Text.Length > 0 && AddEventDate.Text.Length > 0 && AddEventDescription.Text.Length > 0)
             {
-                if (int.TryParse(AddEventBuilding.Text, out _) && int.TryParse(AddEventNumberOfPlaces.Text, out _))
-                {
-
+              
 
                     if (tryb == TrybOkna.New)
                     {
@@ -178,12 +201,6 @@ namespace GoingOutApp
                     }
 
                     Close();
-                }
-                else
-                {
-                    txtNumberInfo.Text = "Number of places should be a number";
-                    txtPlacesInfo.Text = "Number of building should be a number";
-                }
             }
             else
             {
