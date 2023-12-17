@@ -13,6 +13,10 @@
     <None Remove="data\images\concert.jpg" />
     <None Remove="data\images\female.png" />
     <None Remove="data\images\hide.png" />
+    <None Remove="data\images\iconParty.png" />
+    <None Remove="data\images\INFO1.png" />
+    <None Remove="data\images\INFO2.png" />
+    <None Remove="data\images\INFO3.png" />
     <None Remove="data\images\lock.png" />
     <None Remove="data\images\male.png" />
     <None Remove="data\images\name.png" />
@@ -37,7 +41,11 @@
     <Resource Include="data\images\answer.png" />
     <Resource Include="data\images\concert.jpg" />
     <Resource Include="data\images\female.png" />
-    <Resource Include="data\images\hide.png" />
+    <EmbeddedResource Include="data\images\hide.png" />
+    <Resource Include="data\images\iconParty.png" />
+    <EmbeddedResource Include="data\images\INFO1.png" />
+    <Resource Include="data\images\INFO2.png" />
+    <Resource Include="data\images\INFO3.png" />
     <Resource Include="data\images\lock.png" />
     <Resource Include="data\images\male.png" />
     <Resource Include="data\images\name.png" />
