@@ -20,6 +20,7 @@
     <None Remove="data\images\show.png" />
     <None Remove="data\images\surname.png" />
     <None Remove="data\images\user.png" />
+    <None Remove="data\images\userProfile.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,6 +46,7 @@
     <Resource Include="data\images\show.png" />
     <Resource Include="data\images\surname.png" />
     <Resource Include="data\images\user.png" />
+    <Resource Include="data\images\userProfile.png" />
   </ItemGroup>
 
 </Project>

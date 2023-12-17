@@ -24,6 +24,7 @@ namespace GoingOutApp.Services
         public DbSet<EventParticipant> EventParticipants { get; set; }
 
         public DbSet<EventPushPin> EventPushPins { get; set; }
+        public DbSet<EventHistory> EventHistory { get; set; }
 
         public void CreatePushPin(int eventId, double locationX, double locationY)
         {
@@ -39,7 +40,7 @@ namespace GoingOutApp.Services
             }
         }
 
-        public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender, string securityQuestion, string securityAnswer)
+        public void CreateAccount(string username, string encodedPassword, string key, string name, string surname, int age, string gender, string securityQuestion, string securityAnswer, byte[] photoPath)
         {
             using (DataContext context = new DataContext())
             {
@@ -54,6 +55,7 @@ namespace GoingOutApp.Services
                     Gender = gender,
                     SecurityQuestion = securityQuestion,
                     SecurityAnswer = securityAnswer,
+                    PhotoPath = photoPath,
                 });
                 context.SaveChanges();
             }
@@ -74,6 +76,20 @@ namespace GoingOutApp.Services
                     ev.PhotoDescription = eventToUpdate.PhotoDescription;
                     ev.PhotoPath = eventToUpdate.PhotoPath;
 
+                    context.SaveChanges();
+                }
+            }
+        }
+
+        public void UpdateUserPhotoPath(int userId, byte[] newPhotoPath)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var user = context.Users.FirstOrDefault(u => u.UserId == userId);
+
+                if (user != null)
+                {
+                    user.PhotoPath = newPhotoPath;
                     context.SaveChanges();
                 }
             }

@@ -42,7 +42,11 @@
                     <Button Style="{StaticResource Windowbutton}" x:Name="Exitbutton" Click="ExitButton_Click" Content="X" Height="42" Width="48" Margin="0 0 0 0 " />
                 </StackPanel>
                 <StackPanel Grid.Row="1" Margin="10" HorizontalAlignment="Center">
-                    <TextBlock Style="{StaticResource textHint}" Text="User data:" Foreground="Black" FontWeight="Bold" Margin="0 0 0 0" />
+                    <TextBlock Style="{StaticResource textHint}" Text="User data:" Foreground="Black" FontWeight="Bold" Margin="0 0 0 0" HorizontalAlignment="Center" />
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+                        <Image x:Name="imgProfile" Width="100" Height="100" Stretch="UniformToFill" Margin="0,0,0,10" />
+                        <Button Content="Change Picture" Click="ChangePictureButton_Click" Style="{StaticResource MyButtonStyle}" Foreground="Blue" />
+                    </StackPanel>
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Name" Foreground="Black" />
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Surname" Foreground="Black" />
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Age" Foreground="Black" />
