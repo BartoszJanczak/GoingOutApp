@@ -131,36 +131,44 @@ namespace GoingOutApp
 
         private void CancelParticipationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (ParticipatedEventsItemsControl.SelectedItem is Event selectedEvent)
+            if (ParticipatedEventsItemsControl.SelectedItems.Count > 0)
             {
                 if (UserService.LoggedInUser != null)
                 {
-                    int eventId = selectedEvent.EventId;
                     int userId = UserService.LoggedInUser.UserId;
 
                     using (DataContext dataContext = new DataContext())
                     {
-                        bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
-
-                        if (isUserSignedUp)
+                        foreach (var selectedItem in ParticipatedEventsItemsControl.SelectedItems)
                         {
-                            dataContext.CancelParticipation(dataContext, eventId, userId);
+                            if (selectedItem is Event selectedEvent)
+                            {
+                                int eventId = selectedEvent.EventId;
 
-                            ShowParticipatedEvents();
+                                bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
+
+                                if (isUserSignedUp)
+                                {
+                                    dataContext.CancelParticipation(dataContext, eventId, userId);
+                                }
+                                else
+                                {
+                                    MessageBox.Show($"You are not signed up for the event '{selectedEvent.EventName}'.");
+                                }
+                            }
                         }
-                        else
-                        {
-                            MessageBox.Show("You are not signed up for this event.");
-                        }
+
+                        ShowParticipatedEvents();
                     }
                 }
                 else
                 {
+                    // Obsługa przypadku, gdy użytkownik nie jest zalogowany
                 }
             }
             else
             {
-                MessageBox.Show("Please select an event to cancel participation.");
+                MessageBox.Show("Please select events to cancel participation.");
             }
         }
     }
