@@ -28,6 +28,8 @@ namespace GoingOutApp
         private DataContext _database { get; set; } = new DataContext();
 
         private List<Event> events = new List<Event>();
+        public static User LoggedInUser { get; private set; }
+
 
         public CalendarWindow()
         {
@@ -107,9 +109,13 @@ namespace GoingOutApp
 
         private void ShowEventsForSelectedDate(DateTime selectedDate)
         {
+            var userId = UserService.LoggedInUser.UserId;
+
             var eventsForDate = events
-                .Where(ev => DateTime.ParseExact(ev.EventDateTime, "dd.MM.yyyy", CultureInfo.InvariantCulture).Date == selectedDate.Date)
+                .Where(ev => DateTime.ParseExact(ev.EventDateTime, "dd.MM.yyyy", CultureInfo.InvariantCulture).Date == selectedDate.Date &&
+                             (_database.EventParticipants.Any(ep => ep.EventId == ev.EventId && ep.UserId == userId) || ev.EventCreatorId == userId))
                 .ToList();
+
             ListOfEvents.Items.Clear();
             foreach (var ev in eventsForDate)
             {
