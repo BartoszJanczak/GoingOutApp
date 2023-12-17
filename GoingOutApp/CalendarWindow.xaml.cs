@@ -87,11 +87,18 @@ namespace GoingOutApp
             ListOfEvents.Items.Clear();
             ListOfEvents.DisplayMemberPath = "EventName";
 
-            foreach (Event ev in events)
+            var userId = UserService.LoggedInUser.UserId;
+
+            var eventsToShow = events
+                .Where(ev => _database.EventParticipants.Any(ep => ep.EventId == ev.EventId && ep.UserId == userId) || ev.EventCreatorId == userId)
+                .ToList();
+
+            foreach (Event ev in eventsToShow)
             {
                 ListOfEvents.Items.Add(ev);
             }
         }
+
 
         private void LoadData()
         {
