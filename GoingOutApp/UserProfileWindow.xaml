@@ -53,13 +53,16 @@
                     <TextBlock Style="{StaticResource textHint}"  x:Name="Gender" Foreground="Black" />
                     <TextBlock Style="{StaticResource textHint}" Text="Events I Participate In" Margin="0 10 0 5" Foreground="Black" FontWeight="Bold" HorizontalAlignment="Center" />
                     <ScrollViewer Height="130" VerticalScrollBarVisibility="Auto">
-                        <ListBox x:Name="ParticipatedEventsItemsControl" Margin="0,0,0,0" MaxWidth="400" SelectionMode="Multiple" HorizontalContentAlignment="Stretch">
+                        <ListBox x:Name="ParticipatedEventsItemsControl" Margin="0,0,0,0" MaxWidth="400" SelectionMode="Single" HorizontalContentAlignment="Stretch" PreviewMouseDoubleClick="ParticipatedEventsItemsControl_MouseDoubleClick">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Border BorderBrush="Black" BorderThickness="1" Margin="0,0,0,5" Padding="10">
                                         <StackPanel>
                                             <TextBlock Text="{Binding EventName}" FontWeight="Bold" />
-                                            <TextBlock Text="{Binding EventDateTime}" FontStyle="Italic" />
+                                            <TextBlock>
+                                                <Run Text="{Binding EventDateTime}" FontStyle="Italic" FontWeight="Bold" />
+                                                <Run Text="{Binding EventHour}" FontStyle="Italic" FontWeight="Bold" />
+                                            </TextBlock>
                                         </StackPanel>
                                     </Border>
                                 </DataTemplate>

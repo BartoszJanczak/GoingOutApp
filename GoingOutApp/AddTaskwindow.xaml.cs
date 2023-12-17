@@ -22,6 +22,7 @@ namespace GoingOutApp
         New,
         Edit
     }
+
     /// <summary>
     /// Interaction logic for AddTaskwindow.xaml
     /// </summary>
@@ -44,7 +45,7 @@ namespace GoingOutApp
 
         private System.Windows.Point cordsFromMap;
 
-        User user { get; set; }
+        private User user { get; set; }
 
         public enum EventCategory
         {
@@ -54,7 +55,6 @@ namespace GoingOutApp
             Concert
         }
 
-     
         public AddTaskwindow()
         {
             tryb = TrybOkna.New;
@@ -64,6 +64,7 @@ namespace GoingOutApp
             TitleText.Text = "Add new event";
             CancelButton.Visibility = Visibility.Hidden;
         }
+
         public AddTaskwindow(double x, double y)
         {
             tryb = TrybOkna.New;
@@ -81,11 +82,9 @@ namespace GoingOutApp
         {
             var cords = await LocationService.GetAddressInfoByCoords(cordsFromMap.X, cordsFromMap.Y);
 
-            AddEventCity.Text = cords.City +" " + cords.PostalCode;
+            AddEventCity.Text = cords.City + " " + cords.PostalCode;
             AddEventStreet.Text = cords.Street == "" ? "Brak" : cords.Street;
             AddEventBuilding.Text = cords.HouseNumber;
- 
-
         }
 
         public AddTaskwindow(GoingOutApp.Models.Event eventToEdit)
@@ -105,10 +104,10 @@ namespace GoingOutApp
             AddEventStreet.IsEnabled = false;
             AddEventBuilding.Text = eventToEdit.NumberOfBuilding;
             AddEventBuilding.IsEnabled = false;
-            cmbCategory.Text = eventToEdit.EventCategory; 
+            cmbCategory.Text = eventToEdit.EventCategory;
             AddEventDate.Text = eventToEdit.EventDateTime;
             AddEventDescription.Text = eventToEdit.EventDescription;
-            if(eventToEdit.NumberOfplaces != 0)
+            if (eventToEdit.NumberOfplaces != 0)
             {
                 LimitPlacesCheckbox.IsChecked = true;
                 AddEventNumberOfPlaces.Text = Convert.ToString(eventToEdit.NumberOfplaces);
@@ -130,7 +129,6 @@ namespace GoingOutApp
             }
         }
 
-        
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Close();
@@ -140,68 +138,62 @@ namespace GoingOutApp
         {
             if (AddEventName.Text.Length > 0 && AddEventCity.Text.Length > 0 && AddEventStreet.Text.Length > 0 && AddEventBuilding.Text.Length > 0 && AddEventNumberOfPlaces.Text.Length > 0 && AddEventDate.Text.Length > 0 && AddEventDescription.Text.Length > 0)
             {
-              
+                if (tryb == TrybOkna.New)
+                {
+                    var obiekt = new GoingOutApp.Models.Event();
+                }
 
-                    if (tryb == TrybOkna.New)
-                    {
-                        var obiekt = new GoingOutApp.Models.Event();
-                    }
+                user = UserService.LoggedInUser;
+                string eventName = AddEventName.Text;
+                string eventDescription = AddEventDescription.Text;
+                string eventDate = string.Empty;
+                string eventHour = cmbHour.Text + ":" + cmbMinute.Text;
 
-                    user = UserService.LoggedInUser;
-                    string eventName = AddEventName.Text;
-                    string eventDescription = AddEventDescription.Text;
-                    string eventDate = string.Empty;
-                    string eventHour = cmbHour.Text + ":" + cmbMinute.Text;
+                if (!string.IsNullOrEmpty(AddEventDate.Text))
+                {
+                    eventDate = AddEventDate.Text;
+                }
+                else
+                {
+                    eventDate = DateTime.Now.ToString();
+                }
 
-                    if (!string.IsNullOrEmpty(AddEventDate.Text))
-                    {
-                        eventDate = AddEventDate.Text;
-                    }
-                    else
-                    {
-                        eventDate = DateTime.Now.ToString();
-                    }
+                int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
+                string eventCity = AddEventCity.Text;
+                string eventStreet = AddEventStreet.Text;
+                string eventBuildingNumber = AddEventBuilding.Text;
+                int eventCreatorId = user.UserId;
 
-                    int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
-                    string eventCity = AddEventCity.Text;
-                    string eventStreet = AddEventStreet.Text;
-                    string eventBuildingNumber = AddEventBuilding.Text;
-                    int eventCreatorId = user.UserId;
+                EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
+                string eventCategory = eventCategoryEnum.ToString();
 
-                    EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
-                    string eventCategory = eventCategoryEnum.ToString();
+                if (photoBytes == null)
+                {
+                    photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/concert.jpg");
+                }
 
-                    if (photoBytes == null)
-                    {
-                        photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/concert.jpg");
-                    }
-                   
-                    if (tryb == TrybOkna.New)
-                    {
-                        _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
-                        var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
-                        var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
+                if (tryb == TrybOkna.New)
+                {
+                    _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
+                    var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
+                    var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
-                        var cords = await LocationService.GetLocationByCords(location);
+                    var cords = await LocationService.GetLocationByCords(location);
 
-                        _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
+                    _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
 
-                        EventAdded?.Invoke(this, EventArgs.Empty);
-                        PinAdded?.Invoke(this, EventArgs.Empty);
+                    EventAdded?.Invoke(this, EventArgs.Empty);
+                    PinAdded?.Invoke(this, EventArgs.Empty);
+                }
+                else if (tryb == TrybOkna.Edit)
+                {
+                    var objectToUpdate = new Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
+                    objectToUpdate.EventId = eventToEdit.EventId;
+                    _database.UpdateEvent(objectToUpdate);
+                    EventAdded?.Invoke(this, EventArgs.Empty);
+                }
 
-                    }
-                    else if(tryb == TrybOkna.Edit)
-                    {
-
-                        var objectToUpdate = new Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
-                        objectToUpdate.EventId = eventToEdit.EventId;
-                        _database.UpdateEvent(objectToUpdate);
-                        EventAdded?.Invoke(this, EventArgs.Empty);
-
-
-                    }
-
-                    Close();
+                Close();
             }
             else
             {
@@ -210,6 +202,7 @@ namespace GoingOutApp
         }
 
         #region metody do klikania
+
         private void text_MouseDown(Control control)
         {
             control.Focus();
@@ -298,14 +291,14 @@ namespace GoingOutApp
             AddEventNumberOfPlaces.Text = defaultNumberOfPlacesValue;
         }
 
-#endregion
+        #endregion metody do klikania
 
         private void AddPhoto_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
-            //openFileDialog.Filter
+            openFileDialog.Filter = "Image files (*.png;*.jpeg;*.jpg)|*.png;*.jpeg;*.jpg|All files (*.*)|*.*";
 
-            if (openFileDialog.ShowDialog() == true) 
+            if (openFileDialog.ShowDialog() == true)
             {
                 string filePath = openFileDialog.FileName;
 
