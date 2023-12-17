@@ -91,7 +91,7 @@
                 </Grid>
 
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="532,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="120" />
+                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="394,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
                 <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="702,15,0,0" VerticalAlignment="Top" Width="40"   Grid.Column="1" />
                 <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="657,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527" />
                 <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top" Width="60"  Click="AddButton_Click" />
