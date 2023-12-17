@@ -86,7 +86,6 @@ namespace GoingOutApp
 
         private async void Window_mousedown(object sender, MouseButtonEventArgs e)
         {
-
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -150,7 +149,7 @@ namespace GoingOutApp
                     _addWindowInstance.Owner = this;
                     _addWindowInstance.EventAdded += AddEventWindow_EventAdded;
                     _addWindowInstance.PinAdded += AddPin_EventAdded;
-                    _addWindowInstance.Closed += (s, e) => _calendarWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _addWindowInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
                     _addWindowInstance.Show();
                 }
                 else
@@ -165,10 +164,12 @@ namespace GoingOutApp
                 _profileWindowInstance.Show();
             }
         }
+
         public void RefreshData()
         {
             RefreshEvents();
         }
+
         public void RefreshPins()
         {
             var pins = Mapper.Map(_database.GetEventPushPins());
@@ -178,6 +179,7 @@ namespace GoingOutApp
                 pushPins.Add(pin);
             }
         }
+
         public void RefreshEvents()
         {
             var events = _database.GetEvents();
@@ -193,10 +195,12 @@ namespace GoingOutApp
         {
             RefreshPins();
         }
+
         private void AddEventWindow_EventAdded(object sender, EventArgs e)
         {
             OnShown();
         }
+
         private void ListOfEvents_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ListOfEvents.SelectedItem is Event selectedEvent)
@@ -239,7 +243,6 @@ namespace GoingOutApp
 
                 var esa = _database.GetEvent(clickedEvent);
 
-
                 EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(esa.EventId);
 
                 eventDetailsWindow.WindowStartupLocation = WindowStartupLocation.Manual;
@@ -253,6 +256,7 @@ namespace GoingOutApp
                 Map.ZoomLevel = 15;
             }
         }
+
         private void Pushpin_MouseEnter(object sender, MouseEventArgs e)
         {
             if (sender is FrameworkElement element)
@@ -261,6 +265,7 @@ namespace GoingOutApp
                 element.Cursor = Cursors.Hand;
             }
         }
+
         private void Pushpin_MouseLeave(object sender, MouseEventArgs e)
         {
             if (sender is FrameworkElement element)
@@ -268,11 +273,13 @@ namespace GoingOutApp
                 element.Cursor = Cursors.Arrow;
             }
         }
+
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = SearchBox.Text;
             GetEventsByName(searchText);
         }
+
         private void GetEventsByName(string searchText)
         {
             ListOfEvents.Items.Clear();
@@ -282,11 +289,13 @@ namespace GoingOutApp
                 ListOfEvents.Items.Add(e);
             }
         }
+
         private void SortByName_Click(object sender, RoutedEventArgs e)
         {
             sortDesc = !sortDesc;
             sortBySomething();
         }
+
         private void sortBySomething()
         {
             string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
@@ -300,12 +309,15 @@ namespace GoingOutApp
                     case "Name":
                         sorted = events.OrderByDescending(e => e.EventName).ToList();
                         break;
+
                     case "Date":
                         sorted = events.OrderByDescending(e => e.EventDateTime).ToList();
                         break;
+
                     case "Places":
                         sorted = events.OrderByDescending(e => e.NumberOfplaces).ToList();
                         break;
+
                     default:
                         sorted = events.OrderByDescending(e => e.EventName).ToList();
                         break;
@@ -318,12 +330,15 @@ namespace GoingOutApp
                     case "Name":
                         sorted = events.OrderBy(e => e.EventName).ToList();
                         break;
+
                     case "Date":
                         sorted = events.OrderBy(e => e.EventDateTime).ToList();
                         break;
+
                     case "Places":
                         sorted = events.OrderBy(e => e.NumberOfplaces).ToList();
                         break;
+
                     default:
                         sorted = events.OrderBy(e => e.EventName).ToList();
                         break;
@@ -334,7 +349,6 @@ namespace GoingOutApp
                 ListOfEvents.Items.Add(sortedItem);
             }
         }
-
 
         private void CalendarButton_Click(object sender, RoutedEventArgs e)
         {
@@ -359,41 +373,39 @@ namespace GoingOutApp
                 _profileWindowInstance.Show();
             }
         }
-            private void AboutUsButton_Click(object sender, RoutedEventArgs e)
-            {
-                _aboutUsInstance = new AboutUs();
-                _aboutUsInstance.Owner = this;
-                _aboutUsInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
-                _aboutUsInstance.Show();
-            }
 
-            private void Map_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-            {
-                System.Windows.Point mousePosition = e.GetPosition(Map);
+        private void AboutUsButton_Click(object sender, RoutedEventArgs e)
+        {
+            _aboutUsInstance = new AboutUs();
+            _aboutUsInstance.Owner = this;
+            _aboutUsInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+            _aboutUsInstance.Show();
+        }
 
-                // Przekształć punkt na współrzędne geograficzne
-                Location location = Map.ViewportPointToLocation(mousePosition);
+        private void Map_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Point mousePosition = e.GetPosition(Map);
 
-                _yesnoWindow = new YesNoWindow(location.Latitude, location.Longitude);
+            // Przekształć punkt na współrzędne geograficzne
+            Location location = Map.ViewportPointToLocation(mousePosition);
 
-                // Ustawienie właściwości okna
-                _yesnoWindow.Owner = this;
-                _yesnoWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            _yesnoWindow = new YesNoWindow(location.Latitude, location.Longitude);
 
-                // Pobranie pozycji kliknięcia myszką
-                System.Windows.Point clickPoint = e.GetPosition(this);
+            // Ustawienie właściwości okna
+            _yesnoWindow.Owner = this;
+            _yesnoWindow.WindowStartupLocation = WindowStartupLocation.Manual;
 
-                // Przypisanie pozycji okna na podstawie kliknięcia myszką
-                _yesnoWindow.Left = clickPoint.X + 170;
-                _yesnoWindow.Top = clickPoint.Y + 80;
+            // Pobranie pozycji kliknięcia myszką
+            System.Windows.Point clickPoint = e.GetPosition(this);
 
-                _yesnoWindow.Closed += (s, e) => _yesnoWindow = null; // Reset _profileWindowInstance when the window is closed.
-                _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
-                _yesnoWindow.Closed += (s, e) => RefreshPins(); // Reset _profileWindowInstance when the window is closed.
-                _yesnoWindow.Show();
+            // Przypisanie pozycji okna na podstawie kliknięcia myszką
+            _yesnoWindow.Left = clickPoint.X + 170;
+            _yesnoWindow.Top = clickPoint.Y + 80;
 
-            }
-
+            _yesnoWindow.Closed += (s, e) => _yesnoWindow = null; // Reset _profileWindowInstance when the window is closed.
+            _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
+            _yesnoWindow.Closed += (s, e) => RefreshPins(); // Reset _profileWindowInstance when the window is closed.
+            _yesnoWindow.Show();
         }
     }
-
+}
