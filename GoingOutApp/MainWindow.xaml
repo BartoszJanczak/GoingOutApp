@@ -90,7 +90,7 @@
 
                 </Grid>
 
-                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="336,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
+                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="358,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
 
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="489,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
 

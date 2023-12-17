@@ -123,7 +123,7 @@
                 <TextBlock x:Name="txtPlacesInfo" HorizontalAlignment="Left" Height="17" Margin="206,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Foreground="Blue" Grid.Column="1" />
                 <Button x:Name="AddPhoto" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Add photo" HorizontalAlignment="Left" Margin="12,175,0,0" VerticalAlignment="Top" Width="134" Click="AddPhoto_Click" Background="Gray" />
                 <Image x:Name="imagePreview" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,234,0,0" Width="155" Height="144" Grid.Column="1" />
-                <ComboBox x:Name="cmbHour" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="232,311,0,0" VerticalAlignment="Top" Width="63" SelectedIndex="0" FontSize="18">
+                <ComboBox x:Name="cmbHour" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="232,327,0,0" VerticalAlignment="Top" Width="63" SelectedIndex="0" FontSize="18">
                     <ComboBoxItem Content="00"/>
                     <ComboBoxItem Content="01"/>
                     <ComboBoxItem Content="02"/>
@@ -149,7 +149,7 @@
                     <ComboBoxItem Content="22"/>
                     <ComboBoxItem Content="23"/>
                 </ComboBox>
-                <ComboBox x:Name="cmbMinute" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="318,311,0,0" VerticalAlignment="Top" Width="64" SelectedIndex="0" FontSize="18">
+                <ComboBox x:Name="cmbMinute" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="318,327,0,0" VerticalAlignment="Top" Width="64" SelectedIndex="0" FontSize="18">
                     <ComboBoxItem Content="00"/>
                     <ComboBoxItem Content="01"/>
                     <ComboBoxItem Content="02"/>
@@ -212,7 +212,8 @@
                     <ComboBoxItem Content="59"/>
                     <ComboBoxItem Content="60"/>
                 </ComboBox>
-                <Label Grid.Column="1" Content=":" HorizontalAlignment="Left" Margin="300,314,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Column="1" Content=":" HorizontalAlignment="Left" Margin="300,329,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Column="1" Content="Choose time:" HorizontalAlignment="Left" Height="30" Margin="206,292,0,0" VerticalAlignment="Top" Width="114" FontSize="18"/>
             </Grid>
         </Border>
     </Border>

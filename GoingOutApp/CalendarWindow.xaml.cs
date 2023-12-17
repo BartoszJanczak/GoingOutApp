@@ -68,15 +68,15 @@ namespace GoingOutApp
                 eventDetailsWindow.Top = this.Top + 80;
                 eventDetailsWindow.Show();
                 _eventDetailsWindowInstance = eventDetailsWindow;
-                eventDetailsWindow.Closed += EventDetailsWindow_Closed;
+                //eventDetailsWindow.Closed += EventDetailsWindow_Closed;
 
             }
         }
 
-        private void EventDetailsWindow_Closed(object? sender, EventArgs e)
-        {
-            RefreshEvents();
-        }
+        //private void EventDetailsWindow_Closed(object? sender, EventArgs e)
+        //{
+        //    RefreshEvents();
+        //}
 
         public void OnShown()
         {
