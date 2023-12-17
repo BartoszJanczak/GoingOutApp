@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using GoingOutApp.Models;
+using System.Globalization;
 
 namespace GoingOutApp.Services
 {
@@ -50,6 +52,37 @@ namespace GoingOutApp.Services
                 {
                     Console.WriteLine($"Błąd: {response.StatusCode}");
                     return new Location(52.2319581, 21.0067249);
+                }
+            }
+        }
+        public static async Task<AddressInfo> GetAddressInfoByCoords(double latitude, double longitude)
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                CultureInfo culture = new CultureInfo("en-US");
+
+
+                string apiRequest = $"https://api.geoapify.com/v1/geocode/reverse?lat={latitude.ToString(culture)}&lon={longitude.ToString(culture)}&format=json&apiKey=ed8c407bbbc1436b94f087ea02d60a77";
+                HttpResponseMessage response = await client.GetAsync(apiRequest);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string json = await response.Content.ReadAsStringAsync();
+                    JObject jObject = JObject.Parse(json);
+
+                    var address = jObject.SelectToken("$.results[0]");
+
+                    string city = address?.Value<string>("city") ?? "";
+                    string street = address?.Value<string>("street") ?? "";
+                    string houseNumber = address?.Value<string>("housenumber") ?? "";
+                    string postalCode = address?.Value<string>("postcode") ?? "";
+
+                    return new AddressInfo(city, street, houseNumber, postalCode);
+                }
+                else
+                {
+                    Console.WriteLine($"Błąd: {response.StatusCode}");
+                    return new AddressInfo("", "", "", "");
                 }
             }
         }
