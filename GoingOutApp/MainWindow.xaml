@@ -73,6 +73,7 @@
                             <GridView>
                                 <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="200" />
                                 <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
+                                <GridViewColumn Header="Event Hour ; Time" DisplayMemberBinding="{Binding EventHour}" Width="Auto" />
                             </GridView>
                         </ListView.View>
                         <ListView.ItemContainerStyle>

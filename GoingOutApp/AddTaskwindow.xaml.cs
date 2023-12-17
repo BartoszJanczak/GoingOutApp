@@ -125,9 +125,10 @@ namespace GoingOutApp
 
                     user = UserService.LoggedInUser;
                     string eventName = AddEventName.Text;
-                    //string PhotoPath = photoPath,
                     string eventDescription = AddEventDescription.Text;
                     string eventDate = string.Empty;
+                    string eventHour = cmbHour.Text + ":" + cmbMinute.Text;
+
                     if (!string.IsNullOrEmpty(AddEventDate.Text))
                     {
                         eventDate = AddEventDate.Text;
@@ -136,17 +137,12 @@ namespace GoingOutApp
                     {
                         eventDate = DateTime.Now.ToString();
                     }
+
                     int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
-                    //string OtherInfo = otherInfo
                     string eventCity = AddEventCity.Text;
                     string eventStreet = AddEventStreet.Text;
                     string eventBuildingNumber = AddEventBuilding.Text;
                     int eventCreatorId = user.UserId;
-
-                    //byte[] photoPath = new byte[3];
-                    //photoPath[0] = byte.MinValue;
-                    //photoPath[1] = 0;
-                    //photoPath[2] = byte.MaxValue;
 
                     EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
                     string eventCategory = eventCategoryEnum.ToString();
@@ -158,7 +154,7 @@ namespace GoingOutApp
                    
                     if (tryb == TrybOkna.New)
                     {
-                        _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                        _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
                         var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
                         var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
 
@@ -173,7 +169,7 @@ namespace GoingOutApp
                     else if(tryb == TrybOkna.Edit)
                     {
 
-                        var objectToUpdate = new GoingOutApp.Models.Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, numberOfPlaces, "otherinfo", eventCategory);
+                        var objectToUpdate = new Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
                         objectToUpdate.EventId = eventToEdit.EventId;
                         _database.UpdateEvent(objectToUpdate);
                         EventAdded?.Invoke(this, EventArgs.Empty);
