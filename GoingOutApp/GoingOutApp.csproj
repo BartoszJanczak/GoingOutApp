@@ -13,6 +13,9 @@
     <None Remove="data\images\concert.jpg" />
     <None Remove="data\images\female.png" />
     <None Remove="data\images\hide.png" />
+    <None Remove="data\images\iconConcerte.png" />
+    <None Remove="data\images\iconEventSpecial.png" />
+    <None Remove="data\images\iconHouse.png" />
     <None Remove="data\images\iconParty.png" />
     <None Remove="data\images\INFO1.png" />
     <None Remove="data\images\INFO2.png" />
@@ -43,8 +46,17 @@
     <Resource Include="data\images\concert.jpg" />
     <Resource Include="data\images\female.png" />
     <EmbeddedResource Include="data\images\hide.png" />
-    <Resource Include="data\images\iconParty.png" />
-    <EmbeddedResource Include="data\images\INFO1.png" />
+    <Resource Include="data\images\iconEventSpecial.png" />
+    <Resource Include="data\images\INFO1.png" />
+    <Resource Include="data\images\iconConcerte.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="data\images\iconHouse.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="data\images\iconParty.png">
+      <CopyToOutputDirectory></CopyToOutputDirectory>
+    </Resource>
     <Resource Include="data\images\INFO2.png" />
     <Resource Include="data\images\INFO3.png" />
     <Resource Include="data\images\lock.png" />
