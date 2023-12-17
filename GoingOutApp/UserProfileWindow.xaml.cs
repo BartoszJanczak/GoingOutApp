@@ -46,6 +46,7 @@ namespace GoingOutApp
             var gender = LoggedInUser.Gender == "Male" ? "Male" : "Female";
             Gender.Text = "Gender: " + gender;
             imgProfile.Source = ByteArrayToBitmapImage(LoggedInUser.PhotoPath);
+            ParticipatedEventsItemsControl.MouseDoubleClick += ParticipatedEventsItemsControl_MouseDoubleClick;
         }
 
         private BitmapImage ByteArrayToBitmapImage(byte[] byteArray)
@@ -169,6 +170,18 @@ namespace GoingOutApp
             else
             {
                 MessageBox.Show("Please select events to cancel participation.");
+            }
+        }
+
+        private void ParticipatedEventsItemsControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Pobierz wybrane wydarzenie
+            if (ParticipatedEventsItemsControl.SelectedItem is Event selectedEvent)
+            {
+                // Otwórz okno szczegółów wydarzenia
+                EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
+                eventDetailsWindow.Owner = this;
+                eventDetailsWindow.ShowDialog();
             }
         }
     }
