@@ -115,8 +115,9 @@
                     <TextBlock Text="Choose category:" FontSize="18" />
                     <ComboBox x:Name="cmbCategory" SelectedIndex="0" FontFamily="Verdana" FontSize="18">
                         <ComboBoxItem Content="Social" />
-                        <ComboBoxItem Content="Show" />
-                        <ComboBoxItem Content="Sport" />
+                        <ComboBoxItem Content="Party" />
+                        <ComboBoxItem Content="Special" />
+                        <ComboBoxItem Content="Concert" />
                     </ComboBox>
                 </StackPanel>
                 <TextBlock x:Name="txtNumberInfo" HorizontalAlignment="Left" Height="17" Margin="75,347,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Grid.ColumnSpan="2" Foreground="Blue" />

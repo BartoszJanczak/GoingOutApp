@@ -15,12 +15,12 @@ namespace GoingOutApp.ViewModel
     {
         private int _eventId;
         private Location _location;
-        private Brush _pinColor;
+        private string _iconPath;
 
-        public PointViewModel(int Eventid, double x, double y, Brush Color)
+        public PointViewModel(int Eventid, double x, double y, string iconPath)
         {
             EventId = Eventid;
-            PinColor = Color;
+            Icon = iconPath;
             Location = new Location(x, y);
         }
 
@@ -50,15 +50,15 @@ namespace GoingOutApp.ViewModel
             }
         }
 
-        public Brush PinColor
+        public string Icon
         {
-            get { return _pinColor; }
+            get { return _iconPath; }
             set
             {
-                if (_pinColor != value)
+                if (_iconPath != value)
                 {
-                    _pinColor = value;
-                    OnPropertyChanged(nameof(PinColor));
+                    _iconPath = value;
+                    OnPropertyChanged(nameof(Icon));
                 }
             }
         }

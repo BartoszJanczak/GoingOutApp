@@ -49,11 +49,12 @@ namespace GoingOutApp
         public enum EventCategory
         {
             Social,
-            Show,
-            Sport
+            Party,
+            Special,
+            Concert
         }
 
-
+     
         public AddTaskwindow()
         {
             tryb = TrybOkna.New;

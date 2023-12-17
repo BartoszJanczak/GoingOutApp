@@ -37,7 +37,7 @@ namespace GoingOutApp.ViewModel
 
             foreach (var windowsPoint in windowsPoints)
             {
-                PointViewModel pointViewModel = new PointViewModel(windowsPoint.EventId, windowsPoint.X, windowsPoint.Y, LocationService.GetRandomBrush());
+                PointViewModel pointViewModel = new PointViewModel(windowsPoint.EventId, windowsPoint.X, windowsPoint.Y, LocationService.GetIconForCategory(windowsPoint.EventId));
                 pointViewModels.Add(pointViewModel);
             }
 
