@@ -11,7 +11,7 @@ namespace GoingOutApp.Models
         {
                 
         }
-        public Event(int eventCreatorId, string eventName, byte[] photoPath, string photoDescription, string eventDescription, string eventCity, string eventStreet, string eventBuildingNumber, string eventDate, int numberOfPlaces, string otherInfo, string eventCategory)
+        public Event(int eventCreatorId, string eventName, byte[] photoPath, string photoDescription, string eventDescription, string eventCity, string eventStreet, string eventBuildingNumber, string eventDate, string eventHour, int numberOfPlaces, string otherInfo, string eventCategory)
         {
             this.EventCreatorId = eventCreatorId;
             this.EventName = eventName;
@@ -22,6 +22,7 @@ namespace GoingOutApp.Models
             this.Street = eventStreet;
             this.NumberOfBuilding = eventBuildingNumber;
             this.EventDateTime = eventDate;
+            this.EventHour = eventHour;
             this.NumberOfplaces = numberOfPlaces;
             this.OtherInfo = otherInfo;
             this.EventCategory = eventCategory;
@@ -41,6 +42,7 @@ namespace GoingOutApp.Models
         public string City { get; set; }
         public string NumberOfBuilding { get; set; }
         public string EventDateTime { get; set; }
+        public string EventHour { get; set; }
         public int NumberOfplaces { get; set; }
         public string OtherInfo { get; set; }
         public int TakenPlaces { get; set; }

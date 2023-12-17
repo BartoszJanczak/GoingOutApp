@@ -30,8 +30,12 @@ namespace GoingOutApp
         private static UserProfileWindow? _userProfileWindowInstance;
         private static EventDetailsWindow? _eventDetailsWindowInstance;
         private static ResetPasswordWindow? _resetPasswordWindowInstance;
+
+        private static CalendarWindow? _calendarWindowInstance;
+
         private static AboutUs? _aboutUsInstance;
         private static YesNoWindow? _yesnoWindow;
+        
         private DataContext _database { get; set; } = new DataContext();
 
         private List<Event> events = new List<Event>();
@@ -106,7 +110,6 @@ namespace GoingOutApp
 
             if (_resetPasswordWindowInstance != null)
                 _resetPasswordWindowInstance.Close();
-
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -147,7 +150,7 @@ namespace GoingOutApp
                     _addWindowInstance.Owner = this;
                     _addWindowInstance.EventAdded += AddEventWindow_EventAdded;
                     _addWindowInstance.PinAdded += AddPin_EventAdded;
-                    _addWindowInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _addWindowInstance.Closed += (s, e) => _calendarWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
                     _addWindowInstance.Show();
                 }
                 else
@@ -332,6 +335,30 @@ namespace GoingOutApp
             }
         }
 
+
+        private void CalendarButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserService.LoggedInUser != null)
+            {
+                if (_calendarWindowInstance == null)
+                {
+                    _calendarWindowInstance = new CalendarWindow();
+                    _calendarWindowInstance.Owner = this;
+                    _calendarWindowInstance.Closed += (s, e) => _calendarWindowInstance = null; 
+                    _calendarWindowInstance.Show();
+                }
+                else
+                {
+                    _calendarWindowInstance.Focus();
+                }
+            }
+            else
+            {
+                _profileWindowInstance = new LoginWindow();
+                _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; 
+                _profileWindowInstance.Show();
+            }
+
         private void AboutUsButton_Click(object sender, RoutedEventArgs e)
         {
             _aboutUsInstance = new AboutUs();
@@ -364,6 +391,7 @@ namespace GoingOutApp
             _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
             _yesnoWindow.Closed += (s, e) => RefreshPins(); // Reset _profileWindowInstance when the window is closed.
             _yesnoWindow.Show();
+
         }
 
     }
