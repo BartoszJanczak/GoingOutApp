@@ -16,11 +16,15 @@ using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
 using GoingOutApp.Models;
 using System.Globalization;
+using Microsoft.Extensions.Logging;
+using System.Reflection.Metadata;
 
 namespace GoingOutApp.Services
 {
     public static class LocationService
     {
+        private static DataContext _database { get; set; } = new DataContext();
+
         public static async Task<Location> GetLocationByCords(string location)
         {
             using (HttpClient client = new HttpClient())
@@ -87,18 +91,26 @@ namespace GoingOutApp.Services
             }
         }
 
-        public static SolidColorBrush GetRandomBrush()
+        public static string GetIconForCategory(int eventID)
         {
-            // Get the list of properties from the Brushes class using reflection
-            var properties = typeof(Brushes).GetProperties();
 
-            // Get a random index
-            Random random = new Random();
-            int randomIndex = random.Next(properties.Length);
+           var category = _database.GetEvent(eventID).EventCategory;
 
-            // Get the selected Brush property and return it
-            var selectedBrush = properties[randomIndex].GetValue(null, null) as SolidColorBrush;
-            return selectedBrush;
+
+            switch (category)
+            {
+                case "Social":
+                    return @"\data\images\iconHouse.png";
+                case "Party":
+                    return @"\data\images\iconParty.png";                
+                case "Concert":
+                    return @"\data\images\iconConcerte.png";              
+                case "Special":
+                    return @"\data\images\iconEventSpecial.png";
+                default:
+                    return @"\data\images\iconParty.png";
+                    break;
+            }
         }
     }
 }

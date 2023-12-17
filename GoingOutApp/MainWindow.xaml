@@ -90,7 +90,7 @@
 
                 </Grid>
 
-                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="336,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
+                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="358,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
 
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="489,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
 
@@ -104,15 +104,13 @@
                         <m:MapItemsControl ItemsSource="{Binding pushPins}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <m:MapPolygon Locations="{Binding Location}" MouseLeftButtonDown="Pushpin_MouseLeftButtonDown" MouseEnter="Pushpin_MouseEnter" MouseLeave="Pushpin_MouseLeave">
-                                        <m:MapPolygon.Fill>
-                                            <ImageBrush>
-                                                <ImageBrush.ImageSource>
-                                                    <BitmapImage UriSource="/data/images/iconParty.png" />
-                                                </ImageBrush.ImageSource>
-                                            </ImageBrush>
-                                        </m:MapPolygon.Fill>
-                                    </m:MapPolygon>
+                                    <m:Pushpin Location="{Binding Location}" MouseLeftButtonDown="Pushpin_MouseLeftButtonDown" MouseEnter="Pushpin_MouseEnter" MouseLeave="Pushpin_MouseLeave">
+                                        <m:Pushpin.Template>
+                                            <ControlTemplate TargetType="m:Pushpin">
+                                                <Image Source="{Binding Icon}" />
+                                            </ControlTemplate>
+                                        </m:Pushpin.Template>
+                                    </m:Pushpin>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </m:MapItemsControl>

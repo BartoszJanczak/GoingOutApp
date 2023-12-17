@@ -28,6 +28,8 @@ namespace GoingOutApp
         private DataContext _database { get; set; } = new DataContext();
 
         private List<Event> events = new List<Event>();
+        public static User LoggedInUser { get; private set; }
+
 
         public CalendarWindow()
         {
@@ -68,15 +70,15 @@ namespace GoingOutApp
                 eventDetailsWindow.Top = this.Top + 80;
                 eventDetailsWindow.Show();
                 _eventDetailsWindowInstance = eventDetailsWindow;
-                eventDetailsWindow.Closed += EventDetailsWindow_Closed;
+                //eventDetailsWindow.Closed += EventDetailsWindow_Closed;
 
             }
         }
 
-        private void EventDetailsWindow_Closed(object? sender, EventArgs e)
-        {
-            RefreshEvents();
-        }
+        //private void EventDetailsWindow_Closed(object? sender, EventArgs e)
+        //{
+        //    RefreshEvents();
+        //}
 
         public void OnShown()
         {
@@ -85,11 +87,18 @@ namespace GoingOutApp
             ListOfEvents.Items.Clear();
             ListOfEvents.DisplayMemberPath = "EventName";
 
-            foreach (Event ev in events)
+            var userId = UserService.LoggedInUser.UserId;
+
+            var eventsToShow = events
+                .Where(ev => _database.EventParticipants.Any(ep => ep.EventId == ev.EventId && ep.UserId == userId) || ev.EventCreatorId == userId)
+                .ToList();
+
+            foreach (Event ev in eventsToShow)
             {
                 ListOfEvents.Items.Add(ev);
             }
         }
+
 
         private void LoadData()
         {
@@ -107,9 +116,13 @@ namespace GoingOutApp
 
         private void ShowEventsForSelectedDate(DateTime selectedDate)
         {
+            var userId = UserService.LoggedInUser.UserId;
+
             var eventsForDate = events
-                .Where(ev => DateTime.ParseExact(ev.EventDateTime, "dd.MM.yyyy", CultureInfo.InvariantCulture).Date == selectedDate.Date)
+                .Where(ev => DateTime.ParseExact(ev.EventDateTime, "dd.MM.yyyy", CultureInfo.InvariantCulture).Date == selectedDate.Date &&
+                             (_database.EventParticipants.Any(ep => ep.EventId == ev.EventId && ep.UserId == userId) || ev.EventCreatorId == userId))
                 .ToList();
+
             ListOfEvents.Items.Clear();
             foreach (var ev in eventsForDate)
             {
