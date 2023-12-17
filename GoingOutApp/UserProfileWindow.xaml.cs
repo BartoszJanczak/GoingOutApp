@@ -86,23 +86,19 @@ namespace GoingOutApp
 
         private void EditUserData_Click(object sender, RoutedEventArgs e)
         {
-            // Otwórz okno edycji danych użytkownika
             EditProfileWindow editUserDataWindow = new EditProfileWindow(LoggedInUser);
             editUserDataWindow.Owner = this;
             editUserDataWindow.ShowDialog();
 
-            // Zaktualizuj dane na widoku po zamknięciu okna edycji danych użytkownika
             InitControls();
         }
 
         private void UpdateUserProfilePhoto(byte[] newPhotoBytes)
         {
-            // Dodaj kod do zapisu nowego obrazu w bazie danych
             try
             {
                 LoggedInUser.PhotoPath = newPhotoBytes;
                 _database.UpdateUserPhotoPath(LoggedInUser.UserId, newPhotoBytes);
-                // Dodaj dodatkową logikę aktualizacji w przypadku, gdyby była potrzebna
             }
             catch (Exception ex)
             {
@@ -130,6 +126,41 @@ namespace GoingOutApp
                 {
                     MessageBox.Show($"Error while opening: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+        }
+
+        private void CancelParticipationButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ParticipatedEventsItemsControl.SelectedItem is Event selectedEvent)
+            {
+                if (UserService.LoggedInUser != null)
+                {
+                    int eventId = selectedEvent.EventId;
+                    int userId = UserService.LoggedInUser.UserId;
+
+                    using (DataContext dataContext = new DataContext())
+                    {
+                        bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
+
+                        if (isUserSignedUp)
+                        {
+                            dataContext.CancelParticipation(dataContext, eventId, userId);
+
+                            ShowParticipatedEvents();
+                        }
+                        else
+                        {
+                            MessageBox.Show("You are not signed up for this event.");
+                        }
+                    }
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select an event to cancel participation.");
             }
         }
     }
