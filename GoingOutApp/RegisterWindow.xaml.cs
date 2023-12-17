@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Xml.Linq;
 using GoingOutApp.Models;
 using GoingOutApp.Services;
+using System.IO;
 
 namespace GoingOutApp
 {
@@ -31,6 +32,8 @@ namespace GoingOutApp
         public List<User>? DatabaseUsers { get; private set; }
 
         private DataContext _database { get; set; }
+
+        private byte[] photoBytes;
 
         private string selectedGender = "";
 
@@ -62,10 +65,15 @@ namespace GoingOutApp
             SecurityQuestion selectedQuestion = MapComboBoxSelectionToEnum();
             string securityQuestionAsString = selectedQuestion.ToString();
 
+            if (photoBytes == null)
+            {
+                photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/userProfile.png");
+            }
+
             if (AccountValidation(username, password, name, surname, age, gender))
             {
                 var result = EncodePassword(password, 20);
-                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, gender, securityQuestionAsString, securityAnswer);
+                _database.CreateAccount(username, result.Item1, result.Item2, name, surname, age, gender, securityQuestionAsString, securityAnswer, photoBytes);
             }
             else
             {
