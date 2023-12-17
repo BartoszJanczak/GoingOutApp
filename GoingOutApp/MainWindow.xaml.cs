@@ -30,8 +30,12 @@ namespace GoingOutApp
         private static UserProfileWindow? _userProfileWindowInstance;
         private static EventDetailsWindow? _eventDetailsWindowInstance;
         private static ResetPasswordWindow? _resetPasswordWindowInstance;
+
+        private static CalendarWindow? _calendarWindowInstance;
+
         private static AboutUs? _aboutUsInstance;
         private static YesNoWindow? _yesnoWindow;
+
         private DataContext _database { get; set; } = new DataContext();
 
         private List<Event> events = new List<Event>();
@@ -82,7 +86,7 @@ namespace GoingOutApp
 
         private async void Window_mousedown(object sender, MouseButtonEventArgs e)
         {
-           
+
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -106,7 +110,6 @@ namespace GoingOutApp
 
             if (_resetPasswordWindowInstance != null)
                 _resetPasswordWindowInstance.Close();
-
         }
 
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
@@ -147,7 +150,7 @@ namespace GoingOutApp
                     _addWindowInstance.Owner = this;
                     _addWindowInstance.EventAdded += AddEventWindow_EventAdded;
                     _addWindowInstance.PinAdded += AddPin_EventAdded;
-                    _addWindowInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _addWindowInstance.Closed += (s, e) => _calendarWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
                     _addWindowInstance.Show();
                 }
                 else
@@ -159,7 +162,7 @@ namespace GoingOutApp
             {
                 _profileWindowInstance = new LoginWindow();
                 _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
-                _profileWindowInstance.Show();              
+                _profileWindowInstance.Show();
             }
         }
         public void RefreshData()
@@ -274,7 +277,7 @@ namespace GoingOutApp
         {
             ListOfEvents.Items.Clear();
             var filtered = events.Where(e => e.EventName.ToLower().StartsWith(searchText.ToLower())).ToList();
-            foreach(var e in filtered)
+            foreach (var e in filtered)
             {
                 ListOfEvents.Items.Add(e);
             }
@@ -286,11 +289,11 @@ namespace GoingOutApp
         }
         private void sortBySomething()
         {
-           string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
+            string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
 
             ListOfEvents.Items.Clear();
             var sorted = events;
-            if(sortDesc)
+            if (sortDesc)
             {
                 switch (orderByy)
                 {
@@ -332,39 +335,65 @@ namespace GoingOutApp
             }
         }
 
-        private void AboutUsButton_Click(object sender, RoutedEventArgs e)
+
+        private void CalendarButton_Click(object sender, RoutedEventArgs e)
         {
-            _aboutUsInstance = new AboutUs();
-            _aboutUsInstance.Owner = this;
-            _aboutUsInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
-            _aboutUsInstance.Show();
+            if (UserService.LoggedInUser != null)
+            {
+                if (_calendarWindowInstance == null)
+                {
+                    _calendarWindowInstance = new CalendarWindow();
+                    _calendarWindowInstance.Owner = this;
+                    _calendarWindowInstance.Closed += (s, e) => _calendarWindowInstance = null;
+                    _calendarWindowInstance.Show();
+                }
+                else
+                {
+                    _calendarWindowInstance.Focus();
+                }
+            }
+            else
+            {
+                _profileWindowInstance = new LoginWindow();
+                _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null;
+                _profileWindowInstance.Show();
+            }
         }
+            private void AboutUsButton_Click(object sender, RoutedEventArgs e)
+            {
+                _aboutUsInstance = new AboutUs();
+                _aboutUsInstance.Owner = this;
+                _aboutUsInstance.Closed += (s, e) => _addWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                _aboutUsInstance.Show();
+            }
 
-        private void Map_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            System.Windows.Point mousePosition = e.GetPosition(Map);
+            private void Map_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+            {
+                System.Windows.Point mousePosition = e.GetPosition(Map);
 
-            // Przekształć punkt na współrzędne geograficzne
-            Location location = Map.ViewportPointToLocation(mousePosition);
+                // Przekształć punkt na współrzędne geograficzne
+                Location location = Map.ViewportPointToLocation(mousePosition);
 
-            _yesnoWindow = new YesNoWindow(location.Latitude, location.Longitude);
+                _yesnoWindow = new YesNoWindow(location.Latitude, location.Longitude);
 
-            // Ustawienie właściwości okna
-            _yesnoWindow.Owner = this;
-            _yesnoWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                // Ustawienie właściwości okna
+                _yesnoWindow.Owner = this;
+                _yesnoWindow.WindowStartupLocation = WindowStartupLocation.Manual;
 
-            // Pobranie pozycji kliknięcia myszką
-            System.Windows.Point clickPoint = e.GetPosition(this);
+                // Pobranie pozycji kliknięcia myszką
+                System.Windows.Point clickPoint = e.GetPosition(this);
 
-            // Przypisanie pozycji okna na podstawie kliknięcia myszką
-            _yesnoWindow.Left = clickPoint.X + 170;
-            _yesnoWindow.Top = clickPoint.Y+80;
+                // Przypisanie pozycji okna na podstawie kliknięcia myszką
+                _yesnoWindow.Left = clickPoint.X + 170;
+                _yesnoWindow.Top = clickPoint.Y + 80;
 
-            _yesnoWindow.Closed += (s, e) => _yesnoWindow = null; // Reset _profileWindowInstance when the window is closed.
-            _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
-            _yesnoWindow.Closed += (s, e) => RefreshPins(); // Reset _profileWindowInstance when the window is closed.
-            _yesnoWindow.Show();
+                _yesnoWindow.Closed += (s, e) => _yesnoWindow = null; // Reset _profileWindowInstance when the window is closed.
+                _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
+                _yesnoWindow.Closed += (s, e) => RefreshPins(); // Reset _profileWindowInstance when the window is closed.
+                _yesnoWindow.Show();
+
+            }
+
         }
-
     }
-}
+

@@ -85,7 +85,7 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,390,47,162" Grid.ColumnSpan="2">
+                <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Background="White" Margin="75,443,47,109" Grid.ColumnSpan="2">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
@@ -108,11 +108,11 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <Button x:Name="SubmitButton"  Style="{StaticResource Navbutton}" Grid.Column="1" Content="Submit" HorizontalAlignment="Left" Margin="26,462,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click" />
-                <Button x:Name="CancelButton"  Style="{StaticResource Navbutton}" Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="26,512,0,0" VerticalAlignment="Top" Width="106" Click="ExitButton_Click" RenderTransformOrigin="0.759,0.547" />
+                <Button x:Name="SubmitButton"  Style="{StaticResource Navbutton}" Content="Submit" HorizontalAlignment="Left" Margin="309,517,0,0" VerticalAlignment="Top" Width="106" Click="SubmitButton_Click" Grid.ColumnSpan="2" />
+                <Button x:Name="CancelButton"  Style="{StaticResource Navbutton}" Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="321,517,0,0" VerticalAlignment="Top" Width="106" Click="ExitButton_Click" RenderTransformOrigin="0.759,0.547" />
                 <DatePicker x:Name="AddEventDate" Grid.Column="1" HorizontalAlignment="Left" Margin="206,244,0,0" VerticalAlignment="Top" Height="30" Width="201" FontSize="18" />
-                <StackPanel Margin="206,295,67,205" Grid.Column="1">
-                    <TextBlock Text="Choose category:" FontSize="18" />
+                <StackPanel Margin="206,370,67,163" Grid.Column="1">
+                    <TextBlock Text="Choose category:" FontSize="18" Height="25" />
                     <ComboBox x:Name="cmbCategory" SelectedIndex="0" FontFamily="Verdana" FontSize="18">
                         <ComboBoxItem Content="Social" />
                         <ComboBoxItem Content="Party" />
@@ -124,6 +124,97 @@
                 <TextBlock x:Name="txtPlacesInfo" HorizontalAlignment="Left" Height="17" Margin="206,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Foreground="Blue" Grid.Column="1" />
                 <Button x:Name="AddPhoto" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Add photo" HorizontalAlignment="Left" Margin="12,175,0,0" VerticalAlignment="Top" Width="134" Click="AddPhoto_Click" Background="Gray" />
                 <Image x:Name="imagePreview" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,234,0,0" Width="155" Height="144" Grid.Column="1" />
+                <ComboBox x:Name="cmbHour" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="232,327,0,0" VerticalAlignment="Top" Width="63" SelectedIndex="0" FontSize="18">
+                    <ComboBoxItem Content="00"/>
+                    <ComboBoxItem Content="01"/>
+                    <ComboBoxItem Content="02"/>
+                    <ComboBoxItem Content="03"/>
+                    <ComboBoxItem Content="04"/>
+                    <ComboBoxItem Content="05"/>
+                    <ComboBoxItem Content="06"/>
+                    <ComboBoxItem Content="07"/>
+                    <ComboBoxItem Content="08"/>
+                    <ComboBoxItem Content="09"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="13"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="15"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="17"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="19"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="21"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="23"/>
+                </ComboBox>
+                <ComboBox x:Name="cmbMinute" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="318,327,0,0" VerticalAlignment="Top" Width="64" SelectedIndex="0" FontSize="18">
+                    <ComboBoxItem Content="00"/>
+                    <ComboBoxItem Content="01"/>
+                    <ComboBoxItem Content="02"/>
+                    <ComboBoxItem Content="03"/>
+                    <ComboBoxItem Content="04"/>
+                    <ComboBoxItem Content="05"/>
+                    <ComboBoxItem Content="06"/>
+                    <ComboBoxItem Content="07"/>
+                    <ComboBoxItem Content="08"/>
+                    <ComboBoxItem Content="09"/>
+                    <ComboBoxItem Content="10"/>
+                    <ComboBoxItem Content="11"/>
+                    <ComboBoxItem Content="12"/>
+                    <ComboBoxItem Content="13"/>
+                    <ComboBoxItem Content="14"/>
+                    <ComboBoxItem Content="15"/>
+                    <ComboBoxItem Content="16"/>
+                    <ComboBoxItem Content="17"/>
+                    <ComboBoxItem Content="18"/>
+                    <ComboBoxItem Content="19"/>
+                    <ComboBoxItem Content="20"/>
+                    <ComboBoxItem Content="21"/>
+                    <ComboBoxItem Content="22"/>
+                    <ComboBoxItem Content="23"/>
+                    <ComboBoxItem Content="24"/>
+                    <ComboBoxItem Content="25"/>
+                    <ComboBoxItem Content="26"/>
+                    <ComboBoxItem Content="27"/>
+                    <ComboBoxItem Content="28"/>
+                    <ComboBoxItem Content="29"/>
+                    <ComboBoxItem Content="30"/>
+                    <ComboBoxItem Content="31"/>
+                    <ComboBoxItem Content="32"/>
+                    <ComboBoxItem Content="33"/>
+                    <ComboBoxItem Content="34"/>
+                    <ComboBoxItem Content="35"/>
+                    <ComboBoxItem Content="36"/>
+                    <ComboBoxItem Content="37"/>
+                    <ComboBoxItem Content="38"/>
+                    <ComboBoxItem Content="39"/>
+                    <ComboBoxItem Content="40"/>
+                    <ComboBoxItem Content="41"/>
+                    <ComboBoxItem Content="42"/>
+                    <ComboBoxItem Content="43"/>
+                    <ComboBoxItem Content="44"/>
+                    <ComboBoxItem Content="45"/>
+                    <ComboBoxItem Content="46"/>
+                    <ComboBoxItem Content="47"/>
+                    <ComboBoxItem Content="48"/>
+                    <ComboBoxItem Content="49"/>
+                    <ComboBoxItem Content="50"/>
+                    <ComboBoxItem Content="51"/>
+                    <ComboBoxItem Content="52"/>
+                    <ComboBoxItem Content="53"/>
+                    <ComboBoxItem Content="54"/>
+                    <ComboBoxItem Content="55"/>
+                    <ComboBoxItem Content="56"/>
+                    <ComboBoxItem Content="57"/>
+                    <ComboBoxItem Content="58"/>
+                    <ComboBoxItem Content="59"/>
+                    <ComboBoxItem Content="60"/>
+                </ComboBox>
+                <Label Grid.Column="1" Content=":" HorizontalAlignment="Left" Margin="300,329,0,0" VerticalAlignment="Top"/>
+                <Label Grid.Column="1" Content="Choose time:" HorizontalAlignment="Left" Height="30" Margin="206,292,0,0" VerticalAlignment="Top" Width="114" FontSize="18"/>
             </Grid>
         </Border>
     </Border>

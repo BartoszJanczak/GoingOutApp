@@ -73,6 +73,7 @@
                             <GridView>
                                 <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="200" />
                                 <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
+                                <GridViewColumn Header="Event Hour ; Time" DisplayMemberBinding="{Binding EventHour}" Width="Auto" />
                             </GridView>
                         </ListView.View>
                         <ListView.ItemContainerStyle>
@@ -89,8 +90,10 @@
 
                 </Grid>
 
+                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="358,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
+
                 <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="489,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
-                <Button Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="364,13,0,0" VerticalAlignment="Top" Width="120" />
+
                 <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="702,15,0,0" VerticalAlignment="Top" Width="40"   Grid.Column="1" />
                 <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="657,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527" />
                 <Button Style="{StaticResource Navbutton}" x:Name="AboutUsButton" Click="AboutUsButton_Click" Content="?" HorizontalAlignment="Left" Margin="612,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527" />
