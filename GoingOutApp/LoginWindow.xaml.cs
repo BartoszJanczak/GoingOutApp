@@ -16,6 +16,8 @@ namespace GoingOutApp
         private static RegisterWindow? _registerWindowInstance;
         private bool isPasswordVisible = false;
 
+        public event EventHandler LoggedIn;
+
         public LoginWindow()
         {
             InitializeComponent();
@@ -39,12 +41,21 @@ namespace GoingOutApp
             var correctData = UserService.ValidateSignIn(username, password);
             if (correctData)
             {
-                var result = MessageBox.Show("Successfully logged in.");
-                if (result == MessageBoxResult.OK)
+                if (UserService.LoggedInUser.IsBanned)
                 {
-                    this.Close();
-                    UserProfileWindow user = new UserProfileWindow(UserService.LoggedInUser);
-                    user.Show();
+                    MessageBox.Show("You have been banned");
+                    UserService.Logout();
+                }
+                else
+                {
+                    var result = MessageBox.Show("Successfully logged in.");
+                    if (result == MessageBoxResult.OK)
+                    {
+                        this.Close();
+                        UserProfileWindow user = new UserProfileWindow(UserService.LoggedInUser);
+                        user.Show();
+                        RaiseLoggedInEvent();
+                    }
                 }
             }
             else
@@ -65,6 +76,11 @@ namespace GoingOutApp
             {
                 _registerWindowInstance.Focus(); // Skoncentruj się na istniejącym oknie profilu.
             }
+        }
+
+        private void RaiseLoggedInEvent()
+        {
+            LoggedIn?.Invoke(this, EventArgs.Empty);
         }
 
         private void textUser_MouseDown(object sender, MouseButtonEventArgs e)

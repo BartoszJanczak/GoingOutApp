@@ -64,6 +64,8 @@ namespace GoingOutApp
             {
                 pushPins.Add(pin);
             }
+
+            UpdateManageButtonVisibility();
         }
 
         private void LoadData()
@@ -86,6 +88,19 @@ namespace GoingOutApp
 
         private async void Window_mousedown(object sender, MouseButtonEventArgs e)
         {
+        }
+
+        public void UpdateManageButtonVisibility()
+        {
+            ManageButton.Visibility = UserService.LoggedInUser != null && UserService.LoggedInUser.UserName.ToLower() == "admin" ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void LoginWindow_LoggedIn(object sender, EventArgs e)
+        {
+            LoadData();
+            RefreshData();
+
+            UpdateManageButtonVisibility();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
@@ -124,6 +139,7 @@ namespace GoingOutApp
                 {
                     _profileWindowInstance = new LoginWindow();
                     _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                    _profileWindowInstance.LoggedIn += LoginWindow_LoggedIn;
                     _profileWindowInstance.Show();
                 }
                 else
@@ -406,6 +422,17 @@ namespace GoingOutApp
             _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
             _yesnoWindow.Closed += (s, e) => RefreshPins(); // Reset _profileWindowInstance when the window is closed.
             _yesnoWindow.Show();
+        }
+
+        private void ManageButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserService.LoggedInUser != null && UserService.LoggedInUser.UserName.ToLower() == "admin")
+            {
+                AdminPanelWindow adminPanel = new AdminPanelWindow();
+                adminPanel.Owner = this;
+                adminPanel.Closed += (s, args) => adminPanel = null;
+                adminPanel.Show();
+            }
         }
     }
 }
