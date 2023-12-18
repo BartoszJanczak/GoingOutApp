@@ -56,6 +56,7 @@ namespace GoingOutApp.Services
                     SecurityQuestion = securityQuestion,
                     SecurityAnswer = securityAnswer,
                     PhotoPath = photoPath,
+                    IsBanned = false,
                 });
                 context.SaveChanges();
             }
@@ -282,12 +283,31 @@ namespace GoingOutApp.Services
             }
         }
 
+        public List<User> GetUsers()
+        {
+            using (DataContext context = new DataContext())
+            {
+                List<User> users = context.Users.Where(u => u.UserName != "admin").ToList();
+                return users;
+            }
+        }
+
         public byte[] GetPhoto(int eventId)
         {
             using (DataContext context = new DataContext())
             {
                 var photoBytes = context.Events.Where(ep => ep.EventId == eventId).Select(x => x.PhotoPath).FirstOrDefault();
                 return photoBytes;
+            }
+        }
+
+        public void BanUser(User user)
+        {
+            var existingUser = Users.FirstOrDefault(u => u.UserId == user.UserId);
+            if (existingUser != null)
+            {
+                existingUser.IsBanned = true;
+                SaveChanges();
             }
         }
     }

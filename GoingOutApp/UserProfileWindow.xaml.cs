@@ -77,6 +77,7 @@ namespace GoingOutApp
         private void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
             UserService.Logout();
+            UpdateManageButtonVisibility();
             this.Close();
         }
 
@@ -164,7 +165,6 @@ namespace GoingOutApp
                 }
                 else
                 {
-                    // Obsługa przypadku, gdy użytkownik nie jest zalogowany
                 }
             }
             else
@@ -175,13 +175,19 @@ namespace GoingOutApp
 
         private void ParticipatedEventsItemsControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Pobierz wybrane wydarzenie
             if (ParticipatedEventsItemsControl.SelectedItem is Event selectedEvent)
             {
-                // Otwórz okno szczegółów wydarzenia
                 EventDetailsWindow eventDetailsWindow = new EventDetailsWindow(selectedEvent.EventId);
                 eventDetailsWindow.Owner = this;
                 eventDetailsWindow.ShowDialog();
+            }
+        }
+
+        private void UpdateManageButtonVisibility()
+        {
+            if (Application.Current.MainWindow is MainWindow mainWindow)
+            {
+                mainWindow.UpdateManageButtonVisibility();
             }
         }
     }
