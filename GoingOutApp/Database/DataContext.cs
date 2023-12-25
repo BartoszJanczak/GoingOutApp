@@ -95,7 +95,19 @@ namespace GoingOutApp.Services
                 }
             }
         }
-
+        public void DeletePin(int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var deletedEventPin = context.EventPushPins.FirstOrDefault(e => e.EventId == eventId);
+                if (deletedEventPin != null)
+                {
+                    // Remove event
+                    context.EventPushPins.Remove(deletedEventPin);
+                    context.SaveChanges();
+                }
+            }
+        }
         public void DeleteEvent(int eventId)
         {
             using (DataContext context = new DataContext())

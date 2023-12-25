@@ -174,7 +174,7 @@
                 <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" FontSize="10" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="48,5,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="2" RenderTransformOrigin="0.512,0.527" Grid.Row="0" />
                 <Button Style="{StaticResource Navbutton}" x:Name="AboutUsButton" FontSize="10"  Click="AboutUsButton_Click" Content="?" HorizontalAlignment="Left" Margin="8,5,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="2" RenderTransformOrigin="0.512,0.527" Grid.Row="0" />
 
-                <Grid x:Name="prawaStrona" Grid.Column="1" Grid.Row="1" Margin="50" Grid.ColumnSpan="2">
+                <Grid x:Name="prawaStrona" Grid.Column="1" Grid.Row="1" Margin="50 20 50 50" Grid.ColumnSpan="2">
                     <Grid.Effect>
                         <DropShadowEffect ShadowDepth="0" BlurRadius="40" Color="#5ce1e6" />
                     </Grid.Effect>

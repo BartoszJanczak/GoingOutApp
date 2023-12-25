@@ -26,6 +26,8 @@ namespace GoingOutApp
         private List<string> participants = new List<string>();
         private static AddTaskwindow? _addWindowInstance;
 
+        public event EventHandler DeletedEvent;
+
         public EventDetailsWindow(int eventId)
         {
             InitializeComponent();
@@ -272,7 +274,7 @@ namespace GoingOutApp
                         if (result == MessageBoxResult.Yes)
                         {
                             dataContext.DeleteEvent(eventId);
-
+                            dataContext.DeletePin(eventId);
                             this.Close();
                         }
                     }

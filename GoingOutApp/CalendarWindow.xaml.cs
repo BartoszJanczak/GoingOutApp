@@ -30,7 +30,6 @@ namespace GoingOutApp
         private List<Event> events = new List<Event>();
         public static User LoggedInUser { get; private set; }
 
-
         public CalendarWindow()
         {
             InitializeComponent();
@@ -70,8 +69,6 @@ namespace GoingOutApp
                 eventDetailsWindow.Top = this.Top + 80;
                 eventDetailsWindow.Show();
                 _eventDetailsWindowInstance = eventDetailsWindow;
-                //eventDetailsWindow.Closed += EventDetailsWindow_Closed;
-
             }
         }
 
@@ -98,7 +95,6 @@ namespace GoingOutApp
                 ListOfEvents.Items.Add(ev);
             }
         }
-
 
         private void LoadData()
         {
@@ -129,7 +125,5 @@ namespace GoingOutApp
                 ListOfEvents.Items.Add(ev);
             }
         }
-
-
     }
 }

@@ -188,6 +188,7 @@ namespace GoingOutApp
 
         public void RefreshPins()
         {
+            pushPins.Clear();
             var pins = Mapper.Map(_database.GetEventPushPins());
 
             foreach (var pin in pins)
@@ -233,7 +234,6 @@ namespace GoingOutApp
                 eventDetailsWindow.Left = this.Left + 15;
                 eventDetailsWindow.Top = this.Top + 80;
                 eventDetailsWindow.Show();
-                _eventDetailsWindowInstance = eventDetailsWindow;
                 eventDetailsWindow.Closed += EventDetailsWindow_Closed;
                 var eventPin = pushPins.Where(p => p.EventId == selectedEvent.EventId).FirstOrDefault();
 
@@ -248,6 +248,7 @@ namespace GoingOutApp
         private void EventDetailsWindow_Closed(object? sender, EventArgs e)
         {
             RefreshData();
+            RefreshPins();
         }
 
         private void Pushpin_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -265,6 +266,8 @@ namespace GoingOutApp
                 eventDetailsWindow.Left = this.Left + 15;
                 eventDetailsWindow.Top = this.Top + 80;
                 eventDetailsWindow.Show();
+                eventDetailsWindow.Closed += (s, e) => RefreshPins();
+                eventDetailsWindow.Closed += (s, e) => RefreshData();
 
                 var eventPin = pushPins.Where(p => p.EventId == clickedEvent).First();
 
