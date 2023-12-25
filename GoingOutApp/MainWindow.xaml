@@ -14,64 +14,126 @@
         AllowsTransparency="True"
         MouseDown="Window_mousedown">
 
-    <Border CornerRadius="50">
-        <Border CornerRadius="50"
-                BorderThickness="5">
-            <Border.BorderBrush>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E0E0E0" Offset="0" />
-                    <GradientStop Color="#C0C0C0" Offset="0.25" />
-                    <GradientStop Color="#A0A0A0" Offset="0.75" />
-                    <GradientStop Color="#808080" Offset="1" />
-                </LinearGradientBrush>
-            </Border.BorderBrush>
+    <Border CornerRadius="30">
+        <Border CornerRadius="30">
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FDFDFD" Offset="0" />
-                    <GradientStop Color="#E6E6E6" Offset="0.25" />
-                    <GradientStop Color="#CFCFCF" Offset="0.75" />
-                    <GradientStop Color="#B8B8B8" Offset="1" />
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="White" Offset="0.25" />
+                    <GradientStop Color="White" Offset="0.75" />
+                    <GradientStop Color="White" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="512*" />
+                    <ColumnDefinition Width="624*" />
+                    <ColumnDefinition Width="145*" />
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.25*" />
+                    <RowDefinition Height="7*" />
+                </Grid.RowDefinitions>
 
-                <TextBlock Text="GoingOut" FontWeight="Bold" FontFamily="Sylfaen" FontSize="35" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="29,15,0,0" Height="46" Foreground="Black" />
-                <Grid Grid.Column="0" Margin="0,81,0,36">
+                <Image Grid.Column="0" Margin="30,10,0,0" Grid.Row="0" HorizontalAlignment="Left" Source="data/images/logo.png" Height="90" Width="220" />
+
+                <Grid Grid.Column="0" Grid.Row="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition />
-                        </Grid.RowDefinitions>
-                        <TextBox FontSize="20" Grid.Row="0" Grid.Column="0" x:Name="SearchBox" TextChanged="SearchBox_TextChanged" />
-                        <Grid Grid.Row="1">
+                    <Grid Grid.Column="0" Grid.Row="0">
+                        <TextBox Grid.Column="0" Grid.Row="0" Margin="10,35,0,35" Width="250" Height="30" FontSize="20" HorizontalAlignment="Left" x:Name="SearchBox" TextChanged="SearchBox_TextChanged" />
+                        <Grid Grid.Column="0" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
-                                <ColumnDefinition Width="169.333" />
+                                <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Column="1" Style="{StaticResource Navbutton}" Content="Sort by" Click="SortByName_Click" />
-                            <ComboBox FontSize="20" Padding="10" Grid.Column="2" x:Name="sortBy" FocusVisualStyle="{x:Null}" Height="50" Width="Auto">
-                                <ComboBoxItem Content="Name" />
-                                <ComboBoxItem Content="Date" />
-                                <ComboBoxItem Content="Places" />
+                            <Button Style="{StaticResource Navbutton}"  FontSize="12" x:Name="AddButon" Content="+" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center" Click="AddButton_Click" Grid.Column="1" Margin="104,0,0,0" Height="40" Width="40" />
+                            <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Navbutton}" Height="40" Width="100" FontSize="12" Content="Sort by" Click="SortByName_Click" Grid.ColumnSpan="2" Margin="144,30,97,30" />
+                            <ComboBox Grid.Column="2" FontSize="20" Margin="76,35,0,35" HorizontalAlignment="Center" x:Name="sortBy" FocusVisualStyle="{x:Null}" Height="30" Width="90">
+                                <ComboBox.Resources>
+                                    <!-- Styl dla ComboBoxItem -->
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#5ce1e6" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.Resources>
+                                <ComboBoxItem Content="Name" Margin="10 0 0 0" />
+                                <ComboBoxItem Content="Date" Margin="10 0 0 0" />
+                                <ComboBoxItem Content="Places" Margin="10 0 0 0" />
+                                <ComboBox.Style>
+                                    <Style TargetType="ComboBox">
+                                        <Setter Property="Background" Value="Black" />
+                                        <Setter Property="Foreground" Value="White" />
+                                        <Setter Property="BorderBrush" Value="Black" />
+                                        <Setter Property="BorderThickness" Value="1" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="ComboBox">
+                                                    <Grid>
+                                                        <ToggleButton
+                                Name="ToggleButton"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Padding="3,0,0,0"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Content=""
+                                Focusable="False"
+                                IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                        <ContentPresenter
+                                Name="ContentSite"
+                                IsHitTestVisible="False"
+                                Content="{TemplateBinding SelectionBoxItem}"
+                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                Margin="3,3,23,3"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Left" />
+                                                        <Popup
+                                Name="Popup"
+                                Placement="Bottom"
+                                IsOpen="{TemplateBinding IsDropDownOpen}"
+                                AllowsTransparency="True"
+                                Focusable="False"
+                                PopupAnimation="Slide">
+                                                            <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding ActualWidth}" MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                                                                <Border x:Name="DropDownBorder" Background="Black" BorderThickness="1" BorderBrush="Black" CornerRadius="5">
+                                                                    <ScrollViewer SnapsToDevicePixels="True">
+                                                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained">
+                                                                            <ItemsPresenter.Resources>
+                                                                                <!-- Zmiana koloru tekstu dla ComboBoxItem w rozwijanej liście -->
+                                                                                <Style TargetType="ComboBoxItem">
+                                                                                    <Setter Property="Foreground" Value="White" />
+                                                                                </Style>
+                                                                            </ItemsPresenter.Resources>
+                                                                        </ItemsPresenter>
+                                                                    </ScrollViewer>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Popup>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </ComboBox.Style>
                             </ComboBox>
                         </Grid>
                     </Grid>
 
-                    <ListView Grid.Row="1" x:Name="ListOfEvents" Style="{StaticResource EventList}"  FontSize="20"  Background="Transparent" Foreground="Black" HorizontalAlignment="Center" Width="500" MouseDoubleClick="ListOfEvents_MouseDoubleClick">
+                    <ListView Grid.Row="1" x:Name="ListOfEvents" Style="{StaticResource EventList}" HorizontalAlignment="Center"  FontSize="20"  Background="Transparent" Foreground="Black" Width="500" MouseDoubleClick="ListOfEvents_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="200" />
+                                <GridViewColumn Header="Event Name" DisplayMemberBinding="{Binding EventName}" Width="300" />
                                 <GridViewColumn Header="Event Date ; Time" DisplayMemberBinding="{Binding EventDateTime}" Width="Auto" />
                                 <GridViewColumn Header="Event Hour ; Time" DisplayMemberBinding="{Binding EventHour}" Width="Auto" />
                             </GridView>
@@ -80,27 +142,43 @@
                             <Style TargetType="ListViewItem">
                                 <Setter Property="Margin" Value="5" />
                                 <Setter Property="Padding" Value="10" />
-                                <Setter Property="BorderBrush" Value="#E0E0E0" />
-                                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                <Setter Property="Background" Value="Black" />
+                                <Setter Property="Foreground" Value="White" />
+                                <Setter Property="BorderBrush" Value="#5ce1e6" />
+                                <Setter Property="BorderThickness" Value="0,0,0,5" />
                                 <Setter Property="Height" Value="50" />
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="BorderBrush" Value="White" />
+                                        <Setter Property="Background" Value="#5ce1e6" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#5ce1e6" />
+                                        <Setter Property="BorderThickness" Value="0,0,0,0" />
+                                    </Trigger>
+                                </Style.Triggers>
                             </Style>
                         </ListView.ItemContainerStyle>
                     </ListView>
                 </Grid>
 
-                <Button x:Name="ManageButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Manage" FontFamily="Verdana" HorizontalAlignment="Left" Margin="230,15,0,0" VerticalAlignment="Top" Width="120" Click="ManageButton_Click" Visibility="Visible" />
+                <Button x:Name="ManageButton" Style="{StaticResource Navbutton}" Grid.Row="0"  Grid.Column="1" Content="Manage" FontFamily="Verdana" HorizontalAlignment="Left" Margin="381,50,0,0" VerticalAlignment="Top" Width="120" Click="ManageButton_Click" Visibility="Visible" Grid.RowSpan="2" />
 
-                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="358,15,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" />
+                <Button x:Name="CalendarButton" Style="{StaticResource Navbutton}" Grid.Row="0" Grid.Column="1" Content="Calendar" FontFamily="Verdana" HorizontalAlignment="Left" Margin="506,50,0,0" VerticalAlignment="Top" Width="120" Click="CalendarButton_Click" Grid.RowSpan="2" Grid.ColumnSpan="2" />
 
-                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Column="1" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="489,14,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" />
+                <Button Style="{StaticResource Navbutton}" x:Name="ProfileButton" Grid.Row="0" Grid.Column="2" Content="Profile" FontFamily="Verdana" HorizontalAlignment="Left" Margin="8,50,0,0" VerticalAlignment="Top" Width="120"  Click="ProfileButton_Click" Grid.RowSpan="2" />
 
-                <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="702,15,0,0" VerticalAlignment="Top" Width="40"   Grid.Column="1" />
-                <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="657,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527" />
-                <Button Style="{StaticResource Navbutton}" x:Name="AboutUsButton" Click="AboutUsButton_Click" Content="?" HorizontalAlignment="Left" Margin="612,15,0,0" VerticalAlignment="Top" Width="40"  Grid.Column="1" RenderTransformOrigin="0.512,0.527" />
-                <Button Style="{StaticResource Navbutton}" x:Name="AddButon" Content="+" FontFamily="Verdana" HorizontalAlignment="Right" Margin="0,14,0,0" VerticalAlignment="Top" Width="60"  Click="AddButton_Click" />
+                <Button Style="{StaticResource Navbutton}" x:Name="ExitButton" FontSize="10" Click="ExitButton_Click" Content="X" HorizontalAlignment="Left" Margin="88,5,0,0" VerticalAlignment="Top" Width="40" Height="40"   Grid.Column="2" Grid.Row="0" />
+                <Button Style="{StaticResource Navbutton}" x:Name="MinimizeButton" FontSize="10" Click="MinimizeButton_Click" Content="-" HorizontalAlignment="Left" Margin="48,5,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="2" RenderTransformOrigin="0.512,0.527" Grid.Row="0" />
+                <Button Style="{StaticResource Navbutton}" x:Name="AboutUsButton" FontSize="10"  Click="AboutUsButton_Click" Content="?" HorizontalAlignment="Left" Margin="8,5,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="2" RenderTransformOrigin="0.512,0.527" Grid.Row="0" />
 
-                <Grid x:Name="prawaStrona" Grid.Column="1" Margin="50 100 50 50">
+                <Grid x:Name="prawaStrona" Grid.Column="1" Grid.Row="1" Margin="50" Grid.ColumnSpan="2">
+                    <Grid.Effect>
+                        <DropShadowEffect ShadowDepth="0" BlurRadius="40" Color="#5ce1e6" />
+                    </Grid.Effect>
+
                     <m:Map x:Name="Map" Mode="AerialWithLabels" MouseDoubleClick="Map_MouseDoubleClick" MouseLeftButtonDown="Window_mousedown" Center="50.668, 17.925" ZoomLevel="15" CredentialsProvider="tdR8B4UFCok6HiAPmoQ3~K8lYPO2jpRrn2Eo7sfgHRQ~ArKu6p1ZhDGu_ekMQ6eam5QBW67AVHme_OOL_4LkpzH0P8ScgJT2w-UtzHnjRbr4">
                         <m:MapItemsControl ItemsSource="{Binding pushPins}">
                             <ItemsControl.ItemTemplate>

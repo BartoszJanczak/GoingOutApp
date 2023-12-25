@@ -21,6 +21,7 @@
     <None Remove="data\images\INFO2.png" />
     <None Remove="data\images\INFO3.png" />
     <None Remove="data\images\lock.png" />
+    <None Remove="data\images\logo.png" />
     <None Remove="data\images\male.png" />
     <None Remove="data\images\name.png" />
     <None Remove="data\images\question.png" />
@@ -60,6 +61,7 @@
     <Resource Include="data\images\INFO2.png" />
     <Resource Include="data\images\INFO3.png" />
     <Resource Include="data\images\lock.png" />
+    <Resource Include="data\images\logo.png" />
     <Resource Include="data\images\male.png" />
     <Resource Include="data\images\name.png" />
     <Resource Include="data\images\question.png" />
