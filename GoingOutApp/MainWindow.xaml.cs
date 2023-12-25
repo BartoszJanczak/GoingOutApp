@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using System.Globalization;
 
 namespace GoingOutApp
 {
@@ -35,6 +36,8 @@ namespace GoingOutApp
 
         private static AboutUs? _aboutUsInstance;
         private static YesNoWindow? _yesnoWindow;
+
+        private string filter;
 
         private DataContext _database { get; set; } = new DataContext();
 
@@ -200,6 +203,48 @@ namespace GoingOutApp
         public void RefreshEvents()
         {
             var events = _database.GetEvents();
+            if (sortDesc)
+            {
+                switch (filter)
+                {
+                    case "Name":
+                        events = events.OrderByDescending(e => e.EventName).ToList();
+                        break;
+
+                    case "Date":
+                        events = events.OrderByDescending(e => e.EventDateTime).ToList();
+                        break;
+
+                    case "Places":
+                        events = events.OrderByDescending(e => e.NumberOfplaces).ToList();
+                        break;
+
+                    default:
+                        events = events.OrderByDescending(e => e.EventName).ToList();
+                        break;
+                }
+            }
+            else
+            {
+                switch (filter)
+                {
+                    case "Name":
+                        events = events.OrderBy(e => e.EventName).ToList();
+                        break;
+
+                    case "Date":
+                        events = events.OrderBy(e => e.EventDateTime).ToList();
+                        break;
+
+                    case "Places":
+                        events = events.OrderBy(e => e.NumberOfplaces).ToList();
+                        break;
+
+                    default:
+                        events = events.OrderBy(e => e.EventName).ToList();
+                        break;
+                }
+            }
 
             ListOfEvents.Items.Clear();
             foreach (var ev in events)
@@ -318,7 +363,7 @@ namespace GoingOutApp
         private void sortBySomething()
         {
             string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
-
+            filter = orderByy;
             ListOfEvents.Items.Clear();
             var sorted = events;
             if (sortDesc)
