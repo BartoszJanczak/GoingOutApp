@@ -16,19 +16,16 @@
                 BorderThickness="5" Height="220" VerticalAlignment="Top">
             <Border.BorderBrush>
                 <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="#E0E0E0" Offset="0" />
-                    <GradientStop Color="#C0C0C0" Offset="0.25" />
-                    <GradientStop Color="#A0A0A0" Offset="0.75" />
-                    <GradientStop Color="#808080" Offset="1" />
+                    <GradientStop Color="Black" Offset="0" />
                 </LinearGradientBrush>
             </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush>
-                    <GradientStop Color="#FDFDFD" Offset="0" />
-                    <GradientStop Color="#E6E6E6" Offset="0.25" />
-                    <GradientStop Color="#CFCFCF" Offset="0.75" />
-                    <GradientStop Color="#B8B8B8" Offset="1" />
+                    <GradientStop Color="White" Offset="0" />
+                    <GradientStop Color="White" Offset="0.25" />
+                    <GradientStop Color="White" Offset="0.75" />
+                    <GradientStop Color="White" Offset="1" />
                 </LinearGradientBrush>
             </Border.Background>
             <Grid>
@@ -37,9 +34,7 @@
                     <TextBlock Text="Create here new event?" FontFamily="Verdana" FontSize="18" Height="42" Width="244" Foreground="Black" FontWeight="Black" />
                     <Button Style="{StaticResource Navbutton}" Content="  Comfirm  " Click="Button_Click" RenderTransformOrigin="0.231,0.527" Height="55" Width="256" />
                     <Button Style="{StaticResource Navbutton}" Content="  Cancel  " Click="ExitButton_Click" RenderTransformOrigin="0.509,-0.159" Height="53" Width="256" />
-
                 </StackPanel>
-
             </Grid>
         </Border>
     </Border>

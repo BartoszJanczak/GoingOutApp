@@ -18,24 +18,22 @@
             <Setter Property="Background">
                 <Setter.Value>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFE4EAF0" Offset="0" />
-                        <GradientStop Color="#FFECF0F4" Offset="0.16" />
-                        <GradientStop Color="#FFFCFCFD" Offset="0.16" />
-                        <GradientStop Color="#FFFFFFFF" Offset="1" />
+                        <GradientStop Color="White" Offset="0" />
+                        <GradientStop Color="White" Offset="0.16" />
+                        <GradientStop Color="White" Offset="0.16" />
+                        <GradientStop Color="White" Offset="1" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
             <Setter Property="BorderBrush">
                 <Setter.Value>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FFA3AEB9" Offset="0" />
-                        <GradientStop Color="#FF8399A9" Offset="0.375" />
-                        <GradientStop Color="#FF718597" Offset="0.375" />
-                        <GradientStop Color="#FF617584" Offset="1" />
+                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
+                        <GradientStop Color="Black" Offset="0" />
                     </LinearGradientBrush>
                 </Setter.Value>
             </Setter>
-            <Setter Property="BorderThickness" Value="1" />
+
+            <Setter Property="BorderThickness" Value="5" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Calendar}">

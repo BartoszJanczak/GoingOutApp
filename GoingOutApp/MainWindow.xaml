@@ -17,6 +17,12 @@
     <Border CornerRadius="30">
         <Border CornerRadius="30">
 
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Black" Offset="0" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="White" Offset="0" />
