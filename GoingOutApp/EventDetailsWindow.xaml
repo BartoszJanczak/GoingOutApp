@@ -58,8 +58,19 @@
 
                     <TextBlock Text="Participants:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
                     <TextBlock x:Name="ParticipantsTextBlock" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="14" />
-                    <Button x:Name="ShowParticipantsButton" Style="{StaticResource Navbutton}" Content="Show participants" Click="ShowParticipants_Click" RenderTransformOrigin="0.509,-0.159" Height="46" Width="132" FontSize="12" />
-
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="likeButton" Grid.Column="0" Background="Green" Style="{StaticResource Navbutton}" HorizontalAlignment="Left" Margin="26,0,0,0" VerticalAlignment="Center" Click="LikeButtonClick" RenderTransformOrigin="0.509,-0.159" Width="70">
+                            <StackPanel Orientation="Horizontal" Cursor="Hand">
+                                <Image Source="/data/images/like.png" Width="20" Height="20" />
+                                <TextBlock x:Name="likeCountTextBlock" Text="0" Margin="5,0,0,0" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />

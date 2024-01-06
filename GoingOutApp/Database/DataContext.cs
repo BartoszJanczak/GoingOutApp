@@ -4,10 +4,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Controls;
 using System.Xml.Linq;
+using static GoingOutApp.AddTaskwindow;
 
 namespace GoingOutApp.Services
 {
@@ -20,6 +22,7 @@ namespace GoingOutApp.Services
 
         public DbSet<User> Users { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<Like> Likes { get; set; }
         public DbSet<EventComment> EventComments { get; set; }
         public DbSet<EventParticipant> EventParticipants { get; set; }
 
@@ -95,6 +98,7 @@ namespace GoingOutApp.Services
                 }
             }
         }
+
         public void DeletePin(int eventId)
         {
             using (DataContext context = new DataContext())
@@ -108,6 +112,7 @@ namespace GoingOutApp.Services
                 }
             }
         }
+
         public void DeleteEvent(int eventId)
         {
             using (DataContext context = new DataContext())
@@ -320,6 +325,51 @@ namespace GoingOutApp.Services
             {
                 existingUser.IsBanned = true;
                 SaveChanges();
+            }
+        }
+
+        public int GetNumberOfLikes(int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                int numberOfLikes = context.Likes.Where(l => l.EventId == eventId).Count();
+                return numberOfLikes;
+            }
+        }
+
+        public bool doesUserLikeEvent(int userId, int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                bool exists = context.Likes.Where(l => l.EventId == eventId && userId == l.UserId).Any();
+                return exists;
+            }
+        }
+
+        public void AddLike(int userId, int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                context.Likes.Add(new Like
+                {
+                    EventId = eventId,
+                    UserId = userId
+                });
+                context.SaveChanges();
+            }
+        }
+
+        public void DeleteLike(int userId, int eventId)
+        {
+            using (DataContext context = new DataContext())
+            {
+                var like = context.Likes.Where(u => u.UserId == userId && u.EventId == eventId).First();
+                if(like != null)
+                {
+                context.Likes.Remove(like);
+
+                }
+                context.SaveChanges();
             }
         }
     }

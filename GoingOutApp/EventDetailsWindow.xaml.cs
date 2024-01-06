@@ -13,6 +13,7 @@ using GoingOutApp.Services;
 using Microsoft.Extensions.Logging;
 using System.Windows.Media.Imaging;
 using System.IO;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace GoingOutApp
 {
@@ -63,6 +64,73 @@ namespace GoingOutApp
                 {
                     ParticipantsTextBlock.Text = $"{selectedEvent.TakenPlaces}/{selectedEvent.NumberOfplaces} places taken";
                 }
+                if (UserService.LoggedInUser != null)
+                {
+                    int userId = UserService.LoggedInUser.UserId;
+                    var numberOfLikes = dataContext.GetNumberOfLikes(_eventId);
+                    if (dataContext.doesUserLikeEvent(userId, _eventId))
+                    {
+                        SetUnlikeBtn();
+                    }
+                    else
+                    {
+                        SetLikeBtn();
+                    }
+                }
+            }
+        }
+
+        private void SetLikeBtn()
+        {
+            using (DataContext dataContext = new DataContext())
+            {
+                var numberOfLikes = dataContext.GetNumberOfLikes(_eventId);
+                Uri uri = new Uri("/data/images/like.png", UriKind.Relative);
+                BitmapImage bitmapImage = new BitmapImage(uri);
+                System.Windows.Controls.Image image = new();
+                image.Source = bitmapImage;
+                image.Width = 20;
+                image.Height = 20;
+                likeButton.Foreground = new SolidColorBrush(Colors.Black);
+                likeButton.Background = new SolidColorBrush(Colors.Green);
+                likeButton.Cursor = Cursors.Hand;
+
+                likeButton.Content = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Children =
+                                        {
+                                            image,
+                                            new TextBlock { Text = numberOfLikes.ToString(), Foreground = new SolidColorBrush(Colors.Black), Margin = new Thickness(5,0,0,0) }
+                                        }
+                };
+            }
+        }
+
+        private void SetUnlikeBtn()
+        {
+            using (DataContext dataContext = new DataContext())
+            {
+                var numberOfLikes = dataContext.GetNumberOfLikes(_eventId);
+                Uri uri = new Uri("/data/images/unlike.png", UriKind.Relative);
+                BitmapImage bitmapImage = new BitmapImage(uri);
+                System.Windows.Controls.Image image = new();
+                image.Source = bitmapImage;
+                image.Width = 20;
+                image.Height = 20;
+                likeButton.Foreground = new SolidColorBrush(Colors.Black);
+                likeButton.Background = new SolidColorBrush(Colors.Red);
+                likeButton.Cursor = Cursors.Hand;
+
+                likeButton.Content = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    Children =
+                    {
+                        image,
+                        new TextBlock { Text = numberOfLikes.ToString(), Margin = new Thickness(5, 0, 0, 0) },
+                    }
+                };
             }
         }
 
@@ -88,9 +156,19 @@ namespace GoingOutApp
                         DeleteEvent.Visibility = Visibility.Collapsed;
                     }
 
-                    bool isUserSignedUp = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
+                    if (dataContext.doesUserLikeEvent(userId, _eventId))
+                    {
+                        SetUnlikeBtn();
+                    }
+                    else
+                    {
+                        SetLikeBtn();
+                    }
+                    likeButton.IsEnabled = true;
 
-                    if (isUserSignedUp)
+                    bool isUserSignedUpToEvent = dataContext.EventParticipants.Any(ep => ep.EventId == eventId && ep.UserId == userId);
+
+                    if (isUserSignedUpToEvent)
                     {
                         TakePartButton.Visibility = Visibility.Collapsed;
                         CancelParticipationButton.Visibility = Visibility.Visible;
@@ -104,12 +182,11 @@ namespace GoingOutApp
             }
             else
             {
+                likeButton.IsEnabled = false;
                 CancelParticipationButton.Visibility = Visibility.Collapsed;
                 EditEvent.Visibility = Visibility.Collapsed;
                 DeleteEvent.Visibility = Visibility.Collapsed;
             }
-
-            // Reszta kodu...
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
@@ -283,6 +360,27 @@ namespace GoingOutApp
                         MessageBox.Show("You are not authorized to delete this event.", "Unauthorized", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                     }
                 }
+            }
+        }
+
+        private void LikeButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (UserService.LoggedInUser != null)
+            {
+                int userId = UserService.LoggedInUser.UserId;
+
+                using (DataContext dataContext = new DataContext())
+                {
+                    if (dataContext.doesUserLikeEvent(userId, _eventId))
+                    {
+                        dataContext.DeleteLike(userId, _eventId);
+                    }
+                    else
+                    {
+                        dataContext.AddLike(userId, _eventId);
+                    }
+                }
+                RefreshDataContext();
             }
         }
     }

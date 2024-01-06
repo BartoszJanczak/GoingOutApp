@@ -9,8 +9,8 @@ namespace GoingOutApp.Models
     {
         public Event()
         {
-                
         }
+
         public Event(int eventCreatorId, string eventName, byte[] photoPath, string photoDescription, string eventDescription, string eventCity, string eventStreet, string eventBuildingNumber, string eventDate, string eventHour, int numberOfPlaces, string otherInfo, string eventCategory)
         {
             this.EventCreatorId = eventCreatorId;

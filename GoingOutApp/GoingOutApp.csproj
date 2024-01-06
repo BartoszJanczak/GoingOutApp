@@ -20,6 +20,7 @@
     <None Remove="data\images\INFO1.png" />
     <None Remove="data\images\INFO2.png" />
     <None Remove="data\images\INFO3.png" />
+    <None Remove="data\images\like.png" />
     <None Remove="data\images\lock.png" />
     <None Remove="data\images\logo.png" />
     <None Remove="data\images\male.png" />
@@ -27,6 +28,7 @@
     <None Remove="data\images\question.png" />
     <None Remove="data\images\show.png" />
     <None Remove="data\images\surname.png" />
+    <None Remove="data\images\unlike.png" />
     <None Remove="data\images\user.png" />
     <None Remove="data\images\userProfile.png" />
   </ItemGroup>
@@ -60,6 +62,7 @@
     </Resource>
     <Resource Include="data\images\INFO2.png" />
     <Resource Include="data\images\INFO3.png" />
+    <Resource Include="data\images\like.png" />
     <Resource Include="data\images\lock.png" />
     <Resource Include="data\images\logo.png" />
     <Resource Include="data\images\male.png" />
@@ -67,6 +70,7 @@
     <Resource Include="data\images\question.png" />
     <Resource Include="data\images\show.png" />
     <Resource Include="data\images\surname.png" />
+    <Resource Include="data\images\unlike.png" />
     <Resource Include="data\images\user.png" />
     <Resource Include="data\images\userProfile.png" />
   </ItemGroup>
