@@ -31,6 +31,7 @@ namespace GoingOutApp
         private static UserProfileWindow? _userProfileWindowInstance;
         private static EventDetailsWindow? _eventDetailsWindowInstance;
         private static ResetPasswordWindow? _resetPasswordWindowInstance;
+        private static AdminPanelWindow? _adminPanelWindowInstance;
 
         private static CalendarWindow? _calendarWindowInstance;
 
@@ -482,9 +483,16 @@ namespace GoingOutApp
             {
                 AdminPanelWindow adminPanel = new AdminPanelWindow();
                 adminPanel.Owner = this;
+                adminPanel.UserBanned += AdminPanel_UserBanned;
                 adminPanel.Closed += (s, args) => adminPanel = null;
                 adminPanel.Show();
             }
+        }
+
+        private void AdminPanel_UserBanned(object? sender, User e)
+        {
+            RefreshData();
+            RefreshPins();
         }
     }
 }

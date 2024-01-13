@@ -320,12 +320,44 @@ namespace GoingOutApp.Services
 
         public void BanUser(User user)
         {
-            var existingUser = Users.FirstOrDefault(u => u.UserId == user.UserId);
-            if (existingUser != null)
+            using (DataContext context = new DataContext())
             {
-                existingUser.IsBanned = true;
-                SaveChanges();
+                var existingUser = context.Users.FirstOrDefault(u => u.UserId == user.UserId);
+                if (existingUser != null)
+                {
+                    existingUser.IsBanned = !existingUser.IsBanned;
+
+                    var eventsToBan = context.Events.Where(e => e.EventCreatorId == user.UserId).ToList();
+                    foreach (var eventToBan in eventsToBan)
+                    {
+                        BanEvent(context, eventToBan);
+                    }
+                    context.SaveChanges();
+                }
             }
+        }
+
+        private void BanEvent(DataContext context, Event eventToBan)
+        {
+            var eventPushPin = context.EventPushPins.FirstOrDefault(ep => ep.EventId == eventToBan.EventId);
+            if (eventPushPin != null)
+            {
+                context.EventPushPins.Remove(eventPushPin);
+            }
+
+            var participantsToRemove = context.EventParticipants.Where(ep => ep.EventId == eventToBan.EventId).ToList();
+            foreach (var participant in participantsToRemove)
+            {
+                context.EventParticipants.Remove(participant);
+            }
+
+            var likesToRemove = context.Likes.Where(l => l.EventId == eventToBan.EventId).ToList();
+            foreach (var like in likesToRemove)
+            {
+                context.Likes.Remove(like);
+            }
+
+            context.Events.Remove(eventToBan);
         }
 
         public int GetNumberOfLikes(int eventId)
@@ -364,10 +396,9 @@ namespace GoingOutApp.Services
             using (DataContext context = new DataContext())
             {
                 var like = context.Likes.Where(u => u.UserId == userId && u.EventId == eventId).First();
-                if(like != null)
+                if (like != null)
                 {
-                context.Likes.Remove(like);
-
+                    context.Likes.Remove(like);
                 }
                 context.SaveChanges();
             }
