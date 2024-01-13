@@ -27,8 +27,12 @@ namespace GoingOutApp
         private static EventDetailsWindow? _eventDetailsWindowInstance;
         private static ResetPasswordWindow? _resetPasswordWindowInstance;
         private static AboutUs? _aboutUsInstance;
+
         private static System.Windows.Point Cords;
-        public YesNoWindow(double x,double y)
+
+        public event EventHandler LoginWindow_LoggedIn;
+
+        public YesNoWindow(double x, double y)
         {
             InitializeComponent();
             Cords.X = x;
@@ -46,7 +50,7 @@ namespace GoingOutApp
             {
                 if (_addWindowInstance == null)
                 {
-                    _addWindowInstance = new AddTaskwindow(Cords.X,Cords.Y);
+                    _addWindowInstance = new AddTaskwindow(Cords.X, Cords.Y);
                     _addWindowInstance.Owner = this;
                     _addWindowInstance.EventAdded += AddEventWindow_EventAdded;
                     _addWindowInstance.PinAdded += AddPin_EventAdded;
@@ -63,17 +67,17 @@ namespace GoingOutApp
             {
                 _profileWindowInstance = new LoginWindow();
                 _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                _profileWindowInstance.LoggedIn += LoginWindow_LoggedIn;
                 _profileWindowInstance.Show();
             }
         }
 
         private void AddEventWindow_EventAdded(object sender, EventArgs e)
         {
-            
-        }     
+        }
+
         private void AddPin_EventAdded(object sender, EventArgs e)
         {
-           
         }
     }
 }

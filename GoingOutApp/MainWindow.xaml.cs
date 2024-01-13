@@ -180,6 +180,7 @@ namespace GoingOutApp
             {
                 _profileWindowInstance = new LoginWindow();
                 _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null; // Reset _profileWindowInstance when the window is closed.
+                _profileWindowInstance.LoggedIn += LoginWindow_LoggedIn;
                 _profileWindowInstance.Show();
             }
         }
@@ -434,6 +435,7 @@ namespace GoingOutApp
             {
                 _profileWindowInstance = new LoginWindow();
                 _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null;
+                _profileWindowInstance.LoggedIn += LoginWindow_LoggedIn;
                 _profileWindowInstance.Show();
             }
         }
@@ -465,6 +467,8 @@ namespace GoingOutApp
             // Przypisanie pozycji okna na podstawie kliknięcia myszką
             _yesnoWindow.Left = clickPoint.X + 170;
             _yesnoWindow.Top = clickPoint.Y + 80;
+
+            _yesnoWindow.LoginWindow_LoggedIn += LoginWindow_LoggedIn;
 
             _yesnoWindow.Closed += (s, e) => _yesnoWindow = null; // Reset _profileWindowInstance when the window is closed.
             _yesnoWindow.Closed += (s, e) => RefreshData(); // Reset _profileWindowInstance when the window is closed.
