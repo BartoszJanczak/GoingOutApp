@@ -498,12 +498,19 @@ namespace GoingOutApp
 
         private void ReportButton_Click(object sender, RoutedEventArgs e)
         {
-            //if (_reportWindowInstance == null)
-            //{
+            if (UserService.LoggedInUser != null)
+            {
                 _reportWindowInstance = new ReportWindow();
                 _reportWindowInstance.Owner = this;
                 _reportWindowInstance.Show();
-            //}
+            }
+            else
+            {
+                _profileWindowInstance = new LoginWindow();
+                _profileWindowInstance.Closed += (s, e) => _profileWindowInstance = null;
+                _profileWindowInstance.LoggedIn += LoginWindow_LoggedIn;
+                _profileWindowInstance.Show();
+            }
         }
     }
 }
