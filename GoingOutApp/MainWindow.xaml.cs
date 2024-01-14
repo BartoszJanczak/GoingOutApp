@@ -32,6 +32,7 @@ namespace GoingOutApp
         private static EventDetailsWindow? _eventDetailsWindowInstance;
         private static ResetPasswordWindow? _resetPasswordWindowInstance;
         private static AdminPanelWindow? _adminPanelWindowInstance;
+        private static ReportWindow? _reportWindowInstance;
 
         private static CalendarWindow? _calendarWindowInstance;
 
@@ -493,6 +494,16 @@ namespace GoingOutApp
         {
             RefreshData();
             RefreshPins();
+        }
+
+        private void ReportButton_Click(object sender, RoutedEventArgs e)
+        {
+            //if (_reportWindowInstance == null)
+            //{
+                _reportWindowInstance = new ReportWindow();
+                _reportWindowInstance.Owner = this;
+                _reportWindowInstance.Show();
+            //}
         }
     }
 }

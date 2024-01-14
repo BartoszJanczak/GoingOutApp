@@ -13,7 +13,13 @@
         AllowsTransparency="True">
     <Border CornerRadius="50">
         <Border CornerRadius="50"
-                BorderThickness="5" Margin="0,0,0,36">
+                BorderThickness="5">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Black" Offset="0" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
             <Border.Background>
                 <LinearGradientBrush>
                     <GradientStop Color="White" Offset="0" />
