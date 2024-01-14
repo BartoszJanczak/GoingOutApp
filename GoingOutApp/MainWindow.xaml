@@ -60,7 +60,7 @@
                             </Grid.ColumnDefinitions>
                             <Button Style="{StaticResource Navbutton}"  FontSize="12" x:Name="AddButon" Content="+" FontWeight="Bold" HorizontalAlignment="Left"  VerticalAlignment="Center" Click="AddButton_Click" Grid.Column="1" Margin="104,0,0,0" Height="40" Width="40" />
                             <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource Navbutton}" Height="40" Width="100" FontSize="12" Content="Sort by" Click="SortByName_Click" Grid.ColumnSpan="2" Margin="144,30,97,30" />
-                            <ComboBox Grid.Column="2" FontSize="20" Margin="76,35,0,35" HorizontalAlignment="Center" x:Name="sortBy" FocusVisualStyle="{x:Null}" Height="30" Width="90">
+                            <ComboBox Grid.Column="2" FontSize="20" Margin="76,35,0,35" HorizontalAlignment="Center" x:Name="sortBy" FocusVisualStyle="{x:Null}" Height="30" Width="90" Background="LightBlue" Foreground="Black">
                                 <ComboBox.Resources>
                                     <!-- Styl dla ComboBoxItem -->
                                     <Style TargetType="ComboBoxItem">
@@ -201,6 +201,7 @@
                         </m:MapItemsControl>
                     </m:Map>
                 </Grid>
+                <Button Style="{StaticResource Navbutton}" x:Name="ReportButton" Grid.Row="1" Grid.Column="2" Content="Report" FontFamily="Verdana" HorizontalAlignment="Center" Margin="0,566,0,0" VerticalAlignment="Top" Width="89" Height="40" Click="ReportButton_Click" FontSize="12" />
             </Grid>
         </Border>
     </Border>

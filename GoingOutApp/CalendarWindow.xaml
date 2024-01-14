@@ -12,6 +12,7 @@
         ResizeMode="NoResize"
         AllowsTransparency="True">
 
+    
     <Window.Resources>
         <Style x:Key="CalendarStyle1" TargetType="{x:Type Calendar}">
             <Setter Property="Foreground" Value="#FF333333" />
@@ -419,7 +420,14 @@
     </Window.Resources>
 
     <Border CornerRadius="50">
-        <Border CornerRadius="50" BorderThickness="5" Margin="0,0,0,36">
+        <Border CornerRadius="50"
+                BorderThickness="5">
+
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="Black" Offset="0" />
+                </LinearGradientBrush>
+            </Border.BorderBrush>
 
             <Border.Background>
                 <LinearGradientBrush>

@@ -28,6 +28,7 @@ namespace GoingOutApp.Services
 
         public DbSet<EventPushPin> EventPushPins { get; set; }
         public DbSet<EventHistory> EventHistory { get; set; }
+        public DbSet<Report> Reports { get; set; }
 
         public void CreatePushPin(int eventId, double locationX, double locationY)
         {
@@ -400,6 +401,18 @@ namespace GoingOutApp.Services
                 {
                     context.Likes.Remove(like);
                 }
+                context.SaveChanges();
+            }
+        }
+
+        public void AddReport(string Desc)
+        {
+            using (DataContext context = new DataContext())
+            {
+                context.Reports.Add(new Report
+                {
+                    ReportDesc = Desc,
+                });
                 context.SaveChanges();
             }
         }
