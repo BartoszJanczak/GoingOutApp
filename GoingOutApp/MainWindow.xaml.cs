@@ -379,7 +379,7 @@ namespace GoingOutApp
                         break;
 
                     case "Date":
-                        sorted = events.OrderByDescending(e => e.EventDateTime).ToList();
+                        sorted = events.OrderByDescending(e => Convert.ToDateTime(e.EventDateTime)).ToList();
                         break;
 
                     case "Places":
@@ -400,7 +400,7 @@ namespace GoingOutApp
                         break;
 
                     case "Date":
-                        sorted = events.OrderBy(e => e.EventDateTime).ToList();
+                        sorted = events.OrderBy(e => Convert.ToDateTime(e.EventDateTime)).ToList();
                         break;
 
                     case "Places":
