@@ -205,7 +205,7 @@ namespace GoingOutApp
 
         public void RefreshEvents()
         {
-            var events = _database.GetEvents();
+            events = _database.GetEvents();
             if (sortDesc)
             {
                 switch (filter)
@@ -365,6 +365,7 @@ namespace GoingOutApp
 
         private void sortBySomething()
         {
+            RefreshData();
             string orderByy = (sortBy.SelectedItem as ComboBoxItem).Content.ToString();
             filter = orderByy;
             ListOfEvents.Items.Clear();
