@@ -48,7 +48,7 @@
     <Resource Include="data\images\answer.png" />
     <Resource Include="data\images\concert.jpg" />
     <Resource Include="data\images\female.png" />
-    <EmbeddedResource Include="data\images\hide.png" />
+    <Resource Include="data\images\hide.png" />
     <Resource Include="data\images\iconEventSpecial.png" />
     <Resource Include="data\images\INFO1.png" />
     <Resource Include="data\images\iconConcerte.png">

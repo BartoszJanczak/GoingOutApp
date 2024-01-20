@@ -10,7 +10,8 @@
         Background="Transparent"
         WindowStyle="None"
         ResizeMode="NoResize"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+        KeyDown="Window_KeyDown">
 
     <Border CornerRadius="50">
         <Border CornerRadius="50"
@@ -44,7 +45,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/user.png" Height="20" />
                             <TextBlock x:Name="textUser" MouseDown="textUser_MouseDown" Text="Username" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}" />
-                            <TextBox x:Name="txtUser" TextChanged="txtUser_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="26">
+                            <TextBox x:Name="txtUser" TextChanged="txtUser_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="26" MaxLength="16">
                             </TextBox>
                         </Grid>
                     </Border>
@@ -57,7 +58,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/lock.png" Height="20" />
                             <TextBlock x:Name="textPassword" MouseDown="textPassword_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " Height="26" />
-                            <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Height="26" />
+                            <PasswordBox x:Name="txtPassword" PasswordChanged="txtPassword_PasswordChanged" Style="{StaticResource textBox}" Height="26" MaxLength="14" FontSize="15" />
                         </Grid>
                     </Border>
                     <TextBlock x:Name="txtPasswordValidation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Black" Margin="0 -5 0 0" />
@@ -69,7 +70,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/lock.png" Height="20" />
                             <TextBlock x:Name="textPassword2" MouseDown="textPassword2_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " Height="26" />
-                            <PasswordBox x:Name="txtPassword2" PasswordChanged="txtPassword2_PasswordChanged" Style="{StaticResource textBox}" Height="26" />
+                            <PasswordBox x:Name="txtPassword2" PasswordChanged="txtPassword2_PasswordChanged" Style="{StaticResource textBox}" Height="26" MaxLength="14" FontSize="15" />
                         </Grid>
                     </Border>
                     <TextBlock x:Name="txtPassword2Validation" Text="" TextWrapping="Wrap" MaxWidth="200" HorizontalAlignment="Center" Visibility="Collapsed" Foreground="Black" Margin="0 -5 0 0" />
@@ -81,7 +82,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/name.png" Height="20" />
                             <TextBlock x:Name="textName" MouseDown="textName_MouseDown" Text="Name" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}" />
-                            <TextBox x:Name="txtName" TextChanged="txtName_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="26">
+                            <TextBox x:Name="txtName" TextChanged="txtName_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="26" MaxLength="16">
                             </TextBox>
                         </Grid>
                     </Border>
@@ -94,7 +95,7 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/surname.png" Height="20" />
                             <TextBlock x:Name="textSurname" MouseDown="textSurname_MouseDown" Text="Surname" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}" />
-                            <TextBox x:Name="txtSurname" TextChanged="txtSurname_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="26">
+                            <TextBox x:Name="txtSurname" TextChanged="txtSurname_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" Height="26" MaxLength="16">
                             </TextBox>
                         </Grid>
                     </Border>

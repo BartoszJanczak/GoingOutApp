@@ -53,6 +53,14 @@ namespace GoingOutApp
             this.WindowState = WindowState.Minimized;
         }
 
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SignUpButton_Click(sender, e);
+            }
+        }
+
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             string username = txtUser.Text;
@@ -172,6 +180,7 @@ namespace GoingOutApp
             if (!ifPasswordEqual(password))
             {
                 txtPassword2Validation.Visibility = Visibility.Visible;
+                validation = false;
             }
             else
             {

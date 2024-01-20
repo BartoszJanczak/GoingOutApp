@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GoingOutApp"
         mc:Ignorable="d"
-        Title="ProfileWindow" Height="600" Width="456"
+        Title="ProfileWindow" Height="605" Width="456"
         WindowStartupLocation="CenterScreen"
         Background="Transparent"
         WindowStyle="None"
