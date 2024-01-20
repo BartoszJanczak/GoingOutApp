@@ -94,14 +94,14 @@
                         </TextBox>
                     </Grid>
                 </Border>
-                <CheckBox x:Name="LimitPlacesCheckbox" Content="Limit number of places" Checked="LimitPlacesCheckbox_Checked" Unchecked="LimitPlacesCheckbox_Unchecked" HorizontalAlignment="Left" Margin="206,158,0,0" VerticalAlignment="Top" Grid.Column="1" IsChecked="False" />
+                <CheckBox x:Name="LimitPlacesCheckbox" Content="Limit number of participants" Checked="LimitPlacesCheckbox_Checked" Unchecked="LimitPlacesCheckbox_Unchecked" HorizontalAlignment="Left" Margin="206,158,0,0" VerticalAlignment="Top" Grid.Column="1" IsChecked="False" />
                 <Border BorderThickness="1" BorderBrush="#acb0af" CornerRadius="5" Width="201" Background="White" Margin="206,178,67,378" Grid.Column="1">
                     <Grid Margin="7 4">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="textNumberOfPlaces" MouseDown="textNumberOfPlaces_MouseDown" Text="Number of places" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}" />
+                        <TextBlock x:Name="textNumberOfPlaces" MouseDown="textNumberOfPlaces_MouseDown" Text="Number of participants" FontSize="14" Style="{StaticResource textHint}" Margin="12 0 0 0 " FocusVisualStyle="{x:Null}" />
                         <TextBox x:Name="AddEventNumberOfPlaces" TextChanged="AddEventNumberOfPlaces_TextChanged" Style="{StaticResource textBox}" FocusVisualStyle="{x:Null}" IsEnabled="False">
                         </TextBox>
                     </Grid>
@@ -120,7 +120,7 @@
                 </StackPanel>
                 <TextBlock x:Name="txtNumberInfo" HorizontalAlignment="Left" Height="17" Margin="75,347,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Grid.ColumnSpan="2" Foreground="Blue" />
                 <TextBlock x:Name="txtPlacesInfo" HorizontalAlignment="Left" Height="17" Margin="206,217,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="304" Foreground="Blue" Grid.Column="1" />
-                <Button x:Name="AddPhoto" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Add photo" HorizontalAlignment="Left" Margin="12,175,0,0" VerticalAlignment="Top" Width="134" Click="AddPhoto_Click"/>
+                <Button x:Name="AddPhoto" Style="{StaticResource Navbutton}" Grid.Column="1" Content="Add photo" HorizontalAlignment="Left" Margin="12,175,0,0" VerticalAlignment="Top" Width="134" Click="AddPhoto_Click" />
                 <Image x:Name="imagePreview" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,234,0,0" Width="155" Height="144" Grid.Column="1" />
                 <ComboBox x:Name="cmbHour" Grid.Column="1" HorizontalAlignment="Left" Height="32" Margin="232,327,0,0" VerticalAlignment="Top" Width="63" SelectedIndex="0" FontSize="18">
                     <ComboBoxItem Content="00" />
