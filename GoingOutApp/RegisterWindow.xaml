@@ -69,7 +69,7 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Image Source="/data/images/lock.png" Height="20" />
-                            <TextBlock x:Name="textPassword2" MouseDown="textPassword2_MouseDown" Text="Password" Style="{StaticResource textHint}" Margin="12 0 0 0 " Height="26" />
+                            <TextBlock x:Name="textPassword2" MouseDown="textPassword2_MouseDown" Text="Confirm password" Style="{StaticResource textHint}" Margin="12 0 0 0 " Height="26" />
                             <PasswordBox x:Name="txtPassword2" PasswordChanged="txtPassword2_PasswordChanged" Style="{StaticResource textBox}" Height="26" MaxLength="14" FontSize="15" />
                         </Grid>
                     </Border>

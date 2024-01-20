@@ -37,6 +37,7 @@ namespace GoingOutApp
             if (!String.IsNullOrEmpty(txtDesc.Text))
             {
                 _database.AddReport(txtDesc.Text);
+                MessageBox.Show("Report sent");
                 Close();    
             }
         }
