@@ -41,7 +41,7 @@
 
                     <!--<Image Source="{Binding PhotoPath}" Height="200" Margin="0,10,0,0" /> -->
 
-                    <TextBlock Text="{Binding EventDescription}" TextWrapping="Wrap" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
+                    <TextBlock Text="{Binding EventDescription}" TextWrapping="Wrap" Margin="0,20,0,0" HorizontalAlignment="Center" FontSize="14" />
 
                     <TextBlock Text="Location:" FontWeight="Bold" Margin="0,10,0,0" HorizontalAlignment="Center" FontSize="14" />
                     <TextBlock Text="{Binding City}" Margin="0,0,0,5" HorizontalAlignment="Center" FontSize="13" />
@@ -85,6 +85,7 @@
                 </StackPanel>
                 <ListView x:Name="listOfParticipants" Style="{StaticResource ParticipantsList}" HorizontalAlignment="Left" Height="153" Margin="362,381,0,0" VerticalAlignment="Top" Width="102" d:ItemsSource="{d:SampleData ItemCount=5}" Visibility="Collapsed" />
                 <TextBlock x:Name="lblList" HorizontalAlignment="Left" Height="21" Margin="362,355,0,0" TextWrapping="Wrap" Text="List of participants" VerticalAlignment="Top" Width="102" Visibility="Collapsed" />
+                <TextBlock x:Name="categorytxt" Text="Category" HorizontalAlignment="Center" FontWeight="Bold" FontSize="12" Margin="232,286,232,328" />
             </Grid>
         </Border>
     </Border>

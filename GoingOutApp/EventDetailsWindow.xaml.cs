@@ -55,7 +55,7 @@ namespace GoingOutApp
             {
                 Event selectedEvent = dataContext.GetEvent(_eventId);
                 DataContext = selectedEvent;
-
+                categorytxt.Text = selectedEvent.EventCategory.ToString();
                 if (selectedEvent.NumberOfplaces == 0)
                 {
                     ParticipantsTextBlock.Text = $"{selectedEvent.TakenPlaces}";
