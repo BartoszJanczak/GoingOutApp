@@ -14,6 +14,7 @@ using System.IO;
 using Microsoft.Extensions.Logging;
 using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Markup;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace GoingOutApp
 {
@@ -138,62 +139,62 @@ namespace GoingOutApp
         {
             if (AddEventName.Text.Length > 0 && AddEventCity.Text.Length > 0 && AddEventStreet.Text.Length > 0 && AddEventBuilding.Text.Length > 0 && AddEventNumberOfPlaces.Text.Length > 0 && AddEventDate.Text.Length > 0 && AddEventDescription.Text.Length > 0)
             {
-                if (tryb == TrybOkna.New)
+                if (DateTime.TryParse(AddEventDate.Text, out DateTime enteredDate) && enteredDate > DateTime.Now)
                 {
-                    var obiekt = new GoingOutApp.Models.Event();
-                }
 
-                user = UserService.LoggedInUser;
-                string eventName = AddEventName.Text;
-                string eventDescription = AddEventDescription.Text;
-                string eventDate = string.Empty;
-                string eventHour = cmbHour.Text + ":" + cmbMinute.Text;
 
-                if (!string.IsNullOrEmpty(AddEventDate.Text))
-                {
-                    eventDate = AddEventDate.Text;
+                    if (tryb == TrybOkna.New)
+                    {
+                        var obiekt = new GoingOutApp.Models.Event();
+                    }
+
+                    user = UserService.LoggedInUser;
+                    string eventName = AddEventName.Text;
+                    string eventDescription = AddEventDescription.Text;
+                    string eventDate = AddEventDate.Text;
+                    string eventHour = cmbHour.Text + ":" + cmbMinute.Text;
+
+                    int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
+                    string eventCity = AddEventCity.Text;
+                    string eventStreet = AddEventStreet.Text;
+                    string eventBuildingNumber = AddEventBuilding.Text;
+                    int eventCreatorId = user.UserId;
+
+                    EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
+                    string eventCategory = eventCategoryEnum.ToString();
+
+                    if (photoBytes == null)
+                    {
+                        photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/concert.jpg");
+                    }
+
+                    if (tryb == TrybOkna.New)
+                    {
+                        _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
+                        var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
+                        var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
+
+                        var cords = await LocationService.GetLocationByCords(location);
+
+                        _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
+
+                        EventAdded?.Invoke(this, EventArgs.Empty);
+                        PinAdded?.Invoke(this, EventArgs.Empty);
+                    }
+                    else if (tryb == TrybOkna.Edit)
+                    {
+                        var objectToUpdate = new Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
+                        objectToUpdate.EventId = eventToEdit.EventId;
+                        _database.UpdateEvent(objectToUpdate);
+                        EventAdded?.Invoke(this, EventArgs.Empty);
+                    }
+
+                    Close();
                 }
                 else
                 {
-                    eventDate = DateTime.Now.ToString();
+                    MessageBox.Show("Please set a future date");
                 }
-
-                int numberOfPlaces = int.Parse(AddEventNumberOfPlaces.Text);
-                string eventCity = AddEventCity.Text;
-                string eventStreet = AddEventStreet.Text;
-                string eventBuildingNumber = AddEventBuilding.Text;
-                int eventCreatorId = user.UserId;
-
-                EventCategory eventCategoryEnum = (EventCategory)cmbCategory.SelectedIndex;
-                string eventCategory = eventCategoryEnum.ToString();
-
-                if (photoBytes == null)
-                {
-                    photoBytes = File.ReadAllBytes(AppDomain.CurrentDomain.BaseDirectory + "/../../.." + "/data/images/concert.jpg");
-                }
-
-                if (tryb == TrybOkna.New)
-                {
-                    _database.AddEvent(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
-                    var location = $"{eventBuildingNumber}, {eventStreet} , {eventCity}";
-                    var lastEventsId = _database.Events.OrderByDescending(e => e.EventId).FirstOrDefault().EventId;
-
-                    var cords = await LocationService.GetLocationByCords(location);
-
-                    _database.CreatePushPin(lastEventsId, cords.Latitude, cords.Longitude);
-
-                    EventAdded?.Invoke(this, EventArgs.Empty);
-                    PinAdded?.Invoke(this, EventArgs.Empty);
-                }
-                else if (tryb == TrybOkna.Edit)
-                {
-                    var objectToUpdate = new Event(eventCreatorId, eventName, photoBytes, "photodesc", eventDescription, eventCity, eventStreet, eventBuildingNumber, eventDate, eventHour, numberOfPlaces, "otherinfo", eventCategory);
-                    objectToUpdate.EventId = eventToEdit.EventId;
-                    _database.UpdateEvent(objectToUpdate);
-                    EventAdded?.Invoke(this, EventArgs.Empty);
-                }
-
-                Close();
             }
             else
             {
